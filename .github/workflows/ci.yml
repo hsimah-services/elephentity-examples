@@ -1,0 +1,68 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  clog:
+    name: clog / PHP ${{ matrix.php }}
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        # 8.3 is the floor. 8.4 runs to catch forward-compatibility breaks early.
+        php: ['8.3', '8.4']
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          coverage: none
+          tools: composer:v2
+
+      - name: Install dependencies
+        uses: ramsey/composer-install@v3
+        with:
+          working-directory: clog
+
+      - name: Code style
+        working-directory: clog
+        run: vendor/bin/php-cs-fixer fix --dry-run --diff --show-progress=none
+
+      - name: Static analysis
+        working-directory: clog
+        run: composer stan -- --no-progress
+
+      # The four real gates, run against a real product, across every builder and
+      # both adaptors at once. This is the end-to-end assertion PipelineTest used to
+      # be inside the monorepo, run for real this time: a renamed runtime class, a
+      # drifted verifier, a builder answering `describe` differently, all show up
+      # here rather than only at boot in someone's WordPress install.
+      - name: fmt
+        working-directory: clog
+        run: vendor/bin/eleph fmt
+
+      - name: validate
+        working-directory: clog
+        run: vendor/bin/eleph validate
+
+      - name: generate --check
+        working-directory: clog
+        run: vendor/bin/eleph generate --check
+
+      - name: check
+        working-directory: clog
+        run: vendor/bin/eleph check
