@@ -2,7 +2,7 @@
     "name": "elephentity/example-clog",
     "description": "The Elephentity worked example, as a real WordPress plugin: a lending library for equipment.",
     "type": "wordpress-plugin",
-    "license": "MIT",
+    "license": "Apache-2.0",
     "require": {
         "php": ">=8.3",
         "elephentity/runtime": "^0.8",
