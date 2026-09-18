@@ -18,10 +18,7 @@ final readonly class StaffMayWriteItems implements ItemStaffWritePolicy
             return PolicyDecision::deny('Staff access is required to write items.');
         }
 
-        // The typed accessor for an action not currently running returns null, so
-        // this only fires for a discontinue — reading it is the point of the
-        // example: a write policy inspecting an action's argument through
-        // ItemWriteContext, not just the operation and the entity.
+        // The action accessor returns null when discontinue is not running.
         $discontinuing = $context->discontinue();
 
         if (null !== $discontinuing && '' === trim($discontinuing->reason)) {

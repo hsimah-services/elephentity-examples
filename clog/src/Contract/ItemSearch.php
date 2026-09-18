@@ -14,14 +14,7 @@ use Eleph\Runtime\Storage\Filter;
 use Eleph\Runtime\Storage\Order;
 
 /**
- * `Item.search` from the spec, implemented.
- *
- * The generator emitted `ItemFinder::search(string $term)` and the interface above it;
- * this is the part no generator could invent, and it is the only part written by hand.
- *
- * The lazy query comes from `Queries` rather than being assembled here, and taking the
- * hydrator keeps the return type exact: an `ItemHydrator` is a `Hydrator<Item>`, so
- * what comes back is an `EntityQuery<Item>` and the contract is met without a cast.
+ * Application search query; the supplied hydrator preserves EntityQuery<Item> typing.
  */
 final readonly class ItemSearch implements ItemSearchQuery
 {
@@ -36,10 +29,7 @@ final readonly class ItemSearch implements ItemSearchQuery
      */
     public function find(string $term): EntityQuery
     {
-        // Filters on a Criteria are conjunctive, so "name or barcode" is not one query
-        // through the port. Scanning produces digits and typing produces words, so the
-        // shape of the term is the honest way to pick — and it keeps both paths on an
-        // index rather than making one of them a table scan.
+        // Criteria filters are conjunctive; route numeric terms to barcode lookup.
         $criteria = Criteria::for('Item')
             ->where(1 === preg_match('/^\d+$/', $term)
                 ? Filter::equals('barcode', $term)

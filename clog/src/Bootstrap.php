@@ -58,41 +58,13 @@ use Eleph\WordPress\WordPress;
 use Eleph\WPGraphQL\Plugin;
 
 /**
- * Everything between "the code is generated" and "the application runs".
- *
- * The order is the whole content of this file, and none of it is arbitrary:
- *
- *   1. The **storage manifest** and the **adaptor**. The manifest is generated; the
- *      table prefix is not, because a WordPress install can use any and multisite uses
- *      one per site, so it arrives from `$wpdb`.
- *   2. The **container**, holding the generated classes and — the point of the
- *      exercise — the interfaces the spec said you would have to implement.
- *   3. The **catalogue**, which is generated and resolves everything through that
- *      container, so adding an entity never widens a signature here.
- *   4. The **runtime**, the one object an application holds.
- *   5. `BootCheck`, which refuses to start while any contract is unbound and names
- *      every missing one at once.
- *
- * There is a knot in the middle: `ItemSearch` needs a query builder, which needs the
- * runtime, which needs the catalogue, which needs the container `ItemSearch` lives in.
- * Container factories are closures and nothing is resolved until something asks, so
- * binding it after the runtime exists is all the ceremony required.
- *
- * Deliberately one flat file with no cleverness in it. A container that autowires
- * would make this shorter and would teach nothing.
+ * Assembles storage, container, catalogue, and runtime before BootCheck. Lazy factories resolve
+ * query-handler dependencies after the runtime exists.
  */
 final class Bootstrap
 {
     private const GENERATED = __DIR__ . '/../generated';
 
-    /**
-     * Each manifest sits in its own target's directory, inside the PHP tree.
-     *
-     * They are PHP the runtime loads by path, so they belong here — but the PHP builder
-     * cannot produce them, since compiling a storage schema needs code that knows what
-     * a table is. So they come from targets of their own, and a project that installs
-     * neither the driver nor the integration has neither directory.
-     */
     private const STORAGE_MANIFEST = self::GENERATED . '/wordpress/storage-manifest.php';
 
     private const GRAPHQL_MANIFEST = self::GENERATED . '/wpgraphql/graphql-manifest.php';
@@ -129,8 +101,6 @@ final class Bootstrap
 
         $this->register($container, $runtime);
 
-        // Boot time, not call time: a missing handler must not lurk in production
-        // until the one request that needs it arrives.
         (new BootCheck($catalogue, $container))->run();
 
         return $this->runtime = $runtime;
@@ -175,11 +145,7 @@ final class Bootstrap
     }
 
     /**
-     * Create or migrate the tables. Call on plugin activation.
-     *
-     * Additive changes are applied; anything destructive or ambiguous is refused and
-     * then *nothing* is applied, so the plan comes back for the caller to log or to
-     * fail activation on.
+     * Applies additive migrations on activation. Any refusal prevents all planned changes.
      */
     public function install(): MigrationPlan
     {
@@ -187,24 +153,17 @@ final class Bootstrap
     }
 
     /**
-     * Everything the catalogue will ask for, and nothing it will not.
-     *
-     * Two kinds of entry, and the difference is the whole workflow: the generated
-     * classes, which are mechanical and could be autowired; and the contracts under
-     * `generated/*​/Contract/`, which are the list of things you owe this spec.
+     * Generated service factories plus application contract bindings.
      */
     private function register(Container $container, Runtime $runtime): void
     {
         $decoder = new ValueDecoder();
 
         $container
-            // Shared plumbing. The query builder is bound as a closure so it can
-            // capture a runtime that is finished being built by the time it runs.
+            // Resolve query dependencies after runtime assembly.
             ->set(ValueDecoder::class, static fn (): ValueDecoder => $decoder)
             ->set(Queries::class, static fn (): Queries => $runtime->queries())
 
-            // Generated: one hydrator, one input applier, one verifier bridge and one
-            // trigger bridge per entity.
             ->set(ItemHydrator::class, static fn (): object => new ItemHydrator($decoder))
             ->set(ItemInput::class, static fn (): object => new ItemInput($decoder))
             ->set(ItemTriggers::class, static fn (): object => new ItemTriggers())
@@ -238,8 +197,6 @@ final class Bootstrap
             ->set(UserTriggers::class, static fn (): object => new UserTriggers())
             ->set(UserVerifiers::class, static fn (): object => new UserVerifiers())
 
-            // Yours. `ls generated/*/Contract/` is exactly this list, and BootCheck
-            // fails by name for anything missing from it.
             ->bind(ItemSearchQuery::class, static fn (Container $c): object => new ItemSearch(
                 $c->get(Queries::class),
                 $c->get(ItemHydrator::class),

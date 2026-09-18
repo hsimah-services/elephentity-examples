@@ -4,32 +4,28 @@ The three post types from [clog](https://github.com/hsimah-services/clog) — It
 Location and Inventory — written as Elephentity specs, with the generated output committed
 so the two can be compared.
 
-It is also the reference wiring. `src/` holds everything between "the code is
-generated" and "the application runs" — a container, the three contracts the spec says
-you owe it, and `Bootstrap.php`, which is the assembly order written down once. The
-plugin around it is `clog.php`.
+`src/` binds the generated contracts and assembles the runtime; `clog.php` connects it
+to WordPress hooks. The generated tree and wiring are analysed together at PHPStan
+level max.
 
-Both are analysed at PHPStan level max against the committed `generated/` tree, along
-with the generated tree itself. A reference that is not checked against the code it
-wires is a snippet that rots, and the framework's central claim is that generated code
-is provably typed — which is worth proving on real output rather than only on fixtures.
+From this directory:
 
-All four gates pass:
-
+```bash
+../tools/php composer install
+../tools/php composer ci
 ```
-eleph fmt        Specs are in canonical form.
-eleph validate   Specs are valid: 3 entities, 1 type.
-eleph generate   36 file(s).
-eleph check      Conformant: 3 type(s), every field resolves.
-```
+
+The four gates check canonical specs, validation, generated-file drift, and integration
+conformance. Generator dependencies currently pin PHP revisions; the Rust migration is
+tracked separately in [issue #1](https://github.com/hsimah-services/elephentity-examples/issues/1).
 
 ## Reading it
 
 | File | What it shows |
 |---|---|
-| `clog.php` | The three WordPress hooks and nothing else: activation migrates, `plugins_loaded` boots. |
+| `clog.php` | Activation, registration, orphan cleanup, and runtime boot hooks. |
 | `src/Bootstrap.php` | The assembly order, and why each step comes where it does. |
-| `src/Container.php` | Thirty lines, so the example depends on no particular container. |
+| `src/Container.php` | Minimal PSR-11 container. |
 | `src/Contract/ItemSearch.php` | A hand-written finder, and how it gets a lazy query. |
 | `src/Contract/DefaultExpiryIsPaired.php` | A cross-field rule, as one class implementing both halves. |
 
@@ -100,11 +96,9 @@ Under Elephentity, `Item` is built solely from the spec. You get precisely what 
 `defaultExpiryValue`. `createdAt` and `updatedAt` cover what `date` and `modified` did;
 the rest either need declaring or need to go.
 
-**A gap this port surfaced, since closed.** The manifest registered object types, enums
-and mutations and no entry points, so nothing could fetch an Item at all. Root fields
-now come from the `wpgraphql` integration, and the type names match the existing API
-exactly — `ClogItem` / `ClogItems`, and `ClogInventory` / `ClogInventoryEntries`,
-supplied rather than derived because nothing here pluralises on your behalf.
+Root fields and query exposure come from the `wpgraphql` integration. Singular and
+plural names are explicit, including `ClogItem` / `ClogItems` and
+`ClogInventory` / `ClogInventoryEntries`.
 
 **Nothing writes the post row, and that is now said out loud.** `postId` is a nullable
 column like any other; registering the post type does not create a `wp_posts` row, and
@@ -128,16 +122,10 @@ out, and only one of them is honest:
 - **Let them diverge** until the next write re-projects. Silently wrong, which is the
   worst of the three.
 
-### Post type registration, since resolved
+### Post type registration
 
-This was blocking for the port: `PostTypeRegistrar` hardcoded `public: true`,
-`show_in_rest: false` and `supports: ['title']`, where Clog needs `public: false`,
-`show_ui: true`, `show_in_menu: 'clog'`, `exclude_from_search: true` and a full label
-set.
-
-The `ClogPost` pattern is the home for it, and now is: registration arguments come from
-pattern configuration, which the entity supplies with `configure:` and the compiler
-validates against the pattern's own declaration.
+The `ClogPost` pattern declares registration options. Entities supply them through
+`configure:`, validated against the pattern's parameter definitions.
 
 ## What this exercise confirmed
 

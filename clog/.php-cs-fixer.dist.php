@@ -12,8 +12,6 @@ return (new PhpCsFixer\Config())
         '@PSR12' => true,
         '@PHP83Migration' => true,
 
-        // Non-negotiable: PHP silently coerces types without this, and the
-        // framework leans on PHPStan to claw back what the runtime will not enforce.
         'declare_strict_types' => true,
 
         'ordered_imports' => ['sort_algorithm' => 'alpha'],
