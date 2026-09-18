@@ -9,7 +9,7 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   User/UserInput.php
- * digest: sha256:db16f95092e047e12018c009fd47c116c484f7a5ac6a074e55475c7637f2f98f
+ * digest: sha256:0e25782259d5d4753db55c01e7671139694af3fcdc0c9208e2807e02392be30e
  */
 
 namespace Clog\Entity\User;
@@ -26,23 +26,26 @@ final readonly class UserInput
     public function __construct(
         private ValueDecoder $decode,
     ) {
+
     }
 
-    private function postId(mixed $value): ?int
-    {
+    private function postId(
+        mixed $value,
+    ): ?int {
         if (null === $value) {
             return null;
         }
-
+        
         return $this->decode->int($value, 'User.postId');
     }
 
-    private function bio(mixed $value): ?string
-    {
+    private function bio(
+        mixed $value,
+    ): ?string {
         if (null === $value) {
             return null;
         }
-
+        
         return $this->decode->string($value, 'User.bio');
     }
 
@@ -52,12 +55,14 @@ final readonly class UserInput
      *
      * @param array<string, mixed> $input
      */
-    public function apply(MutationBuffer $buffer, array $input): void
-    {
+    public function apply(
+        MutationBuffer $buffer,
+        array $input,
+    ): void {
         if (array_key_exists('postId', $input)) {
             $buffer->set('postId', $this->postId($input['postId']));
         }
-
+        
         if (array_key_exists('bio', $input)) {
             $buffer->set('bio', $this->bio($input['bio']));
         }
@@ -67,10 +72,12 @@ final readonly class UserInput
      * @param array<string, mixed> $args
      * @return array<string, mixed>
      */
-    public function decodeAction(string $action, array $args): array
-    {
+    public function decodeAction(
+        string $action,
+        array $args,
+    ): array {
         return match ($action) {
-
+        
             default => throw new InvalidArgumentException(sprintf('Unknown action %s.', $action)),
         };
     }

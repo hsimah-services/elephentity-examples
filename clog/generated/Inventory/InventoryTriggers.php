@@ -9,7 +9,7 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   Inventory/InventoryTriggers.php
- * digest: sha256:bf8b0df325b0991a1de493fa0d7a9280be0dd3581c9eb40ad8954bc7108ce298
+ * digest: sha256:fc89571947696d43c9150e9784b809dff489c7182a22b04cd0964c299809b86d
  */
 
 namespace Clog\Entity\Inventory;
@@ -28,12 +28,16 @@ final readonly class InventoryTriggers implements EntityTriggers
     public function __construct(
         private InventorySiteAvailabilityTrigger $siteAvailabilityTrigger,
     ) {
+
     }
 
-    public function dispatch(TriggerPhase $phase, TriggerEvent $event, MutationContext $context): void
-    {
+    public function dispatch(
+        TriggerPhase $phase,
+        TriggerEvent $event,
+        MutationContext $context,
+    ): void {
         $typed = InventoryMutationContext::of($context);
-
+        
         if (TriggerPhase::PreCommit === $phase && in_array($event, [TriggerEvent::Create, TriggerEvent::Update], true)) {
             $this->siteAvailabilityTrigger->handle($typed);
         }

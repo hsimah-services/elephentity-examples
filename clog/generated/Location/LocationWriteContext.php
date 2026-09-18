@@ -9,7 +9,7 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   Location/LocationWriteContext.php
- * digest: sha256:0e30ac2c3e6f40812deaf757afbe649900f77868a74c58d0cbc63c80778c3cb4
+ * digest: sha256:815cce17872cb01868c2e112208da15f1cf37fec0e1ea56c38bb9d4f7ec72c54
  */
 
 namespace Clog\Entity\Location;
@@ -24,99 +24,88 @@ final readonly class LocationWriteContext implements WriteContext
     public function __construct(
         private WriteContext $context,
     ) {
+
     }
 
-    public static function of(WriteContext $context): self
-    {
+    public static function of(
+        WriteContext $context,
+    ): self {
         return new self($context);
     }
 
-    public function entity(): string
-    {
+    public function entity(): string {
         return $this->context->entity();
     }
 
-    public function operation(): WriteOperation
-    {
+    public function operation(): WriteOperation {
         return $this->context->operation();
     }
 
-    public function action(): ?string
-    {
+    public function action(): ?string {
         return $this->context->action();
     }
 
-    public function arguments(): array
-    {
+    public function arguments(): array {
         return $this->context->arguments();
     }
 
-    public function mutation(): ?MutationContext
-    {
+    public function mutation(): ?MutationContext {
         return $this->context->mutation();
     }
 
-    public function originalCreatedAt(): ?DateTimeImmutable
-    {
+    public function originalCreatedAt(): ?DateTimeImmutable {
         $value = $this->context->mutation()?->original('createdAt');
         assert(null === $value || $value instanceof DateTimeImmutable);
-
+        
         return $value;
     }
 
-    public function pendingCreatedAt(): ?DateTimeImmutable
-    {
+    public function pendingCreatedAt(): ?DateTimeImmutable {
         $value = $this->context->mutation()?->pending('createdAt');
         assert(null === $value || $value instanceof DateTimeImmutable);
-
+        
         return $value;
     }
 
-    public function originalUpdatedAt(): ?DateTimeImmutable
-    {
+    public function originalUpdatedAt(): ?DateTimeImmutable {
         $value = $this->context->mutation()?->original('updatedAt');
         assert(null === $value || $value instanceof DateTimeImmutable);
-
+        
         return $value;
     }
 
-    public function pendingUpdatedAt(): ?DateTimeImmutable
-    {
+    public function pendingUpdatedAt(): ?DateTimeImmutable {
         $value = $this->context->mutation()?->pending('updatedAt');
         assert(null === $value || $value instanceof DateTimeImmutable);
-
+        
         return $value;
     }
 
-    public function originalPostId(): ?int
-    {
+    public function originalPostId(): ?int {
         $value = $this->context->mutation()?->original('postId');
         assert(null === $value || is_int($value));
-
+        
         return $value;
     }
 
-    public function pendingPostId(): ?int
-    {
+    public function pendingPostId(): ?int {
         $value = $this->context->mutation()?->pending('postId');
         assert(null === $value || is_int($value));
-
+        
         return $value;
     }
 
-    public function originalName(): ?string
-    {
+    public function originalName(): ?string {
         $value = $this->context->mutation()?->original('name');
         assert(null === $value || is_string($value));
-
+        
         return $value;
     }
 
-    public function pendingName(): ?string
-    {
+    public function pendingName(): ?string {
         $value = $this->context->mutation()?->pending('name');
         assert(null === $value || is_string($value));
-
+        
         return $value;
     }
 }

@@ -9,7 +9,7 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   Item/ItemInput.php
- * digest: sha256:d11653d7d677f23e1ae4d420ccff6de56ccea3a1c22755a17bc421c97df85cd1
+ * digest: sha256:da538ac650c64f148274a5bacf38b08700619c6dc8db4107a486ffdd3f7a3f06
  */
 
 namespace Clog\Entity\Item;
@@ -27,50 +27,56 @@ final readonly class ItemInput
     public function __construct(
         private ValueDecoder $decode,
     ) {
+
     }
 
-    private function postId(mixed $value): ?int
-    {
+    private function postId(
+        mixed $value,
+    ): ?int {
         if (null === $value) {
             return null;
         }
-
+        
         return $this->decode->int($value, 'Item.postId');
     }
 
-    private function name(mixed $value): ?string
-    {
+    private function name(
+        mixed $value,
+    ): ?string {
         if (null === $value) {
             return null;
         }
-
+        
         return $this->decode->string($value, 'Item.name');
     }
 
-    private function barcode(mixed $value): ?string
-    {
+    private function barcode(
+        mixed $value,
+    ): ?string {
         if (null === $value) {
             return null;
         }
-
+        
         return $this->decode->string($value, 'Item.barcode');
     }
 
-    private function defaultExpiryUnit(mixed $value): ?ExpiryUnit
-    {
+    private function defaultExpiryUnit(
+        mixed $value,
+    ): ?ExpiryUnit {
         if (null === $value) {
             return null;
         }
-
+        
         return $this->decode->enum(ExpiryUnit::class, $value, 'Item.defaultExpiryUnit');
     }
 
-    private function defaultExpiryValue(mixed $value): ?int
-    {
+    private function defaultExpiryValue(
+        mixed $value,
+    ): ?int {
         if (null === $value) {
             return null;
         }
-
+        
         return $this->decode->int($value, 'Item.defaultExpiryValue');
     }
 
@@ -80,24 +86,26 @@ final readonly class ItemInput
      *
      * @param array<string, mixed> $input
      */
-    public function apply(MutationBuffer $buffer, array $input): void
-    {
+    public function apply(
+        MutationBuffer $buffer,
+        array $input,
+    ): void {
         if (array_key_exists('postId', $input)) {
             $buffer->set('postId', $this->postId($input['postId']));
         }
-
+        
         if (array_key_exists('name', $input)) {
             $buffer->set('name', $this->name($input['name']));
         }
-
+        
         if (array_key_exists('barcode', $input)) {
             $buffer->set('barcode', $this->barcode($input['barcode']));
         }
-
+        
         if (array_key_exists('defaultExpiryUnit', $input)) {
             $buffer->set('defaultExpiryUnit', $this->defaultExpiryUnit($input['defaultExpiryUnit']));
         }
-
+        
         if (array_key_exists('defaultExpiryValue', $input)) {
             $buffer->set('defaultExpiryValue', $this->defaultExpiryValue($input['defaultExpiryValue']));
         }
@@ -107,8 +115,10 @@ final readonly class ItemInput
      * @param array<string, mixed> $args
      * @return array<string, mixed>
      */
-    public function decodeAction(string $action, array $args): array
-    {
+    public function decodeAction(
+        string $action,
+        array $args,
+    ): array {
         return match ($action) {
             'discontinue' => ['reason' => $this->decode->string($args['reason'], 'Item.discontinue.reason')],
             default => throw new InvalidArgumentException(sprintf('Unknown action %s.', $action)),

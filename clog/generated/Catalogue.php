@@ -9,7 +9,7 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   Catalogue.php
- * digest: sha256:13a927e2b938a5f9e897edee14308463d60fb78341d0a891cfd9cccd065deaad
+ * digest: sha256:e6f71d0bb391d94e97bcc777695007653319cf433285913c5aaf77ce4ac36906
  */
 
 namespace Clog\Entity;
@@ -72,21 +72,22 @@ final readonly class Catalogue implements EntityCatalogue
     public function __construct(
         private ContainerInterface $container,
     ) {
+
     }
 
     /**
      * @return list<string>
      */
-    public function entities(): array
-    {
+    public function entities(): array {
         return ['Inventory', 'Item', 'Location', 'Site', 'User'];
     }
 
     /**
      * @return Hydrator<object>
      */
-    public function hydrator(string $entity): Hydrator
-    {
+    public function hydrator(
+        string $entity,
+    ): Hydrator {
         $service = match ($entity) {
             'Inventory' => $this->container->get(InventoryHydrator::class),
             'Item' => $this->container->get(ItemHydrator::class),
@@ -95,14 +96,15 @@ final readonly class Catalogue implements EntityCatalogue
             'User' => $this->container->get(UserHydrator::class),
             default => throw new RuntimeException(sprintf('No entity named "%s".', $entity)),
         };
-
+        
         assert($service instanceof Hydrator);
-
+        
         return $service;
     }
 
-    public function verifiers(string $entity): EntityVerifiers
-    {
+    public function verifiers(
+        string $entity,
+    ): EntityVerifiers {
         $service = match ($entity) {
             'Inventory' => $this->container->get(InventoryVerifiers::class),
             'Item' => $this->container->get(ItemVerifiers::class),
@@ -111,14 +113,15 @@ final readonly class Catalogue implements EntityCatalogue
             'User' => $this->container->get(UserVerifiers::class),
             default => throw new RuntimeException(sprintf('No entity named "%s".', $entity)),
         };
-
+        
         assert($service instanceof EntityVerifiers);
-
+        
         return $service;
     }
 
-    public function triggers(string $entity): EntityTriggers
-    {
+    public function triggers(
+        string $entity,
+    ): EntityTriggers {
         $service = match ($entity) {
             'Inventory' => $this->container->get(InventoryTriggers::class),
             'Item' => $this->container->get(ItemTriggers::class),
@@ -127,50 +130,47 @@ final readonly class Catalogue implements EntityCatalogue
             'User' => $this->container->get(UserTriggers::class),
             default => throw new RuntimeException(sprintf('No entity named "%s".', $entity)),
         };
-
+        
         assert($service instanceof EntityTriggers);
-
+        
         return $service;
     }
 
-    private function readPoliciesInventoryReadPolicies(): EntityReadPolicies
-    {
+    private function readPoliciesInventoryReadPolicies(): EntityReadPolicies {
         $policies = $this->container->get(InventoryReadPolicies::class);
-
+        
         assert($policies instanceof InventoryReadPolicies);
-
+        
         return $policies;
     }
 
-    private function readPoliciesItemReadPolicies(): EntityReadPolicies
-    {
+    private function readPoliciesItemReadPolicies(): EntityReadPolicies {
         $policies = $this->container->get(ItemReadPolicies::class);
-
+        
         assert($policies instanceof ItemReadPolicies);
-
+        
         return $policies;
     }
 
-    private function readPoliciesLocationReadPolicies(): EntityReadPolicies
-    {
+    private function readPoliciesLocationReadPolicies(): EntityReadPolicies {
         $policies = $this->container->get(LocationReadPolicies::class);
-
+        
         assert($policies instanceof LocationReadPolicies);
-
+        
         return $policies;
     }
 
-    private function readPoliciesUserReadPolicies(): EntityReadPolicies
-    {
+    private function readPoliciesUserReadPolicies(): EntityReadPolicies {
         $policies = $this->container->get(UserReadPolicies::class);
-
+        
         assert($policies instanceof UserReadPolicies);
-
+        
         return $policies;
     }
 
-    public function readPolicies(string $entity): EntityReadPolicies
-    {
+    public function readPolicies(
+        string $entity,
+    ): EntityReadPolicies {
         return match ($entity) {
             'Inventory' => $this->readPoliciesInventoryReadPolicies(),
             'Item' => $this->readPoliciesItemReadPolicies(),
@@ -181,17 +181,17 @@ final readonly class Catalogue implements EntityCatalogue
         };
     }
 
-    private function writePoliciesItemWritePolicies(): EntityWritePolicies
-    {
+    private function writePoliciesItemWritePolicies(): EntityWritePolicies {
         $policies = $this->container->get(ItemWritePolicies::class);
-
+        
         assert($policies instanceof ItemWritePolicies);
-
+        
         return $policies;
     }
 
-    public function writePolicies(string $entity): EntityWritePolicies
-    {
+    public function writePolicies(
+        string $entity,
+    ): EntityWritePolicies {
         return match ($entity) {
             'Inventory' => new NoPolicies(),
             'Item' => $this->writePoliciesItemWritePolicies(),
@@ -205,8 +205,7 @@ final readonly class Catalogue implements EntityCatalogue
     /**
      * @return array<string, string> "Entity.edge" => target entity
      */
-    public function edgeTargets(): array
-    {
+    public function edgeTargets(): array {
         return [
             'Inventory.item' => 'Item',
             'Inventory.location' => 'Location',
@@ -218,16 +217,16 @@ final readonly class Catalogue implements EntityCatalogue
     /**
      * @return array<string, string> "Entity.field" => declared type
      */
-    public function fieldTypes(): array
-    {
+    public function fieldTypes(): array {
         return [];
     }
 
     /**
      * @return list<string>
      */
-    public function fieldNames(string $entity): array
-    {
+    public function fieldNames(
+        string $entity,
+    ): array {
         return match ($entity) {
             'Inventory' => ['createdAt', 'updatedAt', 'postId', 'name', 'dateAdded', 'dateExpiry'],
             'Item' => ['createdAt', 'updatedAt', 'postId', 'name', 'barcode', 'defaultExpiryUnit', 'defaultExpiryValue'],
@@ -241,8 +240,9 @@ final readonly class Catalogue implements EntityCatalogue
     /**
      * @return list<string>
      */
-    public function requiredFields(string $entity): array
-    {
+    public function requiredFields(
+        string $entity,
+    ): array {
         return match ($entity) {
             'Inventory' => ['name', 'dateAdded'],
             'Item' => ['name'],
@@ -256,8 +256,9 @@ final readonly class Catalogue implements EntityCatalogue
     /**
      * @return list<string>
      */
-    public function requiredEdges(string $entity): array
-    {
+    public function requiredEdges(
+        string $entity,
+    ): array {
         return match ($entity) {
             'Inventory' => [],
             'Item' => [],
@@ -271,8 +272,9 @@ final readonly class Catalogue implements EntityCatalogue
     /**
      * @return list<string>
      */
-    public function uniqueFields(string $entity): array
-    {
+    public function uniqueFields(
+        string $entity,
+    ): array {
         return match ($entity) {
             'Inventory' => ['postId'],
             'Item' => ['postId', 'barcode'],
@@ -286,8 +288,7 @@ final readonly class Catalogue implements EntityCatalogue
     /**
      * @return array<string, Managed> "Entity.field" => policy
      */
-    public function managedFields(): array
-    {
+    public function managedFields(): array {
         return [
             'Inventory.createdAt' => Managed::Created,
             'Inventory.updatedAt' => Managed::Modified,
@@ -303,8 +304,9 @@ final readonly class Catalogue implements EntityCatalogue
     /**
      * @return list<DeletionRule>
      */
-    public function deletionRules(string $entity): array
-    {
+    public function deletionRules(
+        string $entity,
+    ): array {
         return match ($entity) {
             'Inventory' => InventoryDeleter::rules(),
             'Item' => ItemDeleter::rules(),
@@ -315,20 +317,23 @@ final readonly class Catalogue implements EntityCatalogue
         };
     }
 
-    public function finder(string $entity): object
-    {
+    public function finder(
+        string $entity,
+    ): object {
         $finder = match ($entity) {
             'Item' => $this->container->get(ItemFinder::class),
             default => throw new RuntimeException(sprintf('%s declares no queries.', $entity)),
         };
-
+        
         assert(is_object($finder));
-
+        
         return $finder;
     }
 
-    public function mutatorFor(string $entity, MutationBuffer $buffer): object
-    {
+    public function mutatorFor(
+        string $entity,
+        MutationBuffer $buffer,
+    ): object {
         return match ($entity) {
             'Inventory' => new InventoryMutator($buffer),
             'Item' => new ItemMutator($buffer, $this->resolve(ItemDiscontinueAction::class)),
@@ -342,8 +347,10 @@ final readonly class Catalogue implements EntityCatalogue
     /**
      * @return list<string>
      */
-    public function queryArguments(string $entity, string $query): array
-    {
+    public function queryArguments(
+        string $entity,
+        string $query,
+    ): array {
         return match ($entity . '.' . $query) {
             'Item.search' => ['term'],
             default => [],
@@ -353,8 +360,10 @@ final readonly class Catalogue implements EntityCatalogue
     /**
      * @return list<string>
      */
-    public function actionArguments(string $entity, string $action): array
-    {
+    public function actionArguments(
+        string $entity,
+        string $action,
+    ): array {
         return match ($entity . '.' . $action) {
             'Item.discontinue' => ['reason'],
             default => [],
@@ -365,12 +374,14 @@ final readonly class Catalogue implements EntityCatalogue
      * @param array<string, mixed> $args
      * @return array<string, mixed>
      */
-    private function decodeInventoryInputActionArguments(string $action, array $args): array
-    {
+    private function decodeInventoryInputActionArguments(
+        string $action,
+        array $args,
+    ): array {
         $input = $this->container->get(InventoryInput::class);
-
+        
         assert($input instanceof InventoryInput);
-
+        
         return $input->decodeAction($action, $args);
     }
 
@@ -378,12 +389,14 @@ final readonly class Catalogue implements EntityCatalogue
      * @param array<string, mixed> $args
      * @return array<string, mixed>
      */
-    private function decodeItemInputActionArguments(string $action, array $args): array
-    {
+    private function decodeItemInputActionArguments(
+        string $action,
+        array $args,
+    ): array {
         $input = $this->container->get(ItemInput::class);
-
+        
         assert($input instanceof ItemInput);
-
+        
         return $input->decodeAction($action, $args);
     }
 
@@ -391,12 +404,14 @@ final readonly class Catalogue implements EntityCatalogue
      * @param array<string, mixed> $args
      * @return array<string, mixed>
      */
-    private function decodeLocationInputActionArguments(string $action, array $args): array
-    {
+    private function decodeLocationInputActionArguments(
+        string $action,
+        array $args,
+    ): array {
         $input = $this->container->get(LocationInput::class);
-
+        
         assert($input instanceof LocationInput);
-
+        
         return $input->decodeAction($action, $args);
     }
 
@@ -404,12 +419,14 @@ final readonly class Catalogue implements EntityCatalogue
      * @param array<string, mixed> $args
      * @return array<string, mixed>
      */
-    private function decodeSiteInputActionArguments(string $action, array $args): array
-    {
+    private function decodeSiteInputActionArguments(
+        string $action,
+        array $args,
+    ): array {
         $input = $this->container->get(SiteInput::class);
-
+        
         assert($input instanceof SiteInput);
-
+        
         return $input->decodeAction($action, $args);
     }
 
@@ -417,12 +434,14 @@ final readonly class Catalogue implements EntityCatalogue
      * @param array<string, mixed> $args
      * @return array<string, mixed>
      */
-    private function decodeUserInputActionArguments(string $action, array $args): array
-    {
+    private function decodeUserInputActionArguments(
+        string $action,
+        array $args,
+    ): array {
         $input = $this->container->get(UserInput::class);
-
+        
         assert($input instanceof UserInput);
-
+        
         return $input->decodeAction($action, $args);
     }
 
@@ -430,8 +449,11 @@ final readonly class Catalogue implements EntityCatalogue
      * @param array<string, mixed> $args
      * @return array<string, mixed>
      */
-    public function decodeActionArguments(string $entity, string $action, array $args): array
-    {
+    public function decodeActionArguments(
+        string $entity,
+        string $action,
+        array $args,
+    ): array {
         return match ($entity) {
             'Inventory' => $this->decodeInventoryInputActionArguments($action, $args),
             'Item' => $this->decodeItemInputActionArguments($action, $args),
@@ -445,8 +467,11 @@ final readonly class Catalogue implements EntityCatalogue
     /**
      * @param array<string, mixed> $input
      */
-    public function apply(string $entity, MutationBuffer $buffer, array $input): void
-    {
+    public function apply(
+        string $entity,
+        MutationBuffer $buffer,
+        array $input,
+    ): void {
         $applier = match ($entity) {
             'Inventory' => $this->container->get(InventoryInput::class),
             'Item' => $this->container->get(ItemInput::class),
@@ -455,9 +480,9 @@ final readonly class Catalogue implements EntityCatalogue
             'User' => $this->container->get(UserInput::class),
             default => throw new RuntimeException(sprintf('No entity named "%s".', $entity)),
         };
-
+        
         assert(is_object($applier) && method_exists($applier, 'apply'));
-
+        
         $applier->apply($buffer, $input);
     }
 
@@ -466,8 +491,7 @@ final readonly class Catalogue implements EntityCatalogue
      *
      * @return list<string>
      */
-    public function contracts(): array
-    {
+    public function contracts(): array {
         return ['Clog\\Entity\\Inventory\\Contract\\InventorySiteAvailabilityTrigger', 'Clog\\Entity\\Item\\Contract\\ItemDefaultExpiryUnitVerifier', 'Clog\\Entity\\Item\\Contract\\ItemDefaultExpiryValueVerifier', 'Clog\\Entity\\Item\\Contract\\ItemDiscontinueAction', 'Clog\\Entity\\Item\\Contract\\ItemSearchQuery', 'Clog\\Entity\\Item\\Contract\\ItemStaffWritePolicy', 'Clog\\Entity\\Pattern\\ClogPost\\Contract\\ClogPostSignedInReadPolicy'];
     }
 
@@ -476,12 +500,13 @@ final readonly class Catalogue implements EntityCatalogue
      * @param class-string<T> $class
      * @return T
      */
-    private function resolve(string $class): object
-    {
+    private function resolve(
+        string $class,
+    ): object {
         $service = $this->container->get($class);
-
+        
         assert($service instanceof $class);
-
+        
         return $service;
     }
 }

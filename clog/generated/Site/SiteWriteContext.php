@@ -9,7 +9,7 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   Site/SiteWriteContext.php
- * digest: sha256:542e8639dc47ca99688768418e2caede772d15646f39b45f90f0aba4264490ee
+ * digest: sha256:7692c2721758da105497ad824429c58dab2e1b26b467a82351b068091a111a73
  */
 
 namespace Clog\Entity\Site;
@@ -23,51 +23,46 @@ final readonly class SiteWriteContext implements WriteContext
     public function __construct(
         private WriteContext $context,
     ) {
+
     }
 
-    public static function of(WriteContext $context): self
-    {
+    public static function of(
+        WriteContext $context,
+    ): self {
         return new self($context);
     }
 
-    public function entity(): string
-    {
+    public function entity(): string {
         return $this->context->entity();
     }
 
-    public function operation(): WriteOperation
-    {
+    public function operation(): WriteOperation {
         return $this->context->operation();
     }
 
-    public function action(): ?string
-    {
+    public function action(): ?string {
         return $this->context->action();
     }
 
-    public function arguments(): array
-    {
+    public function arguments(): array {
         return $this->context->arguments();
     }
 
-    public function mutation(): ?MutationContext
-    {
+    public function mutation(): ?MutationContext {
         return $this->context->mutation();
     }
 
-    public function originalName(): ?string
-    {
+    public function originalName(): ?string {
         $value = $this->context->mutation()?->original('name');
         assert(null === $value || is_string($value));
-
+        
         return $value;
     }
 
-    public function pendingName(): ?string
-    {
+    public function pendingName(): ?string {
         $value = $this->context->mutation()?->pending('name');
         assert(null === $value || is_string($value));
-
+        
         return $value;
     }
 }

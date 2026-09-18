@@ -9,7 +9,7 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   User/UserMutator.php
- * digest: sha256:28503c3987eeb9068f15f4b1201cca692a703cd82ccf86e0d690a28d47bf042a
+ * digest: sha256:b9d4482047966f898c3ecc829bfb1c5cad632160af135da28ad05092305651e5
  */
 
 namespace Clog\Entity\User;
@@ -27,19 +27,22 @@ final class UserMutator
     public function __construct(
         private readonly MutationBuffer $buffer,
     ) {
+
     }
 
-    public function setPostId(?int $postId): self
-    {
+    public function setPostId(
+        ?int $postId,
+    ): self {
         $this->buffer->set('postId', $postId);
-
+        
         return $this;
     }
 
-    public function setBio(?string $bio): self
-    {
+    public function setBio(
+        ?string $bio,
+    ): self {
         $this->buffer->set('bio', $bio);
-
+        
         return $this;
     }
 }

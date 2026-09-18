@@ -9,7 +9,7 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   Item/ItemDiscontinueContext.php
- * digest: sha256:42ccf07261048e518fe652706da3a5b952cafde189f4bca5fb4980c8be8fea28
+ * digest: sha256:0fc9a9a98d2dcb60d0f58f89de3065ad073ea5740bfbad91744933ca449ae5d6
  */
 
 namespace Clog\Entity\Item;
@@ -24,17 +24,20 @@ final class ItemDiscontinueContext
     private function __construct(
         private readonly MutationBuffer $buffer,
     ) {
+
     }
 
-    public function setBarcode(?string $barcode): self
-    {
+    public function setBarcode(
+        ?string $barcode,
+    ): self {
         $this->buffer->set('barcode', $barcode);
-
+        
         return $this;
     }
 
-    public static function of(MutationBuffer $buffer): self
-    {
+    public static function of(
+        MutationBuffer $buffer,
+    ): self {
         return new self($buffer);
     }
 }

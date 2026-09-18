@@ -9,7 +9,7 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   Site/SiteInput.php
- * digest: sha256:626a6d7804e5779bbf95fa41a625d60515c850ceefd18f0e949edd88bc1494de
+ * digest: sha256:37997ade6ef71d9e497cccb52975a156e1cb6e5bac8109e61c8ec34995758ece
  */
 
 namespace Clog\Entity\Site;
@@ -26,14 +26,16 @@ final readonly class SiteInput
     public function __construct(
         private ValueDecoder $decode,
     ) {
+
     }
 
-    private function name(mixed $value): ?string
-    {
+    private function name(
+        mixed $value,
+    ): ?string {
         if (null === $value) {
             return null;
         }
-
+        
         return $this->decode->string($value, 'Site.name');
     }
 
@@ -43,8 +45,10 @@ final readonly class SiteInput
      *
      * @param array<string, mixed> $input
      */
-    public function apply(MutationBuffer $buffer, array $input): void
-    {
+    public function apply(
+        MutationBuffer $buffer,
+        array $input,
+    ): void {
         if (array_key_exists('name', $input)) {
             $buffer->set('name', $this->name($input['name']));
         }
@@ -54,10 +58,12 @@ final readonly class SiteInput
      * @param array<string, mixed> $args
      * @return array<string, mixed>
      */
-    public function decodeAction(string $action, array $args): array
-    {
+    public function decodeAction(
+        string $action,
+        array $args,
+    ): array {
         return match ($action) {
-
+        
             default => throw new InvalidArgumentException(sprintf('Unknown action %s.', $action)),
         };
     }

@@ -9,7 +9,7 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   Site/SiteWritePolicies.php
- * digest: sha256:219a0fc12923d51ec1d0b27ca596f9dd3459036784d7e3bd45cf2e86cb42dbd1
+ * digest: sha256:7472bf8c8f142312ceafff3e6d9ed57fbae18729d9c95e7cf2bd807ebefaf0b8
  */
 
 namespace Clog\Entity\Site;
@@ -22,17 +22,19 @@ use Eleph\Runtime\Policy\WriteContext;
 
 final readonly class SiteWritePolicies implements EntityWritePolicies
 {
-    public function __construct()
-    {
+    public function __construct() {
+
     }
 
-    public function isEmpty(): bool
-    {
+    public function isEmpty(): bool {
         return true;
     }
 
-    public function decide(?object $entity, WriteContext $context, Viewer $viewer): PolicyDecision
-    {
+    public function decide(
+        ?object $entity,
+        WriteContext $context,
+        Viewer $viewer,
+    ): PolicyDecision {
         return PolicyDecision::allow();
     }
 }

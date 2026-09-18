@@ -12,12 +12,15 @@ From this directory:
 
 ```bash
 ../tools/php composer install
+../tools/php composer build-generators
 ../tools/php composer ci
 ```
 
 The four gates check canonical specs, validation, generated-file drift, and integration
-conformance. Generator dependencies currently pin PHP revisions; the Rust migration is
-tracked separately in [issue #1](https://github.com/hsimah-services/elephentity-examples/issues/1).
+conformance. The orchestrator and PHP builder use the 0.5 release line; WordPress and
+WPGraphQL builders use 0.2. Composer locks their versions and Cargo locks their Rust
+dependencies. Rebuild after generator updates, then regenerate with
+`../tools/php vendor/bin/eleph generate` and commit the signed output.
 
 ## Reading it
 

@@ -9,7 +9,7 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   Item/ItemFinder.php
- * digest: sha256:a3bd658421866d10cd8564a79e557c52d0eb8dd3fe5fd3a602daa07f01ac7bb2
+ * digest: sha256:f77ea416253e3373fa1e062ce566322344acabef6af285f7117ee694b9066db8
  */
 
 namespace Clog\Entity\Item;
@@ -25,13 +25,15 @@ final class ItemFinder
     public function __construct(
         private readonly ItemSearchQuery $searchQuery,
     ) {
+
     }
 
     /**
      * @return EntityQuery<Item>
      */
-    public function search(string $term): EntityQuery
-    {
+    public function search(
+        string $term,
+    ): EntityQuery {
         return $this->searchQuery->find($term);
     }
 }

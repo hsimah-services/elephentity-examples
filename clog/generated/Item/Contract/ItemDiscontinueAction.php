@@ -9,7 +9,7 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   Item/Contract/ItemDiscontinueAction.php
- * digest: sha256:10684c66055f94fdc177af882b831fe29660b948af27a4b1940182ee08f376f3
+ * digest: sha256:b444e5ff1a8e90e8506bbc98a9a7f522537ab79bde9b51ce1565fcc5658d88ef
  */
 
 namespace Clog\Entity\Item\Contract;
@@ -25,5 +25,8 @@ use Clog\Entity\Item\ItemDiscontinueContext;
  */
 interface ItemDiscontinueAction
 {
-    public function handle(ItemDiscontinueContext $context, string $reason): void;
+    public function handle(
+        ItemDiscontinueContext $context,
+        string $reason,
+    ): void;
 }

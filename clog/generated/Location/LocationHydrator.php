@@ -9,7 +9,7 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   Location/LocationHydrator.php
- * digest: sha256:c334ac0f0777838163b57d6b499af602ef6119d6c045e0b1512e92640c1fbecf
+ * digest: sha256:7d7977bd5f963621a98d81997088f0243d9d4ab259c17cd615b45b08b1876e51
  */
 
 namespace Clog\Entity\Location;
@@ -30,10 +30,13 @@ final readonly class LocationHydrator implements Hydrator
     public function __construct(
         private ValueDecoder $decode,
     ) {
+
     }
 
-    public function hydrate(Record $record, EdgeLoader $edges): Location
-    {
+    public function hydrate(
+        Record $record,
+        EdgeLoader $edges,
+    ): Location {
         return Location::of(
             $record->id,
             $edges,
@@ -44,31 +47,35 @@ final readonly class LocationHydrator implements Hydrator
         );
     }
 
-    private function createdAt(Record $record): DateTimeImmutable
-    {
+    private function createdAt(
+        Record $record,
+    ): DateTimeImmutable {
         $value = $record->value('createdAt');
-
+        
         return $this->decode->datetime($value, 'Location.createdAt');
     }
 
-    private function updatedAt(Record $record): DateTimeImmutable
-    {
+    private function updatedAt(
+        Record $record,
+    ): DateTimeImmutable {
         $value = $record->value('updatedAt');
-
+        
         return $this->decode->datetime($value, 'Location.updatedAt');
     }
 
-    private function postId(Record $record): ?int
-    {
+    private function postId(
+        Record $record,
+    ): ?int {
         $value = $record->value('postId');
-
+        
         return null === $value ? null : $this->decode->int($value, 'Location.postId');
     }
 
-    private function name(Record $record): string
-    {
+    private function name(
+        Record $record,
+    ): string {
         $value = $record->value('name');
-
+        
         return $this->decode->string($value, 'Location.name');
     }
 }

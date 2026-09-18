@@ -9,7 +9,7 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   Item/ItemReadPolicies.php
- * digest: sha256:059969a3c568d520dd73fc32bf0c9f24fc6bee09f7895e388802bf3c8e83af5c
+ * digest: sha256:dda606cbd9b9ec7d415f90d77d6c4f9b5cb31edf517d034e829e658519dad014
  */
 
 namespace Clog\Entity\Item;
@@ -25,21 +25,23 @@ final readonly class ItemReadPolicies implements EntityReadPolicies
     public function __construct(
         private ClogPostSignedInReadPolicy $signedInPolicy,
     ) {
+
     }
 
-    public function isEmpty(): bool
-    {
+    public function isEmpty(): bool {
         return false;
     }
 
-    public function decide(object $entity, Viewer $viewer): PolicyDecision
-    {
+    public function decide(
+        object $entity,
+        Viewer $viewer,
+    ): PolicyDecision {
         assert($entity instanceof Item);
         $decision = $this->signedInPolicy->decide($entity, $viewer);
         if (PolicyOutcome::Skip !== $decision->outcome) {
             return $decision->withPolicy('signedIn');
         }
-
+        
         return PolicyDecision::deny('No policy allowed this read.')->withPolicy('terminal');
     }
 }

@@ -9,7 +9,7 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   User/UserHydrator.php
- * digest: sha256:83ca34f9b4013fec2d762b65b2728c86e0efcf323c18af5333ec7f9a957505b0
+ * digest: sha256:ee9ce117768d6518eefa33f6934378f65c3ff618d705144e4d94166a2bcae9ca
  */
 
 namespace Clog\Entity\User;
@@ -30,10 +30,13 @@ final readonly class UserHydrator implements Hydrator
     public function __construct(
         private ValueDecoder $decode,
     ) {
+
     }
 
-    public function hydrate(Record $record, EdgeLoader $edges): User
-    {
+    public function hydrate(
+        Record $record,
+        EdgeLoader $edges,
+    ): User {
         return User::of(
             $record->id,
             $this->createdAt($record),
@@ -43,31 +46,35 @@ final readonly class UserHydrator implements Hydrator
         );
     }
 
-    private function createdAt(Record $record): DateTimeImmutable
-    {
+    private function createdAt(
+        Record $record,
+    ): DateTimeImmutable {
         $value = $record->value('createdAt');
-
+        
         return $this->decode->datetime($value, 'User.createdAt');
     }
 
-    private function updatedAt(Record $record): DateTimeImmutable
-    {
+    private function updatedAt(
+        Record $record,
+    ): DateTimeImmutable {
         $value = $record->value('updatedAt');
-
+        
         return $this->decode->datetime($value, 'User.updatedAt');
     }
 
-    private function postId(Record $record): ?int
-    {
+    private function postId(
+        Record $record,
+    ): ?int {
         $value = $record->value('postId');
-
+        
         return null === $value ? null : $this->decode->int($value, 'User.postId');
     }
 
-    private function bio(Record $record): ?string
-    {
+    private function bio(
+        Record $record,
+    ): ?string {
         $value = $record->value('bio');
-
+        
         return null === $value ? null : $this->decode->string($value, 'User.bio');
     }
 }

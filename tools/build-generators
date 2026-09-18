@@ -1,0 +1,10 @@
+#!/bin/sh
+set -eu
+
+project_dir=${1:-.}
+for package in codegen codegen-php codegen-wordpress codegen-wpgraphql; do
+    package_dir="$project_dir/vendor/elephentity/$package"
+    cargo build --release --locked \
+        --manifest-path "$package_dir/Cargo.toml" \
+        --target-dir "$package_dir/target"
+done

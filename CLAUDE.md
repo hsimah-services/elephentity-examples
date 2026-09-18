@@ -8,12 +8,13 @@ Run commands from the example directory; there is no root composer.json:
 ```bash
 cd clog
 ../tools/php composer install
+../tools/php composer build-generators
 ../tools/php composer ci
 ```
 
-Clog currently pins PHP generator revisions. Migration to the Rust releases is tracked
-in issue #1 and is separate from documentation cleanup; Composer installation alone
-will not build the new Rust binaries.
+Composer installs the tagged Rust generator sources. Run `composer build-generators`
+after installation or generator updates, in the same environment used for `eleph`.
+`tools/php` provides both PHP and Rust; CI uses the same build script natively.
 
 `clog/generated/` is signed. Never edit it by hand. Regenerate with
 `../tools/php vendor/bin/eleph generate` and review the diff. Investigate unexplained

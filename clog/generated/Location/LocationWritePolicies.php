@@ -9,7 +9,7 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   Location/LocationWritePolicies.php
- * digest: sha256:ed15d380abb5e8e19c09514577d71b18f4ca0466ff8b4b01d38dbb14f2aa0b6b
+ * digest: sha256:b6b92893cd8215cbb80e2aacce2491f6f5d9d87985a7617f41798f7b1765e405
  */
 
 namespace Clog\Entity\Location;
@@ -22,17 +22,19 @@ use Eleph\Runtime\Policy\WriteContext;
 
 final readonly class LocationWritePolicies implements EntityWritePolicies
 {
-    public function __construct()
-    {
+    public function __construct() {
+
     }
 
-    public function isEmpty(): bool
-    {
+    public function isEmpty(): bool {
         return true;
     }
 
-    public function decide(?object $entity, WriteContext $context, Viewer $viewer): PolicyDecision
-    {
+    public function decide(
+        ?object $entity,
+        WriteContext $context,
+        Viewer $viewer,
+    ): PolicyDecision {
         return PolicyDecision::allow();
     }
 }

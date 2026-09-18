@@ -9,7 +9,7 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   Location/LocationMutator.php
- * digest: sha256:09e22bd8233b10bc3823c03cfdb2ea114b4bff8fc8e087544ed2dbc0551d560a
+ * digest: sha256:bfa4a9131ace93f15a3333c3f20e85dde282a1e1aef2a16ffa57503c4d105d7a
  */
 
 namespace Clog\Entity\Location;
@@ -28,27 +28,29 @@ final class LocationMutator
     public function __construct(
         private readonly MutationBuffer $buffer,
     ) {
+
     }
 
-    public function setPostId(?int $postId): self
-    {
+    public function setPostId(
+        ?int $postId,
+    ): self {
         $this->buffer->set('postId', $postId);
-
+        
         return $this;
     }
 
-    public function setName(string $name): self
-    {
+    public function setName(
+        string $name,
+    ): self {
         $this->buffer->set('name', $name);
-
+        
         return $this;
     }
 
     /**
      * Add, remove or replace the Site this links to.
      */
-    public function sites(): EdgeMutation
-    {
+    public function sites(): EdgeMutation {
         return $this->buffer->edge('sites');
     }
 }

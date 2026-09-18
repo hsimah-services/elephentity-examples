@@ -9,7 +9,7 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   Pattern/ClogPost/ClogPostMutatorTrait.php
- * digest: sha256:4a15c6b587d74b32aa7fce4d808e4808f08874942b37829ab0a07bbc1b9fe5ba
+ * digest: sha256:e820aa5894220da85aab4a30e46365f1a01bf4734d4ae142db520391bd943df0
  */
 
 namespace Clog\Entity\Pattern\ClogPost;
@@ -22,10 +22,11 @@ namespace Clog\Entity\Pattern\ClogPost;
  */
 trait ClogPostMutatorTrait
 {
-    public function setPostId(?int $postId): self
-    {
+    public function setPostId(
+        ?int $postId,
+    ): self {
         $this->buffer->set('postId', $postId);
-
+        
         return $this;
     }
 }

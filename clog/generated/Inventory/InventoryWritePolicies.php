@@ -9,7 +9,7 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   Inventory/InventoryWritePolicies.php
- * digest: sha256:4a8f9421cb2a8033779073cdcc6bcc5ab8e8a379199d9bffe2c66cf4e9cd8b78
+ * digest: sha256:fff9f288df6d85a860a25a3f0533fc09795c18dd259d0f5435ead289bba4a32a
  */
 
 namespace Clog\Entity\Inventory;
@@ -22,17 +22,19 @@ use Eleph\Runtime\Policy\WriteContext;
 
 final readonly class InventoryWritePolicies implements EntityWritePolicies
 {
-    public function __construct()
-    {
+    public function __construct() {
+
     }
 
-    public function isEmpty(): bool
-    {
+    public function isEmpty(): bool {
         return true;
     }
 
-    public function decide(?object $entity, WriteContext $context, Viewer $viewer): PolicyDecision
-    {
+    public function decide(
+        ?object $entity,
+        WriteContext $context,
+        Viewer $viewer,
+    ): PolicyDecision {
         return PolicyDecision::allow();
     }
 }

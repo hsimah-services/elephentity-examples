@@ -9,7 +9,7 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   Item/ItemDiscontinueArguments.php
- * digest: sha256:c0068a86c5e11007e2d567cc32a860aa4e8e76f27917549480f5ef8cd10bf3a2
+ * digest: sha256:d2380c57d7a495a46d1b91921b52f7975165d5cf762e2f18dc8d68ba13d6dfdb
  */
 
 namespace Clog\Entity\Item;
@@ -19,13 +19,15 @@ final readonly class ItemDiscontinueArguments
     public function __construct(
         public string $reason,
     ) {
+
     }
 
     /**
      * @param array<string, mixed> $arguments
      */
-    public static function of(array $arguments): self
-    {
+    public static function of(
+        array $arguments,
+    ): self {
         assert(is_string($arguments['reason']));
         return new self($arguments['reason']);
     }

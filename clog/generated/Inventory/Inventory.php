@@ -9,7 +9,7 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   Inventory/Inventory.php
- * digest: sha256:655d75d92a96984426bbacaf97dfb2ed819a913afc34c8ab57787c12890ec15e
+ * digest: sha256:1e7bca595dd098133e626088e83b82bb330e02532f7d04ceb5cf3e96c6df8d4c
  */
 
 namespace Clog\Entity\Inventory;
@@ -38,91 +38,82 @@ final class Inventory implements ClogPost
         private readonly DateTimeImmutable $dateAdded,
         private readonly ?DateTimeImmutable $dateExpiry,
     ) {
+
     }
 
-    public function getId(): EntityId
-    {
+    public function getId(): EntityId {
         return $this->id;
     }
 
     /**
      * When the row was first written. Filled by the framework.
      */
-    public function getCreatedAt(): DateTimeImmutable
-    {
+    public function getCreatedAt(): DateTimeImmutable {
         return $this->createdAt;
     }
 
     /**
      * When the row was last written. Filled by the framework.
      */
-    public function getUpdatedAt(): DateTimeImmutable
-    {
+    public function getUpdatedAt(): DateTimeImmutable {
         return $this->updatedAt;
     }
 
     /**
      * The wp_posts row this entity projects to, once something creates one. Nullable because nothing in the framework writes it: an entity exists in its own table whether or not a post row was ever made for it.
      */
-    public function getPostId(): ?int
-    {
+    public function getPostId(): ?int {
         return $this->postId;
     }
 
     /**
      * Projected to post_title, so the admin list has something to show.
      */
-    public function getName(): string
-    {
+    public function getName(): string {
         return $this->name;
     }
 
     /**
      * When this instance entered inventory.
      */
-    public function getDateAdded(): DateTimeImmutable
-    {
+    public function getDateAdded(): DateTimeImmutable {
         return $this->dateAdded;
     }
 
     /**
      * When it expires. Absent means it does not.
      */
-    public function getDateExpiry(): ?DateTimeImmutable
-    {
+    public function getDateExpiry(): ?DateTimeImmutable {
         return $this->dateExpiry;
     }
 
     /**
      * @return Item|null
      */
-    public function getItem(): ?Item
-    {
+    public function getItem(): ?Item {
         $related = $this->edges->toOne('Inventory', $this->id, 'item');
         assert(null === $related || $related instanceof Item);
-
+        
         return $related;
     }
 
     /**
      * @return Location|null
      */
-    public function getLocation(): ?Location
-    {
+    public function getLocation(): ?Location {
         $related = $this->edges->toOne('Inventory', $this->id, 'location');
         assert(null === $related || $related instanceof Location);
-
+        
         return $related;
     }
 
     /**
      * @return EntityQuery<Site>
      */
-    public function site(): EntityQuery
-    {
+    public function site(): EntityQuery {
         /** @var EntityQuery<Site> $related */
         $related = $this->edges->toMany('Inventory', $this->id, 'site');
-
+        
         return $related;
     }
 

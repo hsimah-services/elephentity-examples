@@ -9,7 +9,7 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   Site/SiteMutationContext.php
- * digest: sha256:053c099a99e17cb4c5366c48844d8ea99356becb2389ad474c2a13a315ab561e
+ * digest: sha256:56bc94182ee00325ac1261b4b27114cd8806338d480e991903a096efadb79dec
  */
 
 namespace Clog\Entity\Site;
@@ -25,77 +25,78 @@ final readonly class SiteMutationContext implements MutationContext
     private function __construct(
         private MutationContext $context,
     ) {
+
     }
 
-    public function id(): Identifier
-    {
+    public function id(): Identifier {
         return $this->context->id();
     }
 
-    public function entity(): string
-    {
+    public function entity(): string {
         return $this->context->entity();
     }
 
-    public function isCreate(): bool
-    {
+    public function isCreate(): bool {
         return $this->context->isCreate();
     }
 
-    public function original(string $field): mixed
-    {
+    public function original(
+        string $field,
+    ): mixed {
         return $this->context->original($field);
     }
 
-    public function pending(string $field): mixed
-    {
+    public function pending(
+        string $field,
+    ): mixed {
         return $this->context->pending($field);
     }
 
-    public function isChanged(string $field): bool
-    {
+    public function isChanged(
+        string $field,
+    ): bool {
         return $this->context->isChanged($field);
     }
 
     /**
      * @return array<string, mixed>
      */
-    public function changes(): array
-    {
+    public function changes(): array {
         return $this->context->changes();
     }
 
     /**
      * @return list<Identifier>
      */
-    public function pendingEdge(string $edge): array
-    {
+    public function pendingEdge(
+        string $edge,
+    ): array {
         return $this->context->pendingEdge($edge);
     }
 
-    public function isEdgeChanged(string $edge): bool
-    {
+    public function isEdgeChanged(
+        string $edge,
+    ): bool {
         return $this->context->isEdgeChanged($edge);
     }
 
-    public function originalName(): ?string
-    {
+    public function originalName(): ?string {
         $value = $this->context->original('name');
         assert(null === $value || is_string($value));
-
+        
         return $value;
     }
 
-    public function pendingName(): ?string
-    {
+    public function pendingName(): ?string {
         $value = $this->context->pending('name');
         assert(null === $value || is_string($value));
-
+        
         return $value;
     }
 
-    public static function of(MutationContext $context): self
-    {
+    public static function of(
+        MutationContext $context,
+    ): self {
         return new self($context);
     }
 }

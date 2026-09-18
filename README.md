@@ -14,16 +14,22 @@ Run the container helper from the example directory:
 ```bash
 cd clog
 ../tools/php composer install
+../tools/php composer build-generators
 ../tools/php composer ci
 ```
 
 `composer ci` runs style, PHPStan, and the four Elephentity gates. These checks detect
 compiler, builder, runtime, and application-wiring incompatibilities together.
 
-Clog currently pins the PHP generator revisions in composer.json. The released Rust
-generators require a Cargo build after installation; adopting them, updating CI, and
-regenerating Clog is tracked separately in
-[issue #1](https://github.com/hsimah-services/elephentity-examples/issues/1).
+Clog uses the Rust orchestrator and all three Rust builders. `build-generators` builds
+locked Cargo dependencies from the Composer-installed sources; repeat it after updating
+generator packages. The container helper includes PHP, Composer, and Rust and caches
+Cargo downloads outside the checkout.
+
+With native PHP/Composer and Rust installed, run `composer install`,
+`composer build-generators`, and `composer ci` directly from `clog/`. CI uses this path.
+Build and run the binaries in the same environment; host binaries may not run inside
+the Linux container.
 
 Generated files are signed. Regenerate through `eleph generate`; never edit them by hand.
 Review unexpected drift before replacing output.

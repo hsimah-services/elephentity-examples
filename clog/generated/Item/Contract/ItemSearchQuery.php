@@ -9,7 +9,7 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   Item/Contract/ItemSearchQuery.php
- * digest: sha256:4947bdf3ffb4719a802c38dadf0f7c63b8f5ef2bdaa10b1899af2396a9144068
+ * digest: sha256:3d217e0f8d623c943011c2d40178d9a0613e12d0087911e761ef6ef324018a32
  */
 
 namespace Clog\Entity\Item\Contract;
@@ -25,5 +25,7 @@ interface ItemSearchQuery
     /**
      * @return EntityQuery<Item>
      */
-    public function find(string $term): EntityQuery;
+    public function find(
+        string $term,
+    ): EntityQuery;
 }

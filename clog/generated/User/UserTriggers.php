@@ -9,7 +9,7 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   User/UserTriggers.php
- * digest: sha256:ed00012b0af055568ce31e3cbc6a2be459bfc138ac995427737c3c0fa7dea4cc
+ * digest: sha256:8da464bd8f9a10ae972c831505ca7811579daa4ca194e267b69f498def4751a8
  */
 
 namespace Clog\Entity\User;
@@ -24,11 +24,15 @@ use Eleph\Runtime\Trigger\TriggerPhase;
  */
 final readonly class UserTriggers implements EntityTriggers
 {
-    public function __construct()
-    {
+    public function __construct() {
+
     }
 
-    public function dispatch(TriggerPhase $phase, TriggerEvent $event, MutationContext $context): void
-    {
+    public function dispatch(
+        TriggerPhase $phase,
+        TriggerEvent $event,
+        MutationContext $context,
+    ): void {
+
     }
 }

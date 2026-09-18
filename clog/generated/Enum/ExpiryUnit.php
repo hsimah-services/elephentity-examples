@@ -9,7 +9,7 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   Enum/ExpiryUnit.php
- * digest: sha256:5677977181087221034a09bf167189eee0fd42a0c17d8d2d7db9a241548cb7ed
+ * digest: sha256:b07d90886a497075e63fbbeda4edec9479035d4668f70b0090205f8c4d2702a7
  */
 
 namespace Clog\Entity\Enum;
@@ -19,6 +19,7 @@ namespace Clog\Entity\Enum;
  */
 enum ExpiryUnit: string
 {
-    case Days = 'days';
-    case Months = 'months';
+    case Days = "days";
+
+    case Months = "months";
 }

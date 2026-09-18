@@ -9,7 +9,7 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   Item/ItemHydrator.php
- * digest: sha256:b3a7c6f26fc144e44fb551f051d0c895d5565162b0b7174c2347fcc486dae608
+ * digest: sha256:81ad1cfc3aa8d964ba2df0ec771ecfe731fdd6823528331c0695eb4afb39aecb
  */
 
 namespace Clog\Entity\Item;
@@ -31,10 +31,13 @@ final readonly class ItemHydrator implements Hydrator
     public function __construct(
         private ValueDecoder $decode,
     ) {
+
     }
 
-    public function hydrate(Record $record, EdgeLoader $edges): Item
-    {
+    public function hydrate(
+        Record $record,
+        EdgeLoader $edges,
+    ): Item {
         return Item::of(
             $record->id,
             $edges,
@@ -48,52 +51,59 @@ final readonly class ItemHydrator implements Hydrator
         );
     }
 
-    private function createdAt(Record $record): DateTimeImmutable
-    {
+    private function createdAt(
+        Record $record,
+    ): DateTimeImmutable {
         $value = $record->value('createdAt');
-
+        
         return $this->decode->datetime($value, 'Item.createdAt');
     }
 
-    private function updatedAt(Record $record): DateTimeImmutable
-    {
+    private function updatedAt(
+        Record $record,
+    ): DateTimeImmutable {
         $value = $record->value('updatedAt');
-
+        
         return $this->decode->datetime($value, 'Item.updatedAt');
     }
 
-    private function postId(Record $record): ?int
-    {
+    private function postId(
+        Record $record,
+    ): ?int {
         $value = $record->value('postId');
-
+        
         return null === $value ? null : $this->decode->int($value, 'Item.postId');
     }
 
-    private function name(Record $record): string
-    {
+    private function name(
+        Record $record,
+    ): string {
         $value = $record->value('name');
-
+        
         return $this->decode->string($value, 'Item.name');
     }
 
-    private function barcode(Record $record): ?string
-    {
+    private function barcode(
+        Record $record,
+    ): ?string {
         $value = $record->value('barcode');
-
+        
         return null === $value ? null : $this->decode->string($value, 'Item.barcode');
     }
 
-    private function defaultExpiryUnit(Record $record): ?ExpiryUnit
-    {
+    private function defaultExpiryUnit(
+        Record $record,
+    ): ?ExpiryUnit {
         $value = $record->value('defaultExpiryUnit');
-
+        
         return null === $value ? null : $this->decode->enum(ExpiryUnit::class, $value, 'Item.defaultExpiryUnit');
     }
 
-    private function defaultExpiryValue(Record $record): ?int
-    {
+    private function defaultExpiryValue(
+        Record $record,
+    ): ?int {
         $value = $record->value('defaultExpiryValue');
-
+        
         return null === $value ? null : $this->decode->int($value, 'Item.defaultExpiryValue');
     }
 }

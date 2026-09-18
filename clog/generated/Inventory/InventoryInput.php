@@ -9,7 +9,7 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   Inventory/InventoryInput.php
- * digest: sha256:f4930ada53b68b604d4b21125bb3f4de91fdd605aca0d9d80d8861f327da0a87
+ * digest: sha256:aad6caee5937c285fd81c86167678dd6b735eb3a205b34d579055aec2018b715
  */
 
 namespace Clog\Entity\Inventory;
@@ -28,87 +28,95 @@ final readonly class InventoryInput
     public function __construct(
         private ValueDecoder $decode,
     ) {
+
     }
 
-    private function postId(mixed $value): ?int
-    {
+    private function postId(
+        mixed $value,
+    ): ?int {
         if (null === $value) {
             return null;
         }
-
+        
         return $this->decode->int($value, 'Inventory.postId');
     }
 
-    private function name(mixed $value): ?string
-    {
+    private function name(
+        mixed $value,
+    ): ?string {
         if (null === $value) {
             return null;
         }
-
+        
         return $this->decode->string($value, 'Inventory.name');
     }
 
-    private function dateAdded(mixed $value): ?DateTimeImmutable
-    {
+    private function dateAdded(
+        mixed $value,
+    ): ?DateTimeImmutable {
         if (null === $value) {
             return null;
         }
-
+        
         return $this->decode->datetime($value, 'Inventory.dateAdded');
     }
 
-    private function dateExpiry(mixed $value): ?DateTimeImmutable
-    {
+    private function dateExpiry(
+        mixed $value,
+    ): ?DateTimeImmutable {
         if (null === $value) {
             return null;
         }
-
+        
         return $this->decode->datetime($value, 'Inventory.dateExpiry');
     }
 
     /**
      * @return list<Identifier>
      */
-    private function item(mixed $value): array
-    {
+    private function item(
+        mixed $value,
+    ): array {
         if (null === $value) {
             return [];
         }
-
+        
         return [$this->decode->id($value, 'Inventory.item')];
     }
 
     /**
      * @return list<Identifier>
      */
-    private function location(mixed $value): array
-    {
+    private function location(
+        mixed $value,
+    ): array {
         if (null === $value) {
             return [];
         }
-
+        
         return [$this->decode->id($value, 'Inventory.location')];
     }
 
     /**
      * @return list<Identifier>
      */
-    private function site(mixed $value): array
-    {
+    private function site(
+        mixed $value,
+    ): array {
         if (null === $value) {
             return [];
         }
-
+        
         if (!is_array($value)) {
             throw new InvalidArgumentException(sprintf('%s takes a list of ids.', 'Inventory.site'));
         }
-
+        
         $ids = [];
-
+        
         foreach ($value as $id) {
             $ids[] = $this->decode->id($id, 'Inventory.site');
         }
-
+        
         return $ids;
     }
 
@@ -118,32 +126,34 @@ final readonly class InventoryInput
      *
      * @param array<string, mixed> $input
      */
-    public function apply(MutationBuffer $buffer, array $input): void
-    {
+    public function apply(
+        MutationBuffer $buffer,
+        array $input,
+    ): void {
         if (array_key_exists('postId', $input)) {
             $buffer->set('postId', $this->postId($input['postId']));
         }
-
+        
         if (array_key_exists('name', $input)) {
             $buffer->set('name', $this->name($input['name']));
         }
-
+        
         if (array_key_exists('dateAdded', $input)) {
             $buffer->set('dateAdded', $this->dateAdded($input['dateAdded']));
         }
-
+        
         if (array_key_exists('dateExpiry', $input)) {
             $buffer->set('dateExpiry', $this->dateExpiry($input['dateExpiry']));
         }
-
+        
         if (array_key_exists('item', $input)) {
             $buffer->edge('item')->set($this->item($input['item']));
         }
-
+        
         if (array_key_exists('location', $input)) {
             $buffer->edge('location')->set($this->location($input['location']));
         }
-
+        
         if (array_key_exists('site', $input)) {
             $buffer->edge('site')->set($this->site($input['site']));
         }
@@ -153,10 +163,12 @@ final readonly class InventoryInput
      * @param array<string, mixed> $args
      * @return array<string, mixed>
      */
-    public function decodeAction(string $action, array $args): array
-    {
+    public function decodeAction(
+        string $action,
+        array $args,
+    ): array {
         return match ($action) {
-
+        
             default => throw new InvalidArgumentException(sprintf('Unknown action %s.', $action)),
         };
     }

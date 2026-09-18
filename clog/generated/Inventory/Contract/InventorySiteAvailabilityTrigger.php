@@ -9,7 +9,7 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   Inventory/Contract/InventorySiteAvailabilityTrigger.php
- * digest: sha256:7a0ba034c617446088955f12b3c8cdc2bcbff360c6ab86d1facc297d4de712d4
+ * digest: sha256:9556e280bac19f9d8db1dc61ff699ab2670a6d0d1f78701f3d942364c2f61b30
  */
 
 namespace Clog\Entity\Inventory\Contract;
@@ -25,5 +25,7 @@ use Clog\Entity\Inventory\InventoryMutationContext;
  */
 interface InventorySiteAvailabilityTrigger
 {
-    public function handle(InventoryMutationContext $context): void;
+    public function handle(
+        InventoryMutationContext $context,
+    ): void;
 }

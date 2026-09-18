@@ -9,7 +9,7 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   Item/Contract/ItemDefaultExpiryUnitVerifier.php
- * digest: sha256:f2374c67cdf1619f9537a6e00a2d7c3502aa1e654124c91d7910ba69e9e178e3
+ * digest: sha256:041dc11e0720fea866e5eed89ed186a3d9e54e70ccb212057d04f298e76d9db6
  */
 
 namespace Clog\Entity\Item\Contract;
@@ -26,5 +26,8 @@ use Eleph\Runtime\Verification\Verification;
  */
 interface ItemDefaultExpiryUnitVerifier
 {
-    public function verify(ExpiryUnit $value, ItemMutationContext $context): Verification;
+    public function verify(
+        ExpiryUnit $value,
+        ItemMutationContext $context,
+    ): Verification;
 }

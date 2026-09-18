@@ -9,7 +9,7 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   Location/LocationInput.php
- * digest: sha256:c316f1b6c51d02a6f2c08c52bcd7810c9a6ee64e63ab3a09cda809bdbb8cc43e
+ * digest: sha256:e24e143eb40ab70df5e35e154b3e504b54a130f1e86b741c353070e2b934d47b
  */
 
 namespace Clog\Entity\Location;
@@ -27,45 +27,49 @@ final readonly class LocationInput
     public function __construct(
         private ValueDecoder $decode,
     ) {
+
     }
 
-    private function postId(mixed $value): ?int
-    {
+    private function postId(
+        mixed $value,
+    ): ?int {
         if (null === $value) {
             return null;
         }
-
+        
         return $this->decode->int($value, 'Location.postId');
     }
 
-    private function name(mixed $value): ?string
-    {
+    private function name(
+        mixed $value,
+    ): ?string {
         if (null === $value) {
             return null;
         }
-
+        
         return $this->decode->string($value, 'Location.name');
     }
 
     /**
      * @return list<Identifier>
      */
-    private function sites(mixed $value): array
-    {
+    private function sites(
+        mixed $value,
+    ): array {
         if (null === $value) {
             return [];
         }
-
+        
         if (!is_array($value)) {
             throw new InvalidArgumentException(sprintf('%s takes a list of ids.', 'Location.sites'));
         }
-
+        
         $ids = [];
-
+        
         foreach ($value as $id) {
             $ids[] = $this->decode->id($id, 'Location.sites');
         }
-
+        
         return $ids;
     }
 
@@ -75,16 +79,18 @@ final readonly class LocationInput
      *
      * @param array<string, mixed> $input
      */
-    public function apply(MutationBuffer $buffer, array $input): void
-    {
+    public function apply(
+        MutationBuffer $buffer,
+        array $input,
+    ): void {
         if (array_key_exists('postId', $input)) {
             $buffer->set('postId', $this->postId($input['postId']));
         }
-
+        
         if (array_key_exists('name', $input)) {
             $buffer->set('name', $this->name($input['name']));
         }
-
+        
         if (array_key_exists('sites', $input)) {
             $buffer->edge('sites')->set($this->sites($input['sites']));
         }
@@ -94,10 +100,12 @@ final readonly class LocationInput
      * @param array<string, mixed> $args
      * @return array<string, mixed>
      */
-    public function decodeAction(string $action, array $args): array
-    {
+    public function decodeAction(
+        string $action,
+        array $args,
+    ): array {
         return match ($action) {
-
+        
             default => throw new InvalidArgumentException(sprintf('Unknown action %s.', $action)),
         };
     }

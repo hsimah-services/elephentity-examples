@@ -9,7 +9,7 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   Site/SiteDeleter.php
- * digest: sha256:29ef50e3923ba93d66ac634dbdca324ee5fd76f1647a09473e49beb144bf3b7b
+ * digest: sha256:ef9776f978d371c283171bd57df3e5fad8f5c2fab70915f30d3f5286864b5522
  */
 
 namespace Clog\Entity\Site;
@@ -28,21 +28,22 @@ final class SiteDeleter
     public function __construct(
         private readonly UnitOfWork $work,
     ) {
+
     }
 
     /**
      * Registers the removal. Nothing happens until the unit of work commits.
      */
-    public function delete(EntityId $id): void
-    {
+    public function delete(
+        EntityId $id,
+    ): void {
         $this->work->delete(new Deletion('Site', $id));
     }
 
     /**
      * @return list<DeletionRule>
      */
-    public static function rules(): array
-    {
+    public static function rules(): array {
         return [
             new DeletionRule('Inventory', 'site', 'Inventory', DeletionPolicy::Restrict, true),
             new DeletionRule('Location', 'sites', 'Location', DeletionPolicy::Restrict, true),

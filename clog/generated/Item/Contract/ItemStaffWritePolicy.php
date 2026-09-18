@@ -9,7 +9,7 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   Item/Contract/ItemStaffWritePolicy.php
- * digest: sha256:29418b48041623c4b9202654728b5053f444d7bf7a5b368b384767b33245ff66
+ * digest: sha256:e1bdf51abb45908aec2eaf9df26dd41ed3a15f512780264f61f129a3ec9bd61f
  */
 
 namespace Clog\Entity\Item\Contract;
@@ -24,5 +24,9 @@ use Eleph\Runtime\Policy\Viewer;
  */
 interface ItemStaffWritePolicy
 {
-    public function decide(?Item $entity, ItemWriteContext $context, Viewer $viewer): PolicyDecision;
+    public function decide(
+        ?Item $entity,
+        ItemWriteContext $context,
+        Viewer $viewer,
+    ): PolicyDecision;
 }

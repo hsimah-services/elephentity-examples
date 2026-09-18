@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f74e8e269f08f4394f8e0fb2185fbe94",
+    "content-hash": "aac62822134b3fee290fa024582e5b46",
     "packages": [
         {
             "name": "elephentity/elephentity",
@@ -1542,16 +1542,16 @@
         },
         {
             "name": "elephentity/codegen",
-            "version": "dev-main",
+            "version": "v0.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hsimah-services/elephentity-codegen.git",
-                "reference": "482dea1"
+                "reference": "b7ce73dbf6259c4419f2e42f920c748522f9c11f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hsimah-services/elephentity-codegen/zipball/482dea1",
-                "reference": "482dea1",
+                "url": "https://api.github.com/repos/hsimah-services/elephentity-codegen/zipball/b7ce73dbf6259c4419f2e42f920c748522f9c11f",
+                "reference": "b7ce73dbf6259c4419f2e42f920c748522f9c11f",
                 "shasum": ""
             },
             "require": {
@@ -1563,7 +1563,6 @@
                 "phpstan/phpstan": "^2.0",
                 "phpunit/phpunit": "^11.0 || ^12.0"
             },
-            "default-branch": true,
             "bin": [
                 "bin/eleph-codegen"
             ],
@@ -1575,27 +1574,27 @@
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "MIT"
+                "Apache-2.0"
             ],
             "description": "The Elephentity code generator: runs a project's language builders, then signs and writes what they return.",
             "support": {
                 "issues": "https://github.com/hsimah-services/elephentity-codegen/issues",
-                "source": "https://github.com/hsimah-services/elephentity-codegen/tree/main"
+                "source": "https://github.com/hsimah-services/elephentity-codegen/tree/v0.5.0"
             },
-            "time": "2026-09-14T16:10:18+00:00"
+            "time": "2026-09-17T03:34:44+00:00"
         },
         {
             "name": "elephentity/codegen-php",
-            "version": "dev-main",
+            "version": "v0.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hsimah-services/elephentity-codegen-php.git",
-                "reference": "b91b645"
+                "reference": "6a39dc15a5689d0dad71d41dc13331eea96bd1a6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hsimah-services/elephentity-codegen-php/zipball/b91b645",
-                "reference": "b91b645",
+                "url": "https://api.github.com/repos/hsimah-services/elephentity-codegen-php/zipball/6a39dc15a5689d0dad71d41dc13331eea96bd1a6",
+                "reference": "6a39dc15a5689d0dad71d41dc13331eea96bd1a6",
                 "shasum": ""
             },
             "require": {
@@ -1608,7 +1607,6 @@
                 "phpstan/phpstan": "^2.0",
                 "phpunit/phpunit": "^11.0 || ^12.0"
             },
-            "default-branch": true,
             "bin": [
                 "bin/eleph-gen-php"
             ],
@@ -1620,27 +1618,27 @@
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "MIT"
+                "Apache-2.0"
             ],
             "description": "The PHP builder for Elephentity: compiles the IR into locked PHP. Build-time only.",
             "support": {
                 "issues": "https://github.com/hsimah-services/elephentity-codegen-php/issues",
-                "source": "https://github.com/hsimah-services/elephentity-codegen-php/tree/main"
+                "source": "https://github.com/hsimah-services/elephentity-codegen-php/tree/v0.5.0"
             },
-            "time": "2026-09-14T16:10:20+00:00"
+            "time": "2026-09-17T03:32:52+00:00"
         },
         {
             "name": "elephentity/codegen-wordpress",
-            "version": "dev-main",
+            "version": "v0.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hsimah-services/elephentity-codegen-wordpress.git",
-                "reference": "b968ef9"
+                "reference": "dce405c9cde02cace66c4d15c34ff6b3f9ea293c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hsimah-services/elephentity-codegen-wordpress/zipball/b968ef9",
-                "reference": "b968ef9",
+                "url": "https://api.github.com/repos/hsimah-services/elephentity-codegen-wordpress/zipball/dce405c9cde02cace66c4d15c34ff6b3f9ea293c",
+                "reference": "dce405c9cde02cace66c4d15c34ff6b3f9ea293c",
                 "shasum": ""
             },
             "require": {
@@ -1652,7 +1650,6 @@
                 "phpstan/phpstan": "^2.0",
                 "phpunit/phpunit": "^11.0 || ^12.0"
             },
-            "default-branch": true,
             "bin": [
                 "bin/eleph-gen-wordpress"
             ],
@@ -1664,27 +1661,27 @@
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "MIT"
+                "Apache-2.0"
             ],
             "description": "The WordPress builder for Elephentity: compiles the IR into the physical schema WordPress needs. Build-time only.",
             "support": {
                 "issues": "https://github.com/hsimah-services/elephentity-codegen-wordpress/issues",
-                "source": "https://github.com/hsimah-services/elephentity-codegen-wordpress/tree/main"
+                "source": "https://github.com/hsimah-services/elephentity-codegen-wordpress/tree/v0.2.0"
             },
-            "time": "2026-09-14T16:10:22+00:00"
+            "time": "2026-09-17T03:35:02+00:00"
         },
         {
             "name": "elephentity/codegen-wpgraphql",
-            "version": "dev-main",
+            "version": "v0.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hsimah-services/elephentity-codegen-wpgraphql.git",
-                "reference": "c9f1013"
+                "reference": "4580b48b6aa217f27146bd23affebf20b1b81f9e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hsimah-services/elephentity-codegen-wpgraphql/zipball/c9f1013",
-                "reference": "c9f1013",
+                "url": "https://api.github.com/repos/hsimah-services/elephentity-codegen-wpgraphql/zipball/4580b48b6aa217f27146bd23affebf20b1b81f9e",
+                "reference": "4580b48b6aa217f27146bd23affebf20b1b81f9e",
                 "shasum": ""
             },
             "require": {
@@ -1695,7 +1692,6 @@
                 "phpstan/phpstan": "^2.0",
                 "phpunit/phpunit": "^11.0 || ^12.0"
             },
-            "default-branch": true,
             "bin": [
                 "bin/eleph-gen-wpgraphql"
             ],
@@ -1707,14 +1703,14 @@
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "MIT"
+                "Apache-2.0"
             ],
             "description": "The WPGraphQL builder for Elephentity: compiles the IR into a GraphQL manifest and a conformance verifier. Build-time only.",
             "support": {
                 "issues": "https://github.com/hsimah-services/elephentity-codegen-wpgraphql/issues",
-                "source": "https://github.com/hsimah-services/elephentity-codegen-wpgraphql/tree/main"
+                "source": "https://github.com/hsimah-services/elephentity-codegen-wpgraphql/tree/v0.2.0"
             },
-            "time": "2026-09-14T16:10:24+00:00"
+            "time": "2026-09-17T03:35:25+00:00"
         },
         {
             "name": "ergebnis/agent-detector",
@@ -3686,10 +3682,6 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "elephentity/codegen": 20,
-        "elephentity/codegen-php": 20,
-        "elephentity/codegen-wordpress": 20,
-        "elephentity/codegen-wpgraphql": 20,
         "elephentity/elephentity": 20
     },
     "prefer-stable": true,

@@ -9,7 +9,7 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   User/UserVerifiers.php
- * digest: sha256:9f6a84ea2e83c4a184877d82f3bdb14771a9eee7adeec81d36f1deb8243f68b8
+ * digest: sha256:c9dca133c5981dc49768ae05fafebe7b3cbe41cf23032dd0ca5e0d368bba31f8
  */
 
 namespace Clog\Entity\User;
@@ -23,20 +23,22 @@ use Eleph\Runtime\Verification\Verification;
  */
 final readonly class UserVerifiers implements EntityVerifiers
 {
-    public function __construct()
-    {
+    public function __construct() {
+
     }
 
     /**
      * @return list<string>
      */
-    public function verifiedFields(): array
-    {
+    public function verifiedFields(): array {
         return [];
     }
 
-    public function verify(string $field, mixed $value, MutationContext $context): Verification
-    {
+    public function verify(
+        string $field,
+        mixed $value,
+        MutationContext $context,
+    ): Verification {
         return Verification::ok();
     }
 }
