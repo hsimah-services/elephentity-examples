@@ -6,14 +6,14 @@
     "require": {
         "php": ">=8.3",
         "elephentity/runtime": "^0.8",
-        "elephentity/wordpress": "^0.1",
+        "elephentity/wordpress": "^0.2",
         "elephentity/wpgraphql": "^0.1"
     },
     "require-dev": {
         "elephentity/elephentity": "dev-main",
         "elephentity/codegen": "^0.5",
         "elephentity/codegen-php": "^0.5",
-        "elephentity/codegen-wordpress": "^0.2",
+        "elephentity/codegen-wordpress": "^0.3",
         "elephentity/codegen-wpgraphql": "^0.2",
         "friendsofphp/php-cs-fixer": "^3.64",
         "php-stubs/wordpress-stubs": "^6.7 || ^7.0",

@@ -9,7 +9,7 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   Location/LocationMutationContext.php
- * digest: sha256:6973510f38f5b275d86fe4ba035270914bf41ebed6e5676c6edc9cc2937a0e0c
+ * digest: sha256:959e6efede751a3118d257891cb870439c7db28de18b25bd9ac8d3ad5da07d4c
  */
 
 namespace Clog\Entity\Location;
@@ -105,20 +105,6 @@ final readonly class LocationMutationContext implements MutationContext
     public function pendingUpdatedAt(): ?DateTimeImmutable {
         $value = $this->context->pending('updatedAt');
         assert(null === $value || $value instanceof DateTimeImmutable);
-        
-        return $value;
-    }
-
-    public function originalPostId(): ?int {
-        $value = $this->context->original('postId');
-        assert(null === $value || is_int($value));
-        
-        return $value;
-    }
-
-    public function pendingPostId(): ?int {
-        $value = $this->context->pending('postId');
-        assert(null === $value || is_int($value));
         
         return $value;
     }

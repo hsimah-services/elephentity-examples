@@ -9,7 +9,7 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   graphql-manifest.php
- * digest: sha256:2a0c887cdfb465ecb077ad84d461b6348ca22796ca387306ad4a1c437b4b4556
+ * digest: sha256:37cda883c32ba92a8f58f8c0a2e6a2e5bc405ebcc05c45f4ffcc635c1c6e4ae3
  */
 
 namespace Eleph\WPGraphQL\Manifest;
@@ -30,8 +30,6 @@ return new Manifest(
                 'databaseId' => new FieldEntry('databaseId', new GraphQLType('ID', true, false), 'getId', 'The row as storage knows it, unique within its table rather than the schema.', FieldEncoding::Id, null),
                 'createdAt' => new FieldEntry('createdAt', new GraphQLType('String', true, false), 'getCreatedAt', 'When the row was first written. Filled by the framework.', FieldEncoding::Datetime, null),
                 'updatedAt' => new FieldEntry('updatedAt', new GraphQLType('String', true, false), 'getUpdatedAt', 'When the row was last written. Filled by the framework.', FieldEncoding::Datetime, null),
-                'postId' => new FieldEntry('postId', new GraphQLType('Int', false, false), 'getPostId', 'The wp_posts row this entity projects to, once something creates one. Nullable because nothing in the framework writes it: an entity exists in its own table whether or not a post row was ever made for it.
-', FieldEncoding::Value, null),
                 'name' => new FieldEntry('name', new GraphQLType('String', true, false), 'getName', 'Projected to post_title, so the admin list has something to show.', FieldEncoding::Value, null),
                 'dateAdded' => new FieldEntry('dateAdded', new GraphQLType('String', true, false), 'getDateAdded', 'When this instance entered inventory.', FieldEncoding::Datetime, null),
                 'dateExpiry' => new FieldEntry('dateExpiry', new GraphQLType('String', false, false), 'getDateExpiry', 'When it expires. Absent means it does not.', FieldEncoding::Datetime, null),
@@ -53,8 +51,6 @@ return new Manifest(
                 'databaseId' => new FieldEntry('databaseId', new GraphQLType('ID', true, false), 'getId', 'The row as storage knows it, unique within its table rather than the schema.', FieldEncoding::Id, null),
                 'createdAt' => new FieldEntry('createdAt', new GraphQLType('String', true, false), 'getCreatedAt', 'When the row was first written. Filled by the framework.', FieldEncoding::Datetime, null),
                 'updatedAt' => new FieldEntry('updatedAt', new GraphQLType('String', true, false), 'getUpdatedAt', 'When the row was last written. Filled by the framework.', FieldEncoding::Datetime, null),
-                'postId' => new FieldEntry('postId', new GraphQLType('Int', false, false), 'getPostId', 'The wp_posts row this entity projects to, once something creates one. Nullable because nothing in the framework writes it: an entity exists in its own table whether or not a post row was ever made for it.
-', FieldEncoding::Value, null),
                 'name' => new FieldEntry('name', new GraphQLType('String', true, false), 'getName', 'What the item is called. Projected to post_title.', FieldEncoding::Value, null),
                 'barcode' => new FieldEntry('barcode', new GraphQLType('String', false, false), 'getBarcode', 'The barcode that identifies this item. One per item: a serialized list could not be indexed, and scanning a barcode to find an item is the query this data exists to serve.
 ', FieldEncoding::Value, null),
@@ -75,8 +71,6 @@ return new Manifest(
                 'databaseId' => new FieldEntry('databaseId', new GraphQLType('ID', true, false), 'getId', 'The row as storage knows it, unique within its table rather than the schema.', FieldEncoding::Id, null),
                 'createdAt' => new FieldEntry('createdAt', new GraphQLType('String', true, false), 'getCreatedAt', 'When the row was first written. Filled by the framework.', FieldEncoding::Datetime, null),
                 'updatedAt' => new FieldEntry('updatedAt', new GraphQLType('String', true, false), 'getUpdatedAt', 'When the row was last written. Filled by the framework.', FieldEncoding::Datetime, null),
-                'postId' => new FieldEntry('postId', new GraphQLType('Int', false, false), 'getPostId', 'The wp_posts row this entity projects to, once something creates one. Nullable because nothing in the framework writes it: an entity exists in its own table whether or not a post row was ever made for it.
-', FieldEncoding::Value, null),
                 'name' => new FieldEntry('name', new GraphQLType('String', true, false), 'getName', 'What the location is called. Projected to post_title.', FieldEncoding::Value, null),
             ],
             [
@@ -110,7 +104,6 @@ return new Manifest(
             'create',
             'Inventory',
             [
-                'postId' => new GraphQLType('Int', false, false),
                 'name' => new GraphQLType('String', true, false),
                 'dateAdded' => new GraphQLType('String', true, false),
                 'dateExpiry' => new GraphQLType('String', false, false),
@@ -126,7 +119,6 @@ return new Manifest(
             'create',
             'Item',
             [
-                'postId' => new GraphQLType('Int', false, false),
                 'name' => new GraphQLType('String', true, false),
                 'barcode' => new GraphQLType('String', false, false),
                 'defaultExpiryUnit' => new GraphQLType('ExpiryUnit', false, false),
@@ -140,7 +132,6 @@ return new Manifest(
             'create',
             'Location',
             [
-                'postId' => new GraphQLType('Int', false, false),
                 'name' => new GraphQLType('String', true, false),
                 'sites' => new GraphQLType('ID', false, true),
             ],
@@ -175,7 +166,6 @@ return new Manifest(
             'Inventory',
             [
                 'id' => new GraphQLType('ID', true, false),
-                'postId' => new GraphQLType('Int', false, false),
                 'name' => new GraphQLType('String', false, false),
                 'dateAdded' => new GraphQLType('String', false, false),
                 'dateExpiry' => new GraphQLType('String', false, false),
@@ -192,7 +182,6 @@ return new Manifest(
             'Item',
             [
                 'id' => new GraphQLType('ID', true, false),
-                'postId' => new GraphQLType('Int', false, false),
                 'name' => new GraphQLType('String', false, false),
                 'barcode' => new GraphQLType('String', false, false),
                 'defaultExpiryUnit' => new GraphQLType('ExpiryUnit', false, false),
@@ -207,7 +196,6 @@ return new Manifest(
             'Location',
             [
                 'id' => new GraphQLType('ID', true, false),
-                'postId' => new GraphQLType('Int', false, false),
                 'name' => new GraphQLType('String', false, false),
                 'sites' => new GraphQLType('ID', false, true),
             ],

@@ -9,7 +9,7 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   Inventory/InventoryWriteContext.php
- * digest: sha256:0eaa7ab20cd43fee516ad0b2eacf305cac8a450858b1a65a2c95000d780bcb50
+ * digest: sha256:6aa5c7d9066dee382f69bedbdaac733ae7ff4843d479f5e2d7e0e6802c62a470
  */
 
 namespace Clog\Entity\Inventory;
@@ -77,20 +77,6 @@ final readonly class InventoryWriteContext implements WriteContext
     public function pendingUpdatedAt(): ?DateTimeImmutable {
         $value = $this->context->mutation()?->pending('updatedAt');
         assert(null === $value || $value instanceof DateTimeImmutable);
-        
-        return $value;
-    }
-
-    public function originalPostId(): ?int {
-        $value = $this->context->mutation()?->original('postId');
-        assert(null === $value || is_int($value));
-        
-        return $value;
-    }
-
-    public function pendingPostId(): ?int {
-        $value = $this->context->mutation()?->pending('postId');
-        assert(null === $value || is_int($value));
         
         return $value;
     }

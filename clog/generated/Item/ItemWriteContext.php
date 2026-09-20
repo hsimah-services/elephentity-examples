@@ -9,7 +9,7 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   Item/ItemWriteContext.php
- * digest: sha256:8d28aa05f7cdbb50687744a20dbd608f14651f2faee0a54acb2bbe2a546db79e
+ * digest: sha256:1bbc0cc204725c23486a6765ecf8273cd2c366a36a6b7f6e968562a0785de9b6
  */
 
 namespace Clog\Entity\Item;
@@ -78,20 +78,6 @@ final readonly class ItemWriteContext implements WriteContext
     public function pendingUpdatedAt(): ?DateTimeImmutable {
         $value = $this->context->mutation()?->pending('updatedAt');
         assert(null === $value || $value instanceof DateTimeImmutable);
-        
-        return $value;
-    }
-
-    public function originalPostId(): ?int {
-        $value = $this->context->mutation()?->original('postId');
-        assert(null === $value || is_int($value));
-        
-        return $value;
-    }
-
-    public function pendingPostId(): ?int {
-        $value = $this->context->mutation()?->pending('postId');
-        assert(null === $value || is_int($value));
         
         return $value;
     }

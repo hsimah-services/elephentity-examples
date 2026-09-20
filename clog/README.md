@@ -26,7 +26,7 @@ dependencies. Rebuild after generator updates, then regenerate with
 
 | File | What it shows |
 |---|---|
-| `clog.php` | Activation, registration, orphan cleanup, and runtime boot hooks. |
+| `clog.php` | Activation, registration, post-link cleanup, and runtime boot hooks. |
 | `src/Bootstrap.php` | The assembly order, and why each step comes where it does. |
 | `src/Container.php` | Minimal PSR-11 container. |
 | `src/Contract/ItemSearch.php` | A hand-written finder, and how it gets a lazy query. |
@@ -47,9 +47,10 @@ backed enum, a `VARCHAR(6)` column sized to its longest member, and a GraphQL en
 whose `DAYS`/`MONTHS` names sit over the stored `days`/`months`. The hand-written
 version had that mapping in three files.
 
-**The projection is explicit.** `postId` comes from the `ClogPost` pattern, so every
-entity that participates in the WordPress admin says so in one line, and the compiler
-refuses that pattern on a non-WordPress driver.
+**Post linking is optional.** `integrations.wordpress.linkPosts` defaults to false.
+Only Item enables it; the builder adds a storage-owned `wp_post_id` and the adaptor
+creates a draft post when an Item is created. Domain entities have no post ID field.
+Admin list/detail views are generated independently and enabled by default.
 
 **Buildings are a taxonomy, not a duplicated Location.** `Site` (`Loft`, `Cave`) uses the
 new `Taxonomy` pattern instead of `ClogPost`, so its rows are `wp_term_taxonomy` terms
@@ -95,7 +96,7 @@ supplies `title`, `databaseId`, `date`, `modified`, `slug`, `status`, `content` 
 `clogItems(where:)` carrying WP's filtering, ordering and cursor pagination.
 
 Under Elephentity, `Item` is built solely from the spec. You get precisely what you declared:
-`id`, `createdAt`, `updatedAt`, `postId`, `name`, `barcode`, `defaultExpiryUnit`,
+`id`, `createdAt`, `updatedAt`, `name`, `barcode`, `defaultExpiryUnit`,
 `defaultExpiryValue`. `createdAt` and `updatedAt` cover what `date` and `modified` did;
 the rest either need declaring or need to go.
 
@@ -103,32 +104,27 @@ Root fields and query exposure come from the `wpgraphql` integration. Singular a
 plural names are explicit, including `ClogItem` / `ClogItems` and
 `ClogInventory` / `ClogInventoryEntries`.
 
-**Nothing writes the post row, and that is now said out loud.** `postId` is a nullable
-column like any other; registering the post type does not create a `wp_posts` row, and
-neither does a commit. An application that wants the projection writes it in a
-`postCommit` trigger, which is where a WordPress-shaped side effect of a commit
-belongs — the unit of work has no business knowing what a post is. Delete events fire
-for cascaded rows too, so such a trigger can keep up with a cascade rather than
-leaving orphans behind it.
+**The adaptor creates optional linked posts.** Item opts into post linking in its
+spec. A creation failure fails the entity insertion; a post never supplies the
+entity's identity or foreign keys. Existing records are not backfilled. Later post
+title/content synchronization and post retention are application decisions.
 
-The divergence hazard is unchanged and worth restating. `show_ui: true` with
-`supports: ['title']` would let a human edit the title in wp-admin, where the custom
-table is authoritative — an admin edit changes the copy and nothing notices. Three ways
-out, and only one of them is honest:
+**Admin views show the authoritative records.** `adminTemplates` defaults to true.
+The generated list/detail pages use Elephentity's runtime, read policies, and IDs;
+Clog registers them under its parent menu on `admin_menu`. Native post screens are
+hidden for Item. Inventory and Location have the same record views without any
+linked posts. Setting `adminTemplates: false` restores native post screens only for
+entities that enable post linking.
 
-- **Stop supporting `title` on the post type.** The post row becomes what the design
-  says it is — an anchor for the ecosystem, holding nothing. Given Clog has its own
-  React client, losing the wp-admin title column costs little. This is now the default:
-  `supports` is empty unless an entity asks for something.
-- **Sync `post_title` back on `post_updated`.** Makes the projection bidirectional,
-  which contradicts "the custom table is authoritative" and invites write loops.
-- **Let them diverge** until the next write re-projects. Silently wrong, which is the
-  worst of the three.
+Deleting a linked post clears its `wp_post_id` without deleting the entity. This
+preserves Elephentity's relationship checks and prevents WordPress deletion from
+silently removing authoritative records.
 
 ### Post type registration
 
-The `ClogPost` pattern declares registration options. Entities supply them through
-`configure:`, validated against the pattern's parameter definitions.
+The `ClogPost` pattern supplies labels and optional registration arguments through
+`configure:`. `integrations.wordpress` separately controls template generation and
+post linking, with project defaults and per-entity overrides.
 
 ## What this exercise confirmed
 

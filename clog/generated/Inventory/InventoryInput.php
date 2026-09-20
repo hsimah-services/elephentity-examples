@@ -9,7 +9,7 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   Inventory/InventoryInput.php
- * digest: sha256:aad6caee5937c285fd81c86167678dd6b735eb3a205b34d579055aec2018b715
+ * digest: sha256:4072bc98ba32eb49ff18519e4332aad4301c0c96a2bb2fa36b776c42e1140c4a
  */
 
 namespace Clog\Entity\Inventory;
@@ -29,16 +29,6 @@ final readonly class InventoryInput
         private ValueDecoder $decode,
     ) {
 
-    }
-
-    private function postId(
-        mixed $value,
-    ): ?int {
-        if (null === $value) {
-            return null;
-        }
-        
-        return $this->decode->int($value, 'Inventory.postId');
     }
 
     private function name(
@@ -130,10 +120,6 @@ final readonly class InventoryInput
         MutationBuffer $buffer,
         array $input,
     ): void {
-        if (array_key_exists('postId', $input)) {
-            $buffer->set('postId', $this->postId($input['postId']));
-        }
-        
         if (array_key_exists('name', $input)) {
             $buffer->set('name', $this->name($input['name']));
         }

@@ -9,6 +9,8 @@ configure:
     label: Item
     pluralLabel: Items
 integrations:
+  wordpress:
+    linkPosts: true
   wpgraphql:
     singular: ClogItem
     plural: ClogItems

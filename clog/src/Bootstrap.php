@@ -47,6 +47,7 @@ use Eleph\Runtime\Policy\WriteGate;
 use Eleph\Runtime\Query\Queries;
 use Eleph\Runtime\Query\ValueDecoder;
 use Eleph\Runtime\Type\NullProcessorRegistry;
+use Eleph\WordPress\Admin\Pages;
 use Eleph\WordPress\Database\Database;
 use Eleph\WordPress\Integrity\OrphanGuard;
 use Eleph\WordPress\Manifest\StorageManifest;
@@ -132,12 +133,18 @@ final class Bootstrap
         return PostTypeRegistrar::fromManifest(self::POST_TYPES);
     }
 
+    /** Hook register() on admin_menu. */
+    public function adminPages(): Pages
+    {
+        return Pages::fromManifest(self::GENERATED . '/wordpress/admin-pages.php', $this->runtime());
+    }
+
     /**
      * Hook `onPostDeleted()` on `before_delete_post`.
      *
      * Nothing in the framework sees someone empty the trash in wp-admin or another
-     * plugin call `wp_delete_post()`. Without this the post row goes and the custom
-     * table row survives, pointing at nothing.
+     * plugin call `wp_delete_post()`. This clears the optional post link; the
+     * entity survives and its relationships remain under Elephentity control.
      */
     public function orphanGuard(): OrphanGuard
     {

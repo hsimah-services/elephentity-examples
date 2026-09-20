@@ -9,7 +9,7 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   Item/ItemMutationContext.php
- * digest: sha256:7af0347c2051314624a635383f85c127222c742b2af7fce0440807b95f33be3e
+ * digest: sha256:35176d3a17fdc301eed06a8295d2a1fbd1c2475329dceb1fec3b230b85989651
  */
 
 namespace Clog\Entity\Item;
@@ -106,20 +106,6 @@ final readonly class ItemMutationContext implements MutationContext
     public function pendingUpdatedAt(): ?DateTimeImmutable {
         $value = $this->context->pending('updatedAt');
         assert(null === $value || $value instanceof DateTimeImmutable);
-        
-        return $value;
-    }
-
-    public function originalPostId(): ?int {
-        $value = $this->context->original('postId');
-        assert(null === $value || is_int($value));
-        
-        return $value;
-    }
-
-    public function pendingPostId(): ?int {
-        $value = $this->context->pending('postId');
-        assert(null === $value || is_int($value));
         
         return $value;
     }

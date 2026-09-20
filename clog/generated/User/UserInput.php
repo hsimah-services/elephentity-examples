@@ -9,7 +9,7 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   User/UserInput.php
- * digest: sha256:0e25782259d5d4753db55c01e7671139694af3fcdc0c9208e2807e02392be30e
+ * digest: sha256:be2fac21bdb3de75e5d496f08f77d1bbe4df322d61b05b6bf62cd285e0e759e4
  */
 
 namespace Clog\Entity\User;
@@ -27,16 +27,6 @@ final readonly class UserInput
         private ValueDecoder $decode,
     ) {
 
-    }
-
-    private function postId(
-        mixed $value,
-    ): ?int {
-        if (null === $value) {
-            return null;
-        }
-        
-        return $this->decode->int($value, 'User.postId');
     }
 
     private function bio(
@@ -59,10 +49,6 @@ final readonly class UserInput
         MutationBuffer $buffer,
         array $input,
     ): void {
-        if (array_key_exists('postId', $input)) {
-            $buffer->set('postId', $this->postId($input['postId']));
-        }
-        
         if (array_key_exists('bio', $input)) {
             $buffer->set('bio', $this->bio($input['bio']));
         }

@@ -9,7 +9,7 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   User/UserWriteContext.php
- * digest: sha256:dd657c6bcd6b8354a797526dc9e0154743f641a50d0253311281f2ebbfbfe2d5
+ * digest: sha256:1a4ce733ee279b13ad6dfca6d09fd8e32493e830801d7e86e5480af2fdee3224
  */
 
 namespace Clog\Entity\User;
@@ -77,20 +77,6 @@ final readonly class UserWriteContext implements WriteContext
     public function pendingUpdatedAt(): ?DateTimeImmutable {
         $value = $this->context->mutation()?->pending('updatedAt');
         assert(null === $value || $value instanceof DateTimeImmutable);
-        
-        return $value;
-    }
-
-    public function originalPostId(): ?int {
-        $value = $this->context->mutation()?->original('postId');
-        assert(null === $value || is_int($value));
-        
-        return $value;
-    }
-
-    public function pendingPostId(): ?int {
-        $value = $this->context->mutation()?->pending('postId');
-        assert(null === $value || is_int($value));
         
         return $value;
     }

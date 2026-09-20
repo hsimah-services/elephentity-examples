@@ -9,7 +9,7 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   Location/LocationInput.php
- * digest: sha256:e24e143eb40ab70df5e35e154b3e504b54a130f1e86b741c353070e2b934d47b
+ * digest: sha256:c7735d51d89431ba5376c070cda6041fea21c7b6bba0ae79076655eae8a82eac
  */
 
 namespace Clog\Entity\Location;
@@ -28,16 +28,6 @@ final readonly class LocationInput
         private ValueDecoder $decode,
     ) {
 
-    }
-
-    private function postId(
-        mixed $value,
-    ): ?int {
-        if (null === $value) {
-            return null;
-        }
-        
-        return $this->decode->int($value, 'Location.postId');
     }
 
     private function name(
@@ -83,10 +73,6 @@ final readonly class LocationInput
         MutationBuffer $buffer,
         array $input,
     ): void {
-        if (array_key_exists('postId', $input)) {
-            $buffer->set('postId', $this->postId($input['postId']));
-        }
-        
         if (array_key_exists('name', $input)) {
             $buffer->set('name', $this->name($input['name']));
         }

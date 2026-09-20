@@ -9,7 +9,7 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   Location/LocationWriteContext.php
- * digest: sha256:815cce17872cb01868c2e112208da15f1cf37fec0e1ea56c38bb9d4f7ec72c54
+ * digest: sha256:7fcdc99fb159a2db2e88b97fe50abaf0a4d4be8157c38d8535743fe26f985d38
  */
 
 namespace Clog\Entity\Location;
@@ -77,20 +77,6 @@ final readonly class LocationWriteContext implements WriteContext
     public function pendingUpdatedAt(): ?DateTimeImmutable {
         $value = $this->context->mutation()?->pending('updatedAt');
         assert(null === $value || $value instanceof DateTimeImmutable);
-        
-        return $value;
-    }
-
-    public function originalPostId(): ?int {
-        $value = $this->context->mutation()?->original('postId');
-        assert(null === $value || is_int($value));
-        
-        return $value;
-    }
-
-    public function pendingPostId(): ?int {
-        $value = $this->context->mutation()?->pending('postId');
-        assert(null === $value || is_int($value));
         
         return $value;
     }

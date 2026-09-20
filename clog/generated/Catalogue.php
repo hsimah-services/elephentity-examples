@@ -9,7 +9,7 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   Catalogue.php
- * digest: sha256:e6f71d0bb391d94e97bcc777695007653319cf433285913c5aaf77ce4ac36906
+ * digest: sha256:74d5e08c96dfd7d77af43b173af4edd63b91249e24bd247a8595268482739b7a
  */
 
 namespace Clog\Entity;
@@ -228,11 +228,11 @@ final readonly class Catalogue implements EntityCatalogue
         string $entity,
     ): array {
         return match ($entity) {
-            'Inventory' => ['createdAt', 'updatedAt', 'postId', 'name', 'dateAdded', 'dateExpiry'],
-            'Item' => ['createdAt', 'updatedAt', 'postId', 'name', 'barcode', 'defaultExpiryUnit', 'defaultExpiryValue'],
-            'Location' => ['createdAt', 'updatedAt', 'postId', 'name'],
+            'Inventory' => ['createdAt', 'updatedAt', 'name', 'dateAdded', 'dateExpiry'],
+            'Item' => ['createdAt', 'updatedAt', 'name', 'barcode', 'defaultExpiryUnit', 'defaultExpiryValue'],
+            'Location' => ['createdAt', 'updatedAt', 'name'],
             'Site' => ['name'],
-            'User' => ['createdAt', 'updatedAt', 'postId', 'bio'],
+            'User' => ['createdAt', 'updatedAt', 'bio'],
             default => [],
         };
     }
@@ -276,11 +276,11 @@ final readonly class Catalogue implements EntityCatalogue
         string $entity,
     ): array {
         return match ($entity) {
-            'Inventory' => ['postId'],
-            'Item' => ['postId', 'barcode'],
-            'Location' => ['postId', 'name'],
+            'Inventory' => [],
+            'Item' => ['barcode'],
+            'Location' => ['name'],
             'Site' => ['name'],
-            'User' => ['postId'],
+            'User' => [],
             default => [],
         };
     }

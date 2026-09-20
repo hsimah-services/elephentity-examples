@@ -9,7 +9,7 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   Item/ItemInput.php
- * digest: sha256:da538ac650c64f148274a5bacf38b08700619c6dc8db4107a486ffdd3f7a3f06
+ * digest: sha256:423a0f3e28d9d4fd7128664999b7d0f986978c7024134c8fadd0d242760ee535
  */
 
 namespace Clog\Entity\Item;
@@ -28,16 +28,6 @@ final readonly class ItemInput
         private ValueDecoder $decode,
     ) {
 
-    }
-
-    private function postId(
-        mixed $value,
-    ): ?int {
-        if (null === $value) {
-            return null;
-        }
-        
-        return $this->decode->int($value, 'Item.postId');
     }
 
     private function name(
@@ -90,10 +80,6 @@ final readonly class ItemInput
         MutationBuffer $buffer,
         array $input,
     ): void {
-        if (array_key_exists('postId', $input)) {
-            $buffer->set('postId', $this->postId($input['postId']));
-        }
-        
         if (array_key_exists('name', $input)) {
             $buffer->set('name', $this->name($input['name']));
         }

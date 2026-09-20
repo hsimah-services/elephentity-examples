@@ -9,7 +9,7 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   Inventory/Inventory.php
- * digest: sha256:1e7bca595dd098133e626088e83b82bb330e02532f7d04ceb5cf3e96c6df8d4c
+ * digest: sha256:45ae0da9818e3868e7f3fe15c1e0298f30c1d31044cc83674914c8dd6cab6575
  */
 
 namespace Clog\Entity\Inventory;
@@ -33,7 +33,6 @@ final class Inventory implements ClogPost
         private readonly EdgeLoader $edges,
         private readonly DateTimeImmutable $createdAt,
         private readonly DateTimeImmutable $updatedAt,
-        private readonly ?int $postId,
         private readonly string $name,
         private readonly DateTimeImmutable $dateAdded,
         private readonly ?DateTimeImmutable $dateExpiry,
@@ -57,13 +56,6 @@ final class Inventory implements ClogPost
      */
     public function getUpdatedAt(): DateTimeImmutable {
         return $this->updatedAt;
-    }
-
-    /**
-     * The wp_posts row this entity projects to, once something creates one. Nullable because nothing in the framework writes it: an entity exists in its own table whether or not a post row was ever made for it.
-     */
-    public function getPostId(): ?int {
-        return $this->postId;
     }
 
     /**
@@ -122,11 +114,10 @@ final class Inventory implements ClogPost
         EdgeLoader $edges,
         DateTimeImmutable $createdAt,
         DateTimeImmutable $updatedAt,
-        ?int $postId,
         string $name,
         DateTimeImmutable $dateAdded,
         ?DateTimeImmutable $dateExpiry,
     ): self {
-        return new self($id, $edges, $createdAt, $updatedAt, $postId, $name, $dateAdded, $dateExpiry);
+        return new self($id, $edges, $createdAt, $updatedAt, $name, $dateAdded, $dateExpiry);
     }
 }
