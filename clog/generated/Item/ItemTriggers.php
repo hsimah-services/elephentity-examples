@@ -9,7 +9,7 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   Item/ItemTriggers.php
- * digest: sha256:e4f703cac5051068516d3487101278fc9d8e58d64ca31a89b10f7cdb4e561cf1
+ * digest: sha256:3594472b67e7311a02f72865ff326adc80f9bf31450d888e7e2a073d08570f9c
  */
 
 namespace Clog\Entity\Item;
@@ -24,11 +24,15 @@ use Eleph\Runtime\Trigger\TriggerPhase;
  */
 final readonly class ItemTriggers implements EntityTriggers
 {
-    public function __construct()
-    {
+    public function __construct() {
+
     }
 
-    public function dispatch(TriggerPhase $phase, TriggerEvent $event, MutationContext $context): void
-    {
+    public function dispatch(
+        TriggerPhase $phase,
+        TriggerEvent $event,
+        MutationContext $context,
+    ): void {
+
     }
 }

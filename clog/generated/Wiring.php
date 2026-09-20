@@ -9,7 +9,7 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   Wiring.php
- * digest: sha256:cea251c54c104fec6a9a117995173cb126ba08c581e2fd869e2c142cf3232539
+ * digest: sha256:c60d2abe2cee81cc5bb089f028e3fcb64088fd0fff9e04a5fe02ae4b76998cbf
  */
 
 namespace Clog\Entity;
@@ -66,8 +66,7 @@ final class Wiring
      *
      * @return array<class-string, Closure(ContainerInterface): object>
      */
-    public static function registrations(): array
-    {
+    public static function registrations(): array {
         return [
             InventoryHydrator::class => static fn (ContainerInterface $c): object => new InventoryHydrator(self::resolve($c, ValueDecoder::class)),
             InventoryInput::class => static fn (ContainerInterface $c): object => new InventoryInput(self::resolve($c, ValueDecoder::class)),
@@ -108,12 +107,14 @@ final class Wiring
      * @param class-string<T> $class
      * @return T
      */
-    private static function resolve(ContainerInterface $c, string $class): object
-    {
+    private static function resolve(
+        ContainerInterface $c,
+        string $class,
+    ): object {
         $service = $c->get($class);
-
+        
         assert($service instanceof $class);
-
+        
         return $service;
     }
 }

@@ -9,7 +9,7 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   Item/ItemMutator.php
- * digest: sha256:2c88dc7fc3b49984753fa0a1fa31602d8eecc58b6fa92ae93a38872e4103d8e9
+ * digest: sha256:8ce48e765903f230d4163dad10f1fef8b9607ad1567cdc38cda982ac6853bf26
  */
 
 namespace Clog\Entity\Item;
@@ -30,48 +30,55 @@ final class ItemMutator
         private readonly MutationBuffer $buffer,
         private readonly ItemDiscontinueAction $discontinueAction,
     ) {
+
     }
 
-    public function setPostId(?int $postId): self
-    {
+    public function setPostId(
+        ?int $postId,
+    ): self {
         $this->buffer->set('postId', $postId);
-
+        
         return $this;
     }
 
-    public function setName(string $name): self
-    {
+    public function setName(
+        string $name,
+    ): self {
         $this->buffer->set('name', $name);
-
+        
         return $this;
     }
 
-    public function setBarcode(?string $barcode): self
-    {
+    public function setBarcode(
+        ?string $barcode,
+    ): self {
         $this->buffer->set('barcode', $barcode);
-
+        
         return $this;
     }
 
-    public function setDefaultExpiryUnit(?ExpiryUnit $defaultExpiryUnit): self
-    {
+    public function setDefaultExpiryUnit(
+        ?ExpiryUnit $defaultExpiryUnit,
+    ): self {
         $this->buffer->set('defaultExpiryUnit', $defaultExpiryUnit);
-
+        
         return $this;
     }
 
-    public function setDefaultExpiryValue(?int $defaultExpiryValue): self
-    {
+    public function setDefaultExpiryValue(
+        ?int $defaultExpiryValue,
+    ): self {
         $this->buffer->set('defaultExpiryValue', $defaultExpiryValue);
-
+        
         return $this;
     }
 
     /**
      * Retire an item from the catalogue. Clears the barcode so a scan stops resolving to it; the item row itself stays, since existing inventory entries still point at it.
      */
-    public function discontinue(string $reason): void
-    {
+    public function discontinue(
+        string $reason,
+    ): void {
         $this->discontinueAction->handle(ItemDiscontinueContext::of($this->buffer), $reason);
     }
 }

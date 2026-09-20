@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 #
-# Run any command against the Elephentity PHP toolchain in a throwaway container.
+# Run the PHP and Rust build tools in a disposable container.
 #
 #   cd clog && ../tools/php composer install
+#   cd clog && ../tools/php composer build-generators
 #   cd clog && ../tools/php composer ci
 #   cd clog && ../tools/php vendor/bin/eleph generate --check
 #   ./tools/php bash                  # interactive shell, from the repo root
@@ -21,8 +22,9 @@ set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 REL="$(realpath --relative-to="$ROOT" "$PWD")"
 
-IMAGE="eleph-dev:8.3"
+IMAGE="eleph-examples-dev:8.3-rust"
 CACHE_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/eleph/composer"
+RUST_CACHE_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/eleph/cargo"
 
 if command -v podman >/dev/null 2>&1; then
     ENGINE=podman
@@ -49,7 +51,7 @@ fi
 
 # A host directory rather than a named volume: under docker's --user a named volume
 # would be created root-owned and unwritable, and this works identically for podman.
-mkdir -p "$CACHE_DIR"
+mkdir -p "$CACHE_DIR" "$RUST_CACHE_DIR"
 
 # stdin is always attached: `eleph-codegen` and friends speak JSON on it, so a
 # container that could not be piped into would be untestable by hand. A TTY is added
@@ -65,7 +67,9 @@ exec "$ENGINE" run --rm \
     `# :z relabels the mount for SELinux, which Fedora enforces by default.` \
     -v "$ROOT:/app:z" \
     -v "$CACHE_DIR:/composer:z" \
+    -v "$RUST_CACHE_DIR:/cargo:z" \
     -e COMPOSER_HOME=/composer \
+    -e CARGO_HOME=/cargo \
     `# An arbitrary UID has no passwd entry, so HOME is unset and some tools fall over.` \
     -e HOME=/tmp \
     -w "/app/$REL" \

@@ -20,18 +20,8 @@ if (!defined('ABSPATH')) {
 require_once __DIR__ . '/vendor/autoload.php';
 
 /**
- * The whole plugin.
- *
- * Elephentity ships as a Composer library rather than a plugin, so this file is the
- * adaptor between WordPress's lifecycle and an ordinary PHP object graph — which is
- * why there is so little of it.
- *
- * Three hooks, and the order matters:
- *
- *   activation         create or migrate the tables, before anything can query them
- *   init               register the post types, which WordPress requires on this hook
- *   before_delete_post clean up rows whose post row went behind the framework's back
- *   plugins_loaded     assemble the runtime and hand it to whatever speaks a protocol
+ * WordPress lifecycle bindings: activation migrates, init registers types, before_delete_post
+ * cleans orphaned rows, and plugins_loaded boots the runtime.
  */
 function bootstrap(): Bootstrap
 {
@@ -52,8 +42,6 @@ function bootstrap(): Bootstrap
 register_activation_hook(__FILE__, static function (): void {
     $plan = bootstrap()->install();
 
-    // A refusal means the plan was not applied at all. Failing activation is the
-    // honest response: a schema two states from the spec is worse than no plugin.
     if (!$plan->isSafe()) {
         wp_die(esc_html(sprintf(
             "Clog could not migrate its tables:\n\n%s",
@@ -74,8 +62,5 @@ add_action('before_delete_post', static function (int $postId): void {
 });
 
 add_action('plugins_loaded', static function (): void {
-    // BootCheck runs here and throws by name if anything under generated/*/Contract/
-    // has no implementation, so the failure is a startup failure rather than a
-    // surprise on the first request that happens to need the missing class.
     bootstrap()->graphql()->boot();
 });

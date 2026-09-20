@@ -9,7 +9,7 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   Location/LocationDeleter.php
- * digest: sha256:724afb255baa2878375275811b4c8d416669a079a28683fce29f1ebbb06493d5
+ * digest: sha256:66fa5eeb75fa263839df9232a1a1268f8c59a377e2695d62c65725e49afac3b8
  */
 
 namespace Clog\Entity\Location;
@@ -28,21 +28,22 @@ final class LocationDeleter
     public function __construct(
         private readonly UnitOfWork $work,
     ) {
+
     }
 
     /**
      * Registers the removal. Nothing happens until the unit of work commits.
      */
-    public function delete(EntityId $id): void
-    {
+    public function delete(
+        EntityId $id,
+    ): void {
         $this->work->delete(new Deletion('Location', $id));
     }
 
     /**
      * @return list<DeletionRule>
      */
-    public static function rules(): array
-    {
+    public static function rules(): array {
         return [
             new DeletionRule('Inventory', 'location', 'Inventory', DeletionPolicy::Restrict, false),
             new DeletionRule('Site', 'sites', 'Location', DeletionPolicy::Restrict, true),

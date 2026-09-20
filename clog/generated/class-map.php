@@ -9,19 +9,9 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   class-map.php
- * digest: sha256:92b311c855cdadf6b1438b1dc64c183561c0d29f2bd0fd9d4a4770d9b6615dc5
+ * digest: sha256:841321005575a2f59520499ad31b52e0750619616a06fc50d9ac2b8c30425bda
  */
 
-/**
- * What this tree contains, and where.
- *
- * `entities` maps a spec name to the class representing it; `classes` maps
- * every generated class to its file, relative to this one's directory.
- *
- * Written for tools that did not generate the tree and should not have to
- * know how it was named — `eleph check` resolves a GraphQL type back to a
- * class through here rather than by reimplementing the generator's rules.
- */
 return [
     'entities' => [
         'Inventory' => 'Clog\\Entity\\Inventory\\Inventory',

@@ -9,7 +9,7 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   Inventory/InventoryHydrator.php
- * digest: sha256:66a97662579b60d753b2ec22ee08dc6459b668e8ae129095c3e907b8dda75233
+ * digest: sha256:f7487148c88dcc663f89952423ffe524420d91cb906bdd747abb190ad10b3c47
  */
 
 namespace Clog\Entity\Inventory;
@@ -30,10 +30,13 @@ final readonly class InventoryHydrator implements Hydrator
     public function __construct(
         private ValueDecoder $decode,
     ) {
+
     }
 
-    public function hydrate(Record $record, EdgeLoader $edges): Inventory
-    {
+    public function hydrate(
+        Record $record,
+        EdgeLoader $edges,
+    ): Inventory {
         return Inventory::of(
             $record->id,
             $edges,
@@ -46,45 +49,51 @@ final readonly class InventoryHydrator implements Hydrator
         );
     }
 
-    private function createdAt(Record $record): DateTimeImmutable
-    {
+    private function createdAt(
+        Record $record,
+    ): DateTimeImmutable {
         $value = $record->value('createdAt');
-
+        
         return $this->decode->datetime($value, 'Inventory.createdAt');
     }
 
-    private function updatedAt(Record $record): DateTimeImmutable
-    {
+    private function updatedAt(
+        Record $record,
+    ): DateTimeImmutable {
         $value = $record->value('updatedAt');
-
+        
         return $this->decode->datetime($value, 'Inventory.updatedAt');
     }
 
-    private function postId(Record $record): ?int
-    {
+    private function postId(
+        Record $record,
+    ): ?int {
         $value = $record->value('postId');
-
+        
         return null === $value ? null : $this->decode->int($value, 'Inventory.postId');
     }
 
-    private function name(Record $record): string
-    {
+    private function name(
+        Record $record,
+    ): string {
         $value = $record->value('name');
-
+        
         return $this->decode->string($value, 'Inventory.name');
     }
 
-    private function dateAdded(Record $record): DateTimeImmutable
-    {
+    private function dateAdded(
+        Record $record,
+    ): DateTimeImmutable {
         $value = $record->value('dateAdded');
-
+        
         return $this->decode->datetime($value, 'Inventory.dateAdded');
     }
 
-    private function dateExpiry(Record $record): ?DateTimeImmutable
-    {
+    private function dateExpiry(
+        Record $record,
+    ): ?DateTimeImmutable {
         $value = $record->value('dateExpiry');
-
+        
         return null === $value ? null : $this->decode->datetime($value, 'Inventory.dateExpiry');
     }
 }

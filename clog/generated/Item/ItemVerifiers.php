@@ -9,7 +9,7 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   Item/ItemVerifiers.php
- * digest: sha256:567587656256c370c53c3692a8ac56eca4642e76c5ac82060dc38354cb309ea3
+ * digest: sha256:055912673f509ce290416e5723fb2d8cc668a56313b701e59810fce911374318
  */
 
 namespace Clog\Entity\Item;
@@ -30,18 +30,21 @@ final readonly class ItemVerifiers implements EntityVerifiers
         private ItemDefaultExpiryUnitVerifier $defaultExpiryUnitVerifier,
         private ItemDefaultExpiryValueVerifier $defaultExpiryValueVerifier,
     ) {
+
     }
 
     /**
      * @return list<string>
      */
-    public function verifiedFields(): array
-    {
+    public function verifiedFields(): array {
         return ['defaultExpiryUnit', 'defaultExpiryValue'];
     }
 
-    public function verify(string $field, mixed $value, MutationContext $context): Verification
-    {
+    public function verify(
+        string $field,
+        mixed $value,
+        MutationContext $context,
+    ): Verification {
         return match ($field) {
             'defaultExpiryUnit' => $this->verifyDefaultExpiryUnit($value, $context),
             'defaultExpiryValue' => $this->verifyDefaultExpiryValue($value, $context),
@@ -49,17 +52,21 @@ final readonly class ItemVerifiers implements EntityVerifiers
         };
     }
 
-    private function verifyDefaultExpiryUnit(mixed $value, MutationContext $context): Verification
-    {
+    private function verifyDefaultExpiryUnit(
+        mixed $value,
+        MutationContext $context,
+    ): Verification {
         assert($value instanceof ExpiryUnit);
-
+        
         return $this->defaultExpiryUnitVerifier->verify($value, ItemMutationContext::of($context));
     }
 
-    private function verifyDefaultExpiryValue(mixed $value, MutationContext $context): Verification
-    {
+    private function verifyDefaultExpiryValue(
+        mixed $value,
+        MutationContext $context,
+    ): Verification {
         assert(is_int($value));
-
+        
         return $this->defaultExpiryValueVerifier->verify($value, ItemMutationContext::of($context));
     }
 }

@@ -9,7 +9,7 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   Site/SiteTriggers.php
- * digest: sha256:4d4f6468aa4fb757a7bc0e0849df72e23b519d6d56a050d8b40e1fc429d50524
+ * digest: sha256:7e1500f5fa48b346b4e89e801832bbfaf3782a83bfc48851171462636016298e
  */
 
 namespace Clog\Entity\Site;
@@ -24,11 +24,15 @@ use Eleph\Runtime\Trigger\TriggerPhase;
  */
 final readonly class SiteTriggers implements EntityTriggers
 {
-    public function __construct()
-    {
+    public function __construct() {
+
     }
 
-    public function dispatch(TriggerPhase $phase, TriggerEvent $event, MutationContext $context): void
-    {
+    public function dispatch(
+        TriggerPhase $phase,
+        TriggerEvent $event,
+        MutationContext $context,
+    ): void {
+
     }
 }

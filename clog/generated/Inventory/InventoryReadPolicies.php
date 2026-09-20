@@ -9,7 +9,7 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   Inventory/InventoryReadPolicies.php
- * digest: sha256:c203883bf6be00be4bd75fc34e9f2466eb72b5fd33755ca8b95b8a13b7359a64
+ * digest: sha256:5beb958140adace52d66bdeac7c9969cc6e9f151c4b2cd330de7e6ef058e6645
  */
 
 namespace Clog\Entity\Inventory;
@@ -25,21 +25,23 @@ final readonly class InventoryReadPolicies implements EntityReadPolicies
     public function __construct(
         private ClogPostSignedInReadPolicy $signedInPolicy,
     ) {
+
     }
 
-    public function isEmpty(): bool
-    {
+    public function isEmpty(): bool {
         return false;
     }
 
-    public function decide(object $entity, Viewer $viewer): PolicyDecision
-    {
+    public function decide(
+        object $entity,
+        Viewer $viewer,
+    ): PolicyDecision {
         assert($entity instanceof Inventory);
         $decision = $this->signedInPolicy->decide($entity, $viewer);
         if (PolicyOutcome::Skip !== $decision->outcome) {
             return $decision->withPolicy('signedIn');
         }
-
+        
         return PolicyDecision::deny('No policy allowed this read.')->withPolicy('terminal');
     }
 }

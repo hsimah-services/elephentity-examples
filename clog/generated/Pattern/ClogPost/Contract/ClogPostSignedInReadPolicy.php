@@ -9,7 +9,7 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   Pattern/ClogPost/Contract/ClogPostSignedInReadPolicy.php
- * digest: sha256:971eb9a544d8549e0f0f4b5a21f4b14cafcc539b01083689d40ada1d52209d4a
+ * digest: sha256:6d28df6454e6f0f5f2a5f4ecc7eae62fcdb90fd11be6f699ee15acb67e2042d8
  */
 
 namespace Clog\Entity\Pattern\ClogPost\Contract;
@@ -23,5 +23,8 @@ use Eleph\Runtime\Policy\Viewer;
  */
 interface ClogPostSignedInReadPolicy
 {
-    public function decide(ClogPost $entity, Viewer $viewer): PolicyDecision;
+    public function decide(
+        ClogPost $entity,
+        Viewer $viewer,
+    ): PolicyDecision;
 }

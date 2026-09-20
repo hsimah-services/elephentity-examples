@@ -9,7 +9,7 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   Item/ItemMutationContext.php
- * digest: sha256:30d09e1c189df1d0afee0ea73beec7bdf5d3393a5a975f01c7654d6f431bafe3
+ * digest: sha256:7af0347c2051314624a635383f85c127222c742b2af7fce0440807b95f33be3e
  */
 
 namespace Clog\Entity\Item;
@@ -27,173 +27,162 @@ final readonly class ItemMutationContext implements MutationContext
     private function __construct(
         private MutationContext $context,
     ) {
+
     }
 
-    public function id(): Identifier
-    {
+    public function id(): Identifier {
         return $this->context->id();
     }
 
-    public function entity(): string
-    {
+    public function entity(): string {
         return $this->context->entity();
     }
 
-    public function isCreate(): bool
-    {
+    public function isCreate(): bool {
         return $this->context->isCreate();
     }
 
-    public function original(string $field): mixed
-    {
+    public function original(
+        string $field,
+    ): mixed {
         return $this->context->original($field);
     }
 
-    public function pending(string $field): mixed
-    {
+    public function pending(
+        string $field,
+    ): mixed {
         return $this->context->pending($field);
     }
 
-    public function isChanged(string $field): bool
-    {
+    public function isChanged(
+        string $field,
+    ): bool {
         return $this->context->isChanged($field);
     }
 
     /**
      * @return array<string, mixed>
      */
-    public function changes(): array
-    {
+    public function changes(): array {
         return $this->context->changes();
     }
 
     /**
      * @return list<Identifier>
      */
-    public function pendingEdge(string $edge): array
-    {
+    public function pendingEdge(
+        string $edge,
+    ): array {
         return $this->context->pendingEdge($edge);
     }
 
-    public function isEdgeChanged(string $edge): bool
-    {
+    public function isEdgeChanged(
+        string $edge,
+    ): bool {
         return $this->context->isEdgeChanged($edge);
     }
 
-    public function originalCreatedAt(): ?DateTimeImmutable
-    {
+    public function originalCreatedAt(): ?DateTimeImmutable {
         $value = $this->context->original('createdAt');
         assert(null === $value || $value instanceof DateTimeImmutable);
-
+        
         return $value;
     }
 
-    public function pendingCreatedAt(): ?DateTimeImmutable
-    {
+    public function pendingCreatedAt(): ?DateTimeImmutable {
         $value = $this->context->pending('createdAt');
         assert(null === $value || $value instanceof DateTimeImmutable);
-
+        
         return $value;
     }
 
-    public function originalUpdatedAt(): ?DateTimeImmutable
-    {
+    public function originalUpdatedAt(): ?DateTimeImmutable {
         $value = $this->context->original('updatedAt');
         assert(null === $value || $value instanceof DateTimeImmutable);
-
+        
         return $value;
     }
 
-    public function pendingUpdatedAt(): ?DateTimeImmutable
-    {
+    public function pendingUpdatedAt(): ?DateTimeImmutable {
         $value = $this->context->pending('updatedAt');
         assert(null === $value || $value instanceof DateTimeImmutable);
-
+        
         return $value;
     }
 
-    public function originalPostId(): ?int
-    {
+    public function originalPostId(): ?int {
         $value = $this->context->original('postId');
         assert(null === $value || is_int($value));
-
+        
         return $value;
     }
 
-    public function pendingPostId(): ?int
-    {
+    public function pendingPostId(): ?int {
         $value = $this->context->pending('postId');
         assert(null === $value || is_int($value));
-
+        
         return $value;
     }
 
-    public function originalName(): ?string
-    {
+    public function originalName(): ?string {
         $value = $this->context->original('name');
         assert(null === $value || is_string($value));
-
+        
         return $value;
     }
 
-    public function pendingName(): ?string
-    {
+    public function pendingName(): ?string {
         $value = $this->context->pending('name');
         assert(null === $value || is_string($value));
-
+        
         return $value;
     }
 
-    public function originalBarcode(): ?string
-    {
+    public function originalBarcode(): ?string {
         $value = $this->context->original('barcode');
         assert(null === $value || is_string($value));
-
+        
         return $value;
     }
 
-    public function pendingBarcode(): ?string
-    {
+    public function pendingBarcode(): ?string {
         $value = $this->context->pending('barcode');
         assert(null === $value || is_string($value));
-
+        
         return $value;
     }
 
-    public function originalDefaultExpiryUnit(): ?ExpiryUnit
-    {
+    public function originalDefaultExpiryUnit(): ?ExpiryUnit {
         $value = $this->context->original('defaultExpiryUnit');
         assert(null === $value || $value instanceof ExpiryUnit);
-
+        
         return $value;
     }
 
-    public function pendingDefaultExpiryUnit(): ?ExpiryUnit
-    {
+    public function pendingDefaultExpiryUnit(): ?ExpiryUnit {
         $value = $this->context->pending('defaultExpiryUnit');
         assert(null === $value || $value instanceof ExpiryUnit);
-
+        
         return $value;
     }
 
-    public function originalDefaultExpiryValue(): ?int
-    {
+    public function originalDefaultExpiryValue(): ?int {
         $value = $this->context->original('defaultExpiryValue');
         assert(null === $value || is_int($value));
-
+        
         return $value;
     }
 
-    public function pendingDefaultExpiryValue(): ?int
-    {
+    public function pendingDefaultExpiryValue(): ?int {
         $value = $this->context->pending('defaultExpiryValue');
         assert(null === $value || is_int($value));
-
+        
         return $value;
     }
 
-    public static function of(MutationContext $context): self
-    {
+    public static function of(
+        MutationContext $context,
+    ): self {
         return new self($context);
     }
 }

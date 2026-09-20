@@ -9,7 +9,7 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   Site/SiteReadPolicies.php
- * digest: sha256:01447fab676e8f30d4f30f350610cfecf1f238d8d478f75401dc94ac32ea08a5
+ * digest: sha256:e9c625f8e057f37cca1c6a383eb02dd5274b219ac9cfc13ddfe123e21ddb455a
  */
 
 namespace Clog\Entity\Site;
@@ -21,17 +21,18 @@ use Eleph\Runtime\Policy\Viewer;
 
 final readonly class SiteReadPolicies implements EntityReadPolicies
 {
-    public function __construct()
-    {
+    public function __construct() {
+
     }
 
-    public function isEmpty(): bool
-    {
+    public function isEmpty(): bool {
         return true;
     }
 
-    public function decide(object $entity, Viewer $viewer): PolicyDecision
-    {
+    public function decide(
+        object $entity,
+        Viewer $viewer,
+    ): PolicyDecision {
         return PolicyDecision::allow();
     }
 }

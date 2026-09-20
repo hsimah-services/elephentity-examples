@@ -11,10 +11,10 @@
     },
     "require-dev": {
         "elephentity/elephentity": "dev-main",
-        "elephentity/codegen": "dev-main#482dea1",
-        "elephentity/codegen-php": "dev-main#b91b645",
-        "elephentity/codegen-wordpress": "dev-main#b968ef9",
-        "elephentity/codegen-wpgraphql": "dev-main#c9f1013",
+        "elephentity/codegen": "^0.5",
+        "elephentity/codegen-php": "^0.5",
+        "elephentity/codegen-wordpress": "^0.2",
+        "elephentity/codegen-wpgraphql": "^0.2",
         "friendsofphp/php-cs-fixer": "^3.64",
         "php-stubs/wordpress-stubs": "^6.7 || ^7.0",
         "axepress/wp-graphql-stubs": "^2.22",
@@ -27,6 +27,7 @@
         }
     },
     "scripts": {
+        "build-generators": "sh ../tools/build-generators",
         "stan": "phpstan analyse --memory-limit=1G",
         "style": "php-cs-fixer fix --dry-run --diff",
         "style:fix": "php-cs-fixer fix",

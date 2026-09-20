@@ -9,7 +9,7 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   Location/Location.php
- * digest: sha256:baea7fb022e899094b87911837676d234f34c6955dea24a41adb25e862e1aafd
+ * digest: sha256:11e896b57babf1c8f8b0ceba41b997a8d88a86de53416638e984d9db05239e98
  */
 
 namespace Clog\Entity\Location;
@@ -35,53 +35,48 @@ final class Location implements ClogPost
         private readonly ?int $postId,
         private readonly string $name,
     ) {
+
     }
 
-    public function getId(): EntityId
-    {
+    public function getId(): EntityId {
         return $this->id;
     }
 
     /**
      * When the row was first written. Filled by the framework.
      */
-    public function getCreatedAt(): DateTimeImmutable
-    {
+    public function getCreatedAt(): DateTimeImmutable {
         return $this->createdAt;
     }
 
     /**
      * When the row was last written. Filled by the framework.
      */
-    public function getUpdatedAt(): DateTimeImmutable
-    {
+    public function getUpdatedAt(): DateTimeImmutable {
         return $this->updatedAt;
     }
 
     /**
      * The wp_posts row this entity projects to, once something creates one. Nullable because nothing in the framework writes it: an entity exists in its own table whether or not a post row was ever made for it.
      */
-    public function getPostId(): ?int
-    {
+    public function getPostId(): ?int {
         return $this->postId;
     }
 
     /**
      * What the location is called. Projected to post_title.
      */
-    public function getName(): string
-    {
+    public function getName(): string {
         return $this->name;
     }
 
     /**
      * @return EntityQuery<Site>
      */
-    public function sites(): EntityQuery
-    {
+    public function sites(): EntityQuery {
         /** @var EntityQuery<Site> $related */
         $related = $this->edges->toMany('Location', $this->id, 'sites');
-
+        
         return $related;
     }
 
@@ -90,11 +85,10 @@ final class Location implements ClogPost
      *
      * @return EntityQuery<Inventory>
      */
-    public function inventoryEntries(): EntityQuery
-    {
+    public function inventoryEntries(): EntityQuery {
         /** @var EntityQuery<Inventory> $related */
         $related = $this->edges->inverseToMany('Inventory', 'location', $this->id);
-
+        
         return $related;
     }
 

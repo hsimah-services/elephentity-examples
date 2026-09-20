@@ -9,7 +9,7 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   Site/SiteVerifiers.php
- * digest: sha256:7e562b341c499eb56db8f62936f5dc33d0d91a51af37dbaf997c1d5f63ca4902
+ * digest: sha256:0bd53193c986ab61ae5c312f2098c160957b39fcb7455b8b317be867eeebabc3
  */
 
 namespace Clog\Entity\Site;
@@ -23,20 +23,22 @@ use Eleph\Runtime\Verification\Verification;
  */
 final readonly class SiteVerifiers implements EntityVerifiers
 {
-    public function __construct()
-    {
+    public function __construct() {
+
     }
 
     /**
      * @return list<string>
      */
-    public function verifiedFields(): array
-    {
+    public function verifiedFields(): array {
         return [];
     }
 
-    public function verify(string $field, mixed $value, MutationContext $context): Verification
-    {
+    public function verify(
+        string $field,
+        mixed $value,
+        MutationContext $context,
+    ): Verification {
         return Verification::ok();
     }
 }

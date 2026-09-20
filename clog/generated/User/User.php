@@ -9,7 +9,7 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   User/User.php
- * digest: sha256:0d32a3010c1e4eaefd07dfb6008bc1715eec6d65a5934bf615638cbc660adf80
+ * digest: sha256:3d2a3ca95c2696ede52ae2af121639547db57e2300dfbc1d724ff74fb3e6a5bf
  */
 
 namespace Clog\Entity\User;
@@ -30,42 +30,38 @@ final class User implements ClogPost
         private readonly ?int $postId,
         private readonly ?string $bio,
     ) {
+
     }
 
-    public function getId(): EntityId
-    {
+    public function getId(): EntityId {
         return $this->id;
     }
 
     /**
      * When the row was first written. Filled by the framework.
      */
-    public function getCreatedAt(): DateTimeImmutable
-    {
+    public function getCreatedAt(): DateTimeImmutable {
         return $this->createdAt;
     }
 
     /**
      * When the row was last written. Filled by the framework.
      */
-    public function getUpdatedAt(): DateTimeImmutable
-    {
+    public function getUpdatedAt(): DateTimeImmutable {
         return $this->updatedAt;
     }
 
     /**
      * The wp_posts row this entity projects to, once something creates one. Nullable because nothing in the framework writes it: an entity exists in its own table whether or not a post row was ever made for it.
      */
-    public function getPostId(): ?int
-    {
+    public function getPostId(): ?int {
         return $this->postId;
     }
 
     /**
      * A short note staff can see on this account's profile.
      */
-    public function getBio(): ?string
-    {
+    public function getBio(): ?string {
         return $this->bio;
     }
 

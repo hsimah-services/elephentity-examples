@@ -9,7 +9,7 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   User/UserWritePolicies.php
- * digest: sha256:3cd8b23c0ada790ac6fb7a66830adb5cc7c1a7ec70762387d47bad30d3e3916e
+ * digest: sha256:0617b6ae83185c3e9f336b55b4931c15ace315439856a92335dcff6f3e53e52c
  */
 
 namespace Clog\Entity\User;
@@ -22,17 +22,19 @@ use Eleph\Runtime\Policy\WriteContext;
 
 final readonly class UserWritePolicies implements EntityWritePolicies
 {
-    public function __construct()
-    {
+    public function __construct() {
+
     }
 
-    public function isEmpty(): bool
-    {
+    public function isEmpty(): bool {
         return true;
     }
 
-    public function decide(?object $entity, WriteContext $context, Viewer $viewer): PolicyDecision
-    {
+    public function decide(
+        ?object $entity,
+        WriteContext $context,
+        Viewer $viewer,
+    ): PolicyDecision {
         return PolicyDecision::allow();
     }
 }

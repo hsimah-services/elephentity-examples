@@ -9,7 +9,7 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   Inventory/InventoryMutationContext.php
- * digest: sha256:ae02c6115d5503090c94e3c2540356cadbd793212f89e2328b632cbda53abd7b
+ * digest: sha256:799da6dc67120ad814719e1afa9f4b189a294daeb30caa7a8ecf8cf8bbfe013a
  */
 
 namespace Clog\Entity\Inventory;
@@ -26,190 +26,175 @@ final readonly class InventoryMutationContext implements MutationContext
     private function __construct(
         private MutationContext $context,
     ) {
+
     }
 
-    public function id(): Identifier
-    {
+    public function id(): Identifier {
         return $this->context->id();
     }
 
-    public function entity(): string
-    {
+    public function entity(): string {
         return $this->context->entity();
     }
 
-    public function isCreate(): bool
-    {
+    public function isCreate(): bool {
         return $this->context->isCreate();
     }
 
-    public function original(string $field): mixed
-    {
+    public function original(
+        string $field,
+    ): mixed {
         return $this->context->original($field);
     }
 
-    public function pending(string $field): mixed
-    {
+    public function pending(
+        string $field,
+    ): mixed {
         return $this->context->pending($field);
     }
 
-    public function isChanged(string $field): bool
-    {
+    public function isChanged(
+        string $field,
+    ): bool {
         return $this->context->isChanged($field);
     }
 
     /**
      * @return array<string, mixed>
      */
-    public function changes(): array
-    {
+    public function changes(): array {
         return $this->context->changes();
     }
 
     /**
      * @return list<Identifier>
      */
-    public function pendingEdge(string $edge): array
-    {
+    public function pendingEdge(
+        string $edge,
+    ): array {
         return $this->context->pendingEdge($edge);
     }
 
-    public function isEdgeChanged(string $edge): bool
-    {
+    public function isEdgeChanged(
+        string $edge,
+    ): bool {
         return $this->context->isEdgeChanged($edge);
     }
 
-    public function originalCreatedAt(): ?DateTimeImmutable
-    {
+    public function originalCreatedAt(): ?DateTimeImmutable {
         $value = $this->context->original('createdAt');
         assert(null === $value || $value instanceof DateTimeImmutable);
-
+        
         return $value;
     }
 
-    public function pendingCreatedAt(): ?DateTimeImmutable
-    {
+    public function pendingCreatedAt(): ?DateTimeImmutable {
         $value = $this->context->pending('createdAt');
         assert(null === $value || $value instanceof DateTimeImmutable);
-
+        
         return $value;
     }
 
-    public function originalUpdatedAt(): ?DateTimeImmutable
-    {
+    public function originalUpdatedAt(): ?DateTimeImmutable {
         $value = $this->context->original('updatedAt');
         assert(null === $value || $value instanceof DateTimeImmutable);
-
+        
         return $value;
     }
 
-    public function pendingUpdatedAt(): ?DateTimeImmutable
-    {
+    public function pendingUpdatedAt(): ?DateTimeImmutable {
         $value = $this->context->pending('updatedAt');
         assert(null === $value || $value instanceof DateTimeImmutable);
-
+        
         return $value;
     }
 
-    public function originalPostId(): ?int
-    {
+    public function originalPostId(): ?int {
         $value = $this->context->original('postId');
         assert(null === $value || is_int($value));
-
+        
         return $value;
     }
 
-    public function pendingPostId(): ?int
-    {
+    public function pendingPostId(): ?int {
         $value = $this->context->pending('postId');
         assert(null === $value || is_int($value));
-
+        
         return $value;
     }
 
-    public function originalName(): ?string
-    {
+    public function originalName(): ?string {
         $value = $this->context->original('name');
         assert(null === $value || is_string($value));
-
+        
         return $value;
     }
 
-    public function pendingName(): ?string
-    {
+    public function pendingName(): ?string {
         $value = $this->context->pending('name');
         assert(null === $value || is_string($value));
-
+        
         return $value;
     }
 
-    public function originalDateAdded(): ?DateTimeImmutable
-    {
+    public function originalDateAdded(): ?DateTimeImmutable {
         $value = $this->context->original('dateAdded');
         assert(null === $value || $value instanceof DateTimeImmutable);
-
+        
         return $value;
     }
 
-    public function pendingDateAdded(): ?DateTimeImmutable
-    {
+    public function pendingDateAdded(): ?DateTimeImmutable {
         $value = $this->context->pending('dateAdded');
         assert(null === $value || $value instanceof DateTimeImmutable);
-
+        
         return $value;
     }
 
-    public function originalDateExpiry(): ?DateTimeImmutable
-    {
+    public function originalDateExpiry(): ?DateTimeImmutable {
         $value = $this->context->original('dateExpiry');
         assert(null === $value || $value instanceof DateTimeImmutable);
-
+        
         return $value;
     }
 
-    public function pendingDateExpiry(): ?DateTimeImmutable
-    {
+    public function pendingDateExpiry(): ?DateTimeImmutable {
         $value = $this->context->pending('dateExpiry');
         assert(null === $value || $value instanceof DateTimeImmutable);
-
+        
         return $value;
     }
 
-    public function pendingItem(): ?Identifier
-    {
+    public function pendingItem(): ?Identifier {
         return $this->context->pendingEdge('item')[0] ?? null;
     }
 
-    public function isItemChanged(): bool
-    {
+    public function isItemChanged(): bool {
         return $this->context->isEdgeChanged('item');
     }
 
-    public function pendingLocation(): ?Identifier
-    {
+    public function pendingLocation(): ?Identifier {
         return $this->context->pendingEdge('location')[0] ?? null;
     }
 
-    public function isLocationChanged(): bool
-    {
+    public function isLocationChanged(): bool {
         return $this->context->isEdgeChanged('location');
     }
 
     /**
      * @return list<Identifier>
      */
-    public function pendingSite(): array
-    {
+    public function pendingSite(): array {
         return $this->context->pendingEdge('site');
     }
 
-    public function isSiteChanged(): bool
-    {
+    public function isSiteChanged(): bool {
         return $this->context->isEdgeChanged('site');
     }
 
-    public static function of(MutationContext $context): self
-    {
+    public static function of(
+        MutationContext $context,
+    ): self {
         return new self($context);
     }
 }

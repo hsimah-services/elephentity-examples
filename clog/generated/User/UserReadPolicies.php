@@ -9,7 +9,7 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   User/UserReadPolicies.php
- * digest: sha256:f4c2854574a78a0880ef11aa142e3c8b6bc7c53340481e8b56a6027442631e7a
+ * digest: sha256:31ad237fc6b613edd8374d4ab5589867e37a26572550ede986d3e987dea32464
  */
 
 namespace Clog\Entity\User;
@@ -25,21 +25,23 @@ final readonly class UserReadPolicies implements EntityReadPolicies
     public function __construct(
         private ClogPostSignedInReadPolicy $signedInPolicy,
     ) {
+
     }
 
-    public function isEmpty(): bool
-    {
+    public function isEmpty(): bool {
         return false;
     }
 
-    public function decide(object $entity, Viewer $viewer): PolicyDecision
-    {
+    public function decide(
+        object $entity,
+        Viewer $viewer,
+    ): PolicyDecision {
         assert($entity instanceof User);
         $decision = $this->signedInPolicy->decide($entity, $viewer);
         if (PolicyOutcome::Skip !== $decision->outcome) {
             return $decision->withPolicy('signedIn');
         }
-
+        
         return PolicyDecision::deny('No policy allowed this read.')->withPolicy('terminal');
     }
 }

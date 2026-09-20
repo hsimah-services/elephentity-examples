@@ -15,17 +15,7 @@ use Eleph\Runtime\Storage\Criteria;
 use Eleph\Runtime\Storage\EdgeFilter;
 
 /**
- * `Inventory.siteAvailability` from the spec, implemented.
- *
- * The invariant spans two edges of the row being written and one edge of a different
- * entity entirely — "this site" against "this location's sites" — which is exactly
- * what a field verifier cannot reach: `MutationContext` carries the whole pending row,
- * not the rows it points at. A trigger can query, so this loads `Location.sites` for
- * the pending location and checks the pending site against it, the same way
- * `wp_term_relationships` would if a human curator were doing it by hand.
- *
- * `Location.sites` and `Inventory.site` share one taxonomy, so "available at" and "is
- * at" never drift into two vocabularies that happen to look alike.
+ * PreCommit check that Inventory.site belongs to Inventory.location's allowed sites.
  */
 final readonly class SiteAvailableAtLocation implements InventorySiteAvailabilityTrigger
 {
@@ -41,8 +31,7 @@ final readonly class SiteAvailableAtLocation implements InventorySiteAvailabilit
         $sites = $context->pendingSite();
 
         if (null === $location || [] === $sites) {
-            // Nothing to check yet: Inventory.location is not required by the spec,
-            // and an entry naming no site makes no claim to validate.
+            // Optional location or absent site leaves no pair to validate.
             return;
         }
 

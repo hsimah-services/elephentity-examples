@@ -26,6 +26,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Set up Rust
+        run: rustup toolchain install stable --profile minimal
+
       - name: Set up PHP
         uses: shivammathur/setup-php@v2
         with:
@@ -38,6 +41,12 @@ jobs:
         with:
           working-directory: clog
 
+      - name: Build generators
+        working-directory: clog
+        env:
+          RUSTUP_TOOLCHAIN: stable
+        run: composer build-generators
+
       - name: Code style
         working-directory: clog
         run: vendor/bin/php-cs-fixer fix --dry-run --diff --show-progress=none
@@ -46,11 +55,6 @@ jobs:
         working-directory: clog
         run: composer stan -- --no-progress
 
-      # The four real gates, run against a real product, across every builder and
-      # both adaptors at once. This is the end-to-end assertion PipelineTest used to
-      # be inside the monorepo, run for real this time: a renamed runtime class, a
-      # drifted verifier, a builder answering `describe` differently, all show up
-      # here rather than only at boot in someone's WordPress install.
       - name: fmt
         working-directory: clog
         run: vendor/bin/eleph fmt

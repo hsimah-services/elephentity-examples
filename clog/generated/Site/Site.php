@@ -9,7 +9,7 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   Site/Site.php
- * digest: sha256:6a11bef227145d8558774e248be54689aac28166221fbaa9a87aefb7811e7b1d
+ * digest: sha256:18e149e3d9ab27da94e8a71c40fb4c4abb66da47aab6d69900699f15243a5581
  */
 
 namespace Clog\Entity\Site;
@@ -25,23 +25,24 @@ final class Site
         private readonly EntityId $id,
         private readonly string $name,
     ) {
+
     }
 
-    public function getId(): EntityId
-    {
+    public function getId(): EntityId {
         return $this->id;
     }
 
     /**
      * The term's label. A taxonomy-backed entity has exactly this field — anything else declared here has nowhere to live in wp_term_taxonomy and is silently dropped at runtime.
      */
-    public function getName(): string
-    {
+    public function getName(): string {
         return $this->name;
     }
 
-    public static function of(EntityId $id, string $name): self
-    {
+    public static function of(
+        EntityId $id,
+        string $name,
+    ): self {
         return new self($id, $name);
     }
 }

@@ -9,7 +9,7 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   Site/SiteHydrator.php
- * digest: sha256:af5f14a80d4687bd33207c442d29687b7aef9919db7de420afc490ba346149f3
+ * digest: sha256:5c063c5f7b3564109881035ce55d24ad6df1830a1605759be61b3722310eec4d
  */
 
 namespace Clog\Entity\Site;
@@ -29,20 +29,24 @@ final readonly class SiteHydrator implements Hydrator
     public function __construct(
         private ValueDecoder $decode,
     ) {
+
     }
 
-    public function hydrate(Record $record, EdgeLoader $edges): Site
-    {
+    public function hydrate(
+        Record $record,
+        EdgeLoader $edges,
+    ): Site {
         return Site::of(
             $record->id,
             $this->name($record),
         );
     }
 
-    private function name(Record $record): string
-    {
+    private function name(
+        Record $record,
+    ): string {
         $value = $record->value('name');
-
+        
         return $this->decode->string($value, 'Site.name');
     }
 }

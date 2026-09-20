@@ -8,12 +8,7 @@ use Clog\Entity\Item\Contract\ItemDiscontinueAction;
 use Clog\Entity\Item\ItemDiscontinueContext;
 
 /**
- * `Item.discontinue` from the spec, implemented.
- *
- * The write itself is one line: clear the barcode so a scan stops resolving to a
- * retired item. `$reason` is not stored anywhere — it exists for
- * `StaffMayWriteItems` to read off `ItemWriteContext::discontinue()`, not for the
- * mutation itself.
+ * Clears the barcode. The reason is consumed by the write policy, not persisted.
  */
 final readonly class DiscontinueItem implements ItemDiscontinueAction
 {

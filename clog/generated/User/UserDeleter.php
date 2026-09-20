@@ -9,7 +9,7 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   User/UserDeleter.php
- * digest: sha256:4f9616289b1f70fdda38c2160ce0c27d244a5f1fc491cb6e3a058a104173834c
+ * digest: sha256:9fc4db0e4ab8b74052c1e2b9909b237108858233f444f590cc14275b8baef7b5
  */
 
 namespace Clog\Entity\User;
@@ -27,21 +27,22 @@ final class UserDeleter
     public function __construct(
         private readonly UnitOfWork $work,
     ) {
+
     }
 
     /**
      * Registers the removal. Nothing happens until the unit of work commits.
      */
-    public function delete(EntityId $id): void
-    {
+    public function delete(
+        EntityId $id,
+    ): void {
         $this->work->delete(new Deletion('User', $id));
     }
 
     /**
      * @return list<DeletionRule>
      */
-    public static function rules(): array
-    {
+    public static function rules(): array {
         return [];
     }
 }

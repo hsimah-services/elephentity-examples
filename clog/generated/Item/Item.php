@@ -9,7 +9,7 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   Item/Item.php
- * digest: sha256:4827c4cfdb2e7aa133c09d93faca9d1d3d57f8428a367e48b63f8a7973ec6ba7
+ * digest: sha256:4f8305e51eb1758ff102c84e9b91f5240b0e9d881b7d49c856be243a5005341a
  */
 
 namespace Clog\Entity\Item;
@@ -38,66 +38,59 @@ final class Item implements ClogPost
         private readonly ?ExpiryUnit $defaultExpiryUnit,
         private readonly ?int $defaultExpiryValue,
     ) {
+
     }
 
-    public function getId(): EntityId
-    {
+    public function getId(): EntityId {
         return $this->id;
     }
 
     /**
      * When the row was first written. Filled by the framework.
      */
-    public function getCreatedAt(): DateTimeImmutable
-    {
+    public function getCreatedAt(): DateTimeImmutable {
         return $this->createdAt;
     }
 
     /**
      * When the row was last written. Filled by the framework.
      */
-    public function getUpdatedAt(): DateTimeImmutable
-    {
+    public function getUpdatedAt(): DateTimeImmutable {
         return $this->updatedAt;
     }
 
     /**
      * The wp_posts row this entity projects to, once something creates one. Nullable because nothing in the framework writes it: an entity exists in its own table whether or not a post row was ever made for it.
      */
-    public function getPostId(): ?int
-    {
+    public function getPostId(): ?int {
         return $this->postId;
     }
 
     /**
      * What the item is called. Projected to post_title.
      */
-    public function getName(): string
-    {
+    public function getName(): string {
         return $this->name;
     }
 
     /**
      * The barcode that identifies this item. One per item: a serialized list could not be indexed, and scanning a barcode to find an item is the query this data exists to serve.
      */
-    public function getBarcode(): ?string
-    {
+    public function getBarcode(): ?string {
         return $this->barcode;
     }
 
     /**
      * Half of the default expiry; meaningless without the other half.
      */
-    public function getDefaultExpiryUnit(): ?ExpiryUnit
-    {
+    public function getDefaultExpiryUnit(): ?ExpiryUnit {
         return $this->defaultExpiryUnit;
     }
 
     /**
      * Half of the default expiry; meaningless without the other half.
      */
-    public function getDefaultExpiryValue(): ?int
-    {
+    public function getDefaultExpiryValue(): ?int {
         return $this->defaultExpiryValue;
     }
 
@@ -106,11 +99,10 @@ final class Item implements ClogPost
      *
      * @return EntityQuery<Inventory>
      */
-    public function inventoryEntries(): EntityQuery
-    {
+    public function inventoryEntries(): EntityQuery {
         /** @var EntityQuery<Inventory> $related */
         $related = $this->edges->inverseToMany('Inventory', 'item', $this->id);
-
+        
         return $related;
     }
 

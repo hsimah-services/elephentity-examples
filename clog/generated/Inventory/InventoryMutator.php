@@ -9,7 +9,7 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   Inventory/InventoryMutator.php
- * digest: sha256:5b2c4c60cbd470be280177f9c7e091fbf7426b0164646e89ed9fc2658e15ba4a
+ * digest: sha256:2e3aa2927f8b61a5087e6954a3ac970315f3177ec83d8066c1f6951a64c73ef3
  */
 
 namespace Clog\Entity\Inventory;
@@ -30,61 +30,67 @@ final class InventoryMutator
     public function __construct(
         private readonly MutationBuffer $buffer,
     ) {
+
     }
 
-    public function setPostId(?int $postId): self
-    {
+    public function setPostId(
+        ?int $postId,
+    ): self {
         $this->buffer->set('postId', $postId);
-
+        
         return $this;
     }
 
-    public function setName(string $name): self
-    {
+    public function setName(
+        string $name,
+    ): self {
         $this->buffer->set('name', $name);
-
+        
         return $this;
     }
 
-    public function setDateAdded(DateTimeImmutable $dateAdded): self
-    {
+    public function setDateAdded(
+        DateTimeImmutable $dateAdded,
+    ): self {
         $this->buffer->set('dateAdded', $dateAdded);
-
+        
         return $this;
     }
 
-    public function setDateExpiry(?DateTimeImmutable $dateExpiry): self
-    {
+    public function setDateExpiry(
+        ?DateTimeImmutable $dateExpiry,
+    ): self {
         $this->buffer->set('dateExpiry', $dateExpiry);
-
+        
         return $this;
     }
 
     /**
      * Point this at one Item, or at nothing.
      */
-    public function setItem(?Identifier $item): self
-    {
+    public function setItem(
+        ?Identifier $item,
+    ): self {
         $this->buffer->edge('item')->set(null === $item ? [] : [$item]);
-
+        
         return $this;
     }
 
     /**
      * Point this at one Location, or at nothing.
      */
-    public function setLocation(?Identifier $location): self
-    {
+    public function setLocation(
+        ?Identifier $location,
+    ): self {
         $this->buffer->edge('location')->set(null === $location ? [] : [$location]);
-
+        
         return $this;
     }
 
     /**
      * Add, remove or replace the Site this links to.
      */
-    public function site(): EdgeMutation
-    {
+    public function site(): EdgeMutation {
         return $this->buffer->edge('site');
     }
 }
