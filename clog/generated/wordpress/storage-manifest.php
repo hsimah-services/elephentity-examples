@@ -9,7 +9,7 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   storage-manifest.php
- * digest: sha256:e6401abdaf8af532270c36c8594aa175d436a4e2a5fe3745d236de90b360bf85
+ * digest: sha256:696afb7ff70a3caa7994ff2480c40ae17b8ad4e3b9d5f6bfd3aee80ceb172777
  */
 
 namespace Eleph\WordPress\Manifest;
@@ -36,7 +36,6 @@ return new StorageManifest(
                 'id' => new Column('id', 'BIGINT UNSIGNED', false, true, null),
                 'created_at' => new Column('created_at', 'DATETIME', false, false, null),
                 'updated_at' => new Column('updated_at', 'DATETIME', false, false, null),
-                'post_id' => new Column('post_id', 'BIGINT', true, false, null),
                 'name' => new Column('name', 'VARCHAR(200)', false, false, null),
                 'date_added' => new Column('date_added', 'DATETIME', false, false, null),
                 'date_expiry' => new Column('date_expiry', 'DATETIME', true, false, null),
@@ -44,7 +43,6 @@ return new StorageManifest(
                 'location_id' => new Column('location_id', 'BIGINT UNSIGNED', true, false, null),
             ],
             [
-                'clog_inventory_post_id_uniq' => new Index('clog_inventory_post_id_uniq', ['post_id'], true),
                 'clog_inventory_item_id_idx' => new Index('clog_inventory_item_id_idx', ['item_id'], false),
                 'clog_inventory_location_id_idx' => new Index('clog_inventory_location_id_idx', ['location_id'], false),
             ],
@@ -54,16 +52,16 @@ return new StorageManifest(
             'clog_item',
             [
                 'id' => new Column('id', 'BIGINT UNSIGNED', false, true, null),
+                'wp_post_id' => new Column('wp_post_id', 'BIGINT UNSIGNED', true, false, null),
                 'created_at' => new Column('created_at', 'DATETIME', false, false, null),
                 'updated_at' => new Column('updated_at', 'DATETIME', false, false, null),
-                'post_id' => new Column('post_id', 'BIGINT', true, false, null),
                 'name' => new Column('name', 'VARCHAR(200)', false, false, null),
                 'barcode' => new Column('barcode', 'VARCHAR(64)', true, false, null),
                 'default_expiry_unit' => new Column('default_expiry_unit', 'VARCHAR(6)', true, false, null),
                 'default_expiry_value' => new Column('default_expiry_value', 'BIGINT', true, false, null),
             ],
             [
-                'clog_item_post_id_uniq' => new Index('clog_item_post_id_uniq', ['post_id'], true),
+                'clog_item_wp_post_id_uniq' => new Index('clog_item_wp_post_id_uniq', ['wp_post_id'], true),
                 'clog_item_name_idx' => new Index('clog_item_name_idx', ['name'], false),
                 'clog_item_barcode_uniq' => new Index('clog_item_barcode_uniq', ['barcode'], true),
             ],
@@ -75,11 +73,9 @@ return new StorageManifest(
                 'id' => new Column('id', 'BIGINT UNSIGNED', false, true, null),
                 'created_at' => new Column('created_at', 'DATETIME', false, false, null),
                 'updated_at' => new Column('updated_at', 'DATETIME', false, false, null),
-                'post_id' => new Column('post_id', 'BIGINT', true, false, null),
                 'name' => new Column('name', 'VARCHAR(200)', false, false, null),
             ],
             [
-                'clog_location_post_id_uniq' => new Index('clog_location_post_id_uniq', ['post_id'], true),
                 'clog_location_name_uniq' => new Index('clog_location_name_uniq', ['name'], true),
             ],
             'id',
@@ -108,11 +104,11 @@ return new StorageManifest(
         ),
     ],
     columns: [
-        'Inventory' => ['createdAt' => 'created_at', 'updatedAt' => 'updated_at', 'postId' => 'post_id', 'name' => 'name', 'dateAdded' => 'date_added', 'dateExpiry' => 'date_expiry'],
-        'Item' => ['createdAt' => 'created_at', 'updatedAt' => 'updated_at', 'postId' => 'post_id', 'name' => 'name', 'barcode' => 'barcode', 'defaultExpiryUnit' => 'default_expiry_unit', 'defaultExpiryValue' => 'default_expiry_value'],
-        'Location' => ['createdAt' => 'created_at', 'updatedAt' => 'updated_at', 'postId' => 'post_id', 'name' => 'name'],
+        'Inventory' => ['createdAt' => 'created_at', 'updatedAt' => 'updated_at', 'name' => 'name', 'dateAdded' => 'date_added', 'dateExpiry' => 'date_expiry'],
+        'Item' => ['createdAt' => 'created_at', 'updatedAt' => 'updated_at', 'name' => 'name', 'barcode' => 'barcode', 'defaultExpiryUnit' => 'default_expiry_unit', 'defaultExpiryValue' => 'default_expiry_value'],
+        'Location' => ['createdAt' => 'created_at', 'updatedAt' => 'updated_at', 'name' => 'name'],
         'Site' => ['name' => 'name'],
-        'User' => ['createdAt' => 'created_at', 'updatedAt' => 'updated_at', 'postId' => 'post_id', 'bio' => 'bio'],
+        'User' => ['createdAt' => 'created_at', 'updatedAt' => 'updated_at', 'bio' => 'bio'],
     ],
     joinTables: [
 
@@ -140,5 +136,8 @@ return new StorageManifest(
             'createdAt',
             'updatedAt',
         ),
+    ],
+    posts: [
+        'Item' => 'clog_item',
     ],
 );

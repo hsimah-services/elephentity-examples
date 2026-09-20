@@ -9,7 +9,7 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   post-types.php
- * digest: sha256:80fd06af8f60f236301ef1d2319b8b532d1bde7f340a27a8c5df5dcce87c8877
+ * digest: sha256:beb072d530232866e27c36b41932f5a147073b3bb3682ed8232b8aae831ba455
  */
 
 /**
@@ -20,28 +20,6 @@ declare(strict_types=1);
  * manifest here exists to remove.
  */
 return [
-    'clog_inventory' => [
-        'labels' => [
-            'name' => 'Inventory',
-            'singular_name' => 'Inventory Entry',
-            'add_new_item' => 'Add New Inventory Entry',
-            'edit_item' => 'Edit Inventory Entry',
-            'new_item' => 'New Inventory Entry',
-            'view_item' => 'View Inventory Entry',
-            'search_items' => 'Search Inventory',
-            'not_found' => 'No inventory found',
-            'not_found_in_trash' => 'No inventory found in Trash',
-        ],
-        'description' => 'One stocked instance of an item, in a location, with its own expiry.',
-        'public' => false,
-        'publicly_queryable' => false,
-        'exclude_from_search' => true,
-        'show_ui' => true,
-        'show_in_menu' => 'clog',
-        'show_in_rest' => false,
-        'capability_type' => 'post',
-        'supports' => [],
-    ],
     'clog_item' => [
         'labels' => [
             'name' => 'Items',
@@ -58,30 +36,8 @@ return [
         'public' => false,
         'publicly_queryable' => false,
         'exclude_from_search' => true,
-        'show_ui' => true,
-        'show_in_menu' => 'clog',
-        'show_in_rest' => false,
-        'capability_type' => 'post',
-        'supports' => [],
-    ],
-    'clog_location' => [
-        'labels' => [
-            'name' => 'Locations',
-            'singular_name' => 'Location',
-            'add_new_item' => 'Add New Location',
-            'edit_item' => 'Edit Location',
-            'new_item' => 'New Location',
-            'view_item' => 'View Location',
-            'search_items' => 'Search Locations',
-            'not_found' => 'No locations found',
-            'not_found_in_trash' => 'No locations found in Trash',
-        ],
-        'description' => 'Somewhere inventory can be kept.',
-        'public' => false,
-        'publicly_queryable' => false,
-        'exclude_from_search' => true,
-        'show_ui' => true,
-        'show_in_menu' => 'clog',
+        'show_ui' => false,
+        'show_in_menu' => false,
         'show_in_rest' => false,
         'capability_type' => 'post',
         'supports' => [],

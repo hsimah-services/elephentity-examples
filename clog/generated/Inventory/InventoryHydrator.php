@@ -9,7 +9,7 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   Inventory/InventoryHydrator.php
- * digest: sha256:f7487148c88dcc663f89952423ffe524420d91cb906bdd747abb190ad10b3c47
+ * digest: sha256:c1e153e0241c725549aed2cde00306cb637a3bf20b091dfd4c48807710324698
  */
 
 namespace Clog\Entity\Inventory;
@@ -42,7 +42,6 @@ final readonly class InventoryHydrator implements Hydrator
             $edges,
             $this->createdAt($record),
             $this->updatedAt($record),
-            $this->postId($record),
             $this->name($record),
             $this->dateAdded($record),
             $this->dateExpiry($record),
@@ -63,14 +62,6 @@ final readonly class InventoryHydrator implements Hydrator
         $value = $record->value('updatedAt');
         
         return $this->decode->datetime($value, 'Inventory.updatedAt');
-    }
-
-    private function postId(
-        Record $record,
-    ): ?int {
-        $value = $record->value('postId');
-        
-        return null === $value ? null : $this->decode->int($value, 'Inventory.postId');
     }
 
     private function name(

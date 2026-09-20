@@ -1,7 +1,7 @@
 pattern: ClogPost
 description: >
-  Participation in the WordPress post ecosystem, which every Clog type needs: the
-  admin UI lists them, and existing data lives in wp_posts.
+  Shared labels, timestamps and access policies. Records live in Elephentity;
+  the WordPress integration provides admin views and optional linked posts.
 requires:
   driver: wordpress
 config:
@@ -43,16 +43,6 @@ config:
     default: false
 use:
   - Timestamps
-fields:
-  postId:
-    type: int
-    description: >
-      The wp_posts row this entity projects to, once something creates one. Nullable
-      because nothing in the framework writes it: an entity exists in its own table
-      whether or not a post row was ever made for it.
-    nullable: true
-    unique: true
-    indexed: true
 readPolicies:
   signedIn:
     handler: true

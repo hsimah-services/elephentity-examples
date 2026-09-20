@@ -9,7 +9,7 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   Item/ItemHydrator.php
- * digest: sha256:81ad1cfc3aa8d964ba2df0ec771ecfe731fdd6823528331c0695eb4afb39aecb
+ * digest: sha256:01e29257f5d906e76177df33e58d131d9a3d6553b77ef2c01a14c99f7773a4e3
  */
 
 namespace Clog\Entity\Item;
@@ -43,7 +43,6 @@ final readonly class ItemHydrator implements Hydrator
             $edges,
             $this->createdAt($record),
             $this->updatedAt($record),
-            $this->postId($record),
             $this->name($record),
             $this->barcode($record),
             $this->defaultExpiryUnit($record),
@@ -65,14 +64,6 @@ final readonly class ItemHydrator implements Hydrator
         $value = $record->value('updatedAt');
         
         return $this->decode->datetime($value, 'Item.updatedAt');
-    }
-
-    private function postId(
-        Record $record,
-    ): ?int {
-        $value = $record->value('postId');
-        
-        return null === $value ? null : $this->decode->int($value, 'Item.postId');
     }
 
     private function name(

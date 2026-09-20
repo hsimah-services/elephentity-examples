@@ -9,7 +9,7 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   Item/Item.php
- * digest: sha256:4f8305e51eb1758ff102c84e9b91f5240b0e9d881b7d49c856be243a5005341a
+ * digest: sha256:96711d9782fac4673cbbfec9f4709f6c95698db08d8fecf3d8e6059875ce1418
  */
 
 namespace Clog\Entity\Item;
@@ -32,7 +32,6 @@ final class Item implements ClogPost
         private readonly EdgeLoader $edges,
         private readonly DateTimeImmutable $createdAt,
         private readonly DateTimeImmutable $updatedAt,
-        private readonly ?int $postId,
         private readonly string $name,
         private readonly ?string $barcode,
         private readonly ?ExpiryUnit $defaultExpiryUnit,
@@ -57,13 +56,6 @@ final class Item implements ClogPost
      */
     public function getUpdatedAt(): DateTimeImmutable {
         return $this->updatedAt;
-    }
-
-    /**
-     * The wp_posts row this entity projects to, once something creates one. Nullable because nothing in the framework writes it: an entity exists in its own table whether or not a post row was ever made for it.
-     */
-    public function getPostId(): ?int {
-        return $this->postId;
     }
 
     /**
@@ -111,12 +103,11 @@ final class Item implements ClogPost
         EdgeLoader $edges,
         DateTimeImmutable $createdAt,
         DateTimeImmutable $updatedAt,
-        ?int $postId,
         string $name,
         ?string $barcode,
         ?ExpiryUnit $defaultExpiryUnit,
         ?int $defaultExpiryValue,
     ): self {
-        return new self($id, $edges, $createdAt, $updatedAt, $postId, $name, $barcode, $defaultExpiryUnit, $defaultExpiryValue);
+        return new self($id, $edges, $createdAt, $updatedAt, $name, $barcode, $defaultExpiryUnit, $defaultExpiryValue);
     }
 }

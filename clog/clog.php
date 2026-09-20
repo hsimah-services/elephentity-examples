@@ -21,7 +21,7 @@ require_once __DIR__ . '/vendor/autoload.php';
 
 /**
  * WordPress lifecycle bindings: activation migrates, init registers types, before_delete_post
- * cleans orphaned rows, and plugins_loaded boots the runtime.
+ * detaches post links, and plugins_loaded boots the runtime.
  */
 function bootstrap(): Bootstrap
 {
@@ -53,6 +53,13 @@ register_activation_hook(__FILE__, static function (): void {
 add_action('init', static function (): void {
     // WordPress requires post type registration on this hook and no earlier.
     bootstrap()->postTypes()->register();
+});
+
+add_action('admin_menu', static function (): void {
+    add_menu_page('Clog', 'Clog', 'manage_options', 'clog', static function (): void {
+        bootstrap()->adminPages()->render('Item');
+    }, 'dashicons-database');
+    bootstrap()->adminPages()->register();
 });
 
 add_action('before_delete_post', static function (int $postId): void {

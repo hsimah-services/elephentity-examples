@@ -9,7 +9,7 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   Pattern/ClogPost/ClogPost.php
- * digest: sha256:db42143ae009ee7139aae6a239c30a22d901f8bee48c6f6027eb6a5e94abc9c2
+ * digest: sha256:0d12133aa0171abdf5a921e1a04dce971ecd294079b6d130d54dbbc6c118ad78
  */
 
 namespace Clog\Entity\Pattern\ClogPost;
@@ -22,8 +22,4 @@ namespace Clog\Entity\Pattern\ClogPost;
  */
 interface ClogPost
 {
-    /**
-     * The wp_posts row this entity projects to, once something creates one. Nullable because nothing in the framework writes it: an entity exists in its own table whether or not a post row was ever made for it.
-     */
-    public function getPostId(): ?int;
 }

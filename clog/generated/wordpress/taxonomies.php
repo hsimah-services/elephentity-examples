@@ -9,7 +9,7 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   taxonomies.php
- * digest: sha256:89b1e66a80b715b71f95ae6a356c8ea137151e105e151f6c9d75dd714af78df1
+ * digest: sha256:e81a1f091d5bb3b2d4c5cd8cf2edbbcfea1c03e0071e2d8d7f5ebfa4600df281
  */
 
 /**
@@ -37,9 +37,6 @@ return [
         'show_ui' => true,
         'show_admin_column' => true,
         'show_in_rest' => false,
-        'object_type' => [
-            0 => 'clog_inventory',
-            1 => 'clog_location',
-        ],
+        'object_type' => [],
     ],
 ];

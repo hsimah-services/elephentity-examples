@@ -9,7 +9,7 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   User/UserHydrator.php
- * digest: sha256:ee9ce117768d6518eefa33f6934378f65c3ff618d705144e4d94166a2bcae9ca
+ * digest: sha256:bea49548dea8d7c34e0498b5f37c30b1ed3b58ecedb226f7c11769e330e7da8d
  */
 
 namespace Clog\Entity\User;
@@ -41,7 +41,6 @@ final readonly class UserHydrator implements Hydrator
             $record->id,
             $this->createdAt($record),
             $this->updatedAt($record),
-            $this->postId($record),
             $this->bio($record),
         );
     }
@@ -60,14 +59,6 @@ final readonly class UserHydrator implements Hydrator
         $value = $record->value('updatedAt');
         
         return $this->decode->datetime($value, 'User.updatedAt');
-    }
-
-    private function postId(
-        Record $record,
-    ): ?int {
-        $value = $record->value('postId');
-        
-        return null === $value ? null : $this->decode->int($value, 'User.postId');
     }
 
     private function bio(
