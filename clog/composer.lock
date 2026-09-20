@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "aac62822134b3fee290fa024582e5b46",
+    "content-hash": "a17310bddbe19a559dbfd06c49d51bf6",
     "packages": [
         {
             "name": "elephentity/elephentity",
@@ -70,16 +70,16 @@
         },
         {
             "name": "elephentity/wordpress",
-            "version": "v0.1.1",
+            "version": "v0.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hsimah-services/elephentity-wordpress.git",
-                "reference": "c93a07022eb45cd3df36c75b3e71547b780c7da5"
+                "reference": "78d4b94bf242a15202f64ab581dcd358ff856ea7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hsimah-services/elephentity-wordpress/zipball/c93a07022eb45cd3df36c75b3e71547b780c7da5",
-                "reference": "c93a07022eb45cd3df36c75b3e71547b780c7da5",
+                "url": "https://api.github.com/repos/hsimah-services/elephentity-wordpress/zipball/78d4b94bf242a15202f64ab581dcd358ff856ea7",
+                "reference": "78d4b94bf242a15202f64ab581dcd358ff856ea7",
                 "shasum": ""
             },
             "require": {
@@ -100,14 +100,14 @@
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "MIT"
+                "Apache-2.0"
             ],
             "description": "WordPress storage adaptor for Elephentity. The only package permitted to reference WP symbols.",
             "support": {
                 "issues": "https://github.com/hsimah-services/elephentity-wordpress/issues",
-                "source": "https://github.com/hsimah-services/elephentity-wordpress/tree/v0.1.1"
+                "source": "https://github.com/hsimah-services/elephentity-wordpress/tree/v0.2.0"
             },
-            "time": "2026-09-14T16:26:22+00:00"
+            "time": "2026-09-20T22:04:51+00:00"
         },
         {
             "name": "elephentity/wpgraphql",
@@ -1629,16 +1629,16 @@
         },
         {
             "name": "elephentity/codegen-wordpress",
-            "version": "v0.2.0",
+            "version": "v0.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hsimah-services/elephentity-codegen-wordpress.git",
-                "reference": "dce405c9cde02cace66c4d15c34ff6b3f9ea293c"
+                "reference": "c42f08473154f22f6df60765440637c4e5a9e22a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hsimah-services/elephentity-codegen-wordpress/zipball/dce405c9cde02cace66c4d15c34ff6b3f9ea293c",
-                "reference": "dce405c9cde02cace66c4d15c34ff6b3f9ea293c",
+                "url": "https://api.github.com/repos/hsimah-services/elephentity-codegen-wordpress/zipball/c42f08473154f22f6df60765440637c4e5a9e22a",
+                "reference": "c42f08473154f22f6df60765440637c4e5a9e22a",
                 "shasum": ""
             },
             "require": {
@@ -1666,9 +1666,9 @@
             "description": "The WordPress builder for Elephentity: compiles the IR into the physical schema WordPress needs. Build-time only.",
             "support": {
                 "issues": "https://github.com/hsimah-services/elephentity-codegen-wordpress/issues",
-                "source": "https://github.com/hsimah-services/elephentity-codegen-wordpress/tree/v0.2.0"
+                "source": "https://github.com/hsimah-services/elephentity-codegen-wordpress/tree/v0.3.0"
             },
-            "time": "2026-09-17T03:35:02+00:00"
+            "time": "2026-09-20T22:05:02+00:00"
         },
         {
             "name": "elephentity/codegen-wpgraphql",
