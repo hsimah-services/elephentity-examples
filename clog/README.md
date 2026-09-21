@@ -68,7 +68,7 @@ storage actually exists in, so a client reading `location { sites { name } }` se
 the sites worth offering for that location, with no query the spec did not already
 expose. Checking that `Inventory.site` actually falls within `Inventory.location`'s
 `sites` is a rule about two edges on the row plus an edge on a different entity — past
-what a field `verify:` can reach — so it is a `preCommit` trigger instead:
+what a field `verify:` can reach — so it is a `preCommit` side effect instead:
 `Inventory.siteAvailability`, implemented by `src/Contract/SiteAvailableAtLocation.php`,
 which queries `Location.sites` and rejects the commit if the pending site is not in it.
 

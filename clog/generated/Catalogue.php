@@ -9,7 +9,7 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   Catalogue.php
- * digest: sha256:74d5e08c96dfd7d77af43b173af4edd63b91249e24bd247a8595268482739b7a
+ * digest: sha256:0f0eff33bfdf6006c3a9e1b1d0b93224eecb332ec5dd0aa37569c9f2d3bd8695
  */
 
 namespace Clog\Entity;
@@ -19,7 +19,7 @@ use Clog\Entity\Inventory\InventoryHydrator;
 use Clog\Entity\Inventory\InventoryInput;
 use Clog\Entity\Inventory\InventoryMutator;
 use Clog\Entity\Inventory\InventoryReadPolicies;
-use Clog\Entity\Inventory\InventoryTriggers;
+use Clog\Entity\Inventory\InventorySideEffects;
 use Clog\Entity\Inventory\InventoryVerifiers;
 use Clog\Entity\Item\Contract\ItemDiscontinueAction;
 use Clog\Entity\Item\ItemDeleter;
@@ -28,7 +28,7 @@ use Clog\Entity\Item\ItemHydrator;
 use Clog\Entity\Item\ItemInput;
 use Clog\Entity\Item\ItemMutator;
 use Clog\Entity\Item\ItemReadPolicies;
-use Clog\Entity\Item\ItemTriggers;
+use Clog\Entity\Item\ItemSideEffects;
 use Clog\Entity\Item\ItemVerifiers;
 use Clog\Entity\Item\ItemWritePolicies;
 use Clog\Entity\Location\LocationDeleter;
@@ -36,23 +36,23 @@ use Clog\Entity\Location\LocationHydrator;
 use Clog\Entity\Location\LocationInput;
 use Clog\Entity\Location\LocationMutator;
 use Clog\Entity\Location\LocationReadPolicies;
-use Clog\Entity\Location\LocationTriggers;
+use Clog\Entity\Location\LocationSideEffects;
 use Clog\Entity\Location\LocationVerifiers;
 use Clog\Entity\Site\SiteDeleter;
 use Clog\Entity\Site\SiteHydrator;
 use Clog\Entity\Site\SiteInput;
 use Clog\Entity\Site\SiteMutator;
-use Clog\Entity\Site\SiteTriggers;
+use Clog\Entity\Site\SiteSideEffects;
 use Clog\Entity\Site\SiteVerifiers;
 use Clog\Entity\User\UserDeleter;
 use Clog\Entity\User\UserHydrator;
 use Clog\Entity\User\UserInput;
 use Clog\Entity\User\UserMutator;
 use Clog\Entity\User\UserReadPolicies;
-use Clog\Entity\User\UserTriggers;
+use Clog\Entity\User\UserSideEffects;
 use Clog\Entity\User\UserVerifiers;
 use Eleph\Runtime\Catalogue\EntityCatalogue;
-use Eleph\Runtime\Mutation\EntityTriggers;
+use Eleph\Runtime\Mutation\EntitySideEffects;
 use Eleph\Runtime\Mutation\Managed;
 use Eleph\Runtime\Mutation\MutationBuffer;
 use Eleph\Runtime\Policy\EntityReadPolicies;
@@ -119,19 +119,19 @@ final readonly class Catalogue implements EntityCatalogue
         return $service;
     }
 
-    public function triggers(
+    public function sideEffects(
         string $entity,
-    ): EntityTriggers {
+    ): EntitySideEffects {
         $service = match ($entity) {
-            'Inventory' => $this->container->get(InventoryTriggers::class),
-            'Item' => $this->container->get(ItemTriggers::class),
-            'Location' => $this->container->get(LocationTriggers::class),
-            'Site' => $this->container->get(SiteTriggers::class),
-            'User' => $this->container->get(UserTriggers::class),
+            'Inventory' => $this->container->get(InventorySideEffects::class),
+            'Item' => $this->container->get(ItemSideEffects::class),
+            'Location' => $this->container->get(LocationSideEffects::class),
+            'Site' => $this->container->get(SiteSideEffects::class),
+            'User' => $this->container->get(UserSideEffects::class),
             default => throw new RuntimeException(sprintf('No entity named "%s".', $entity)),
         };
         
-        assert($service instanceof EntityTriggers);
+        assert($service instanceof EntitySideEffects);
         
         return $service;
     }
@@ -492,7 +492,7 @@ final readonly class Catalogue implements EntityCatalogue
      * @return list<string>
      */
     public function contracts(): array {
-        return ['Clog\\Entity\\Inventory\\Contract\\InventorySiteAvailabilityTrigger', 'Clog\\Entity\\Item\\Contract\\ItemDefaultExpiryUnitVerifier', 'Clog\\Entity\\Item\\Contract\\ItemDefaultExpiryValueVerifier', 'Clog\\Entity\\Item\\Contract\\ItemDiscontinueAction', 'Clog\\Entity\\Item\\Contract\\ItemSearchQuery', 'Clog\\Entity\\Item\\Contract\\ItemStaffWritePolicy', 'Clog\\Entity\\Pattern\\ClogPost\\Contract\\ClogPostSignedInReadPolicy'];
+        return ['Clog\\Entity\\Inventory\\Contract\\InventorySiteAvailabilitySideEffect', 'Clog\\Entity\\Item\\Contract\\ItemDefaultExpiryUnitVerifier', 'Clog\\Entity\\Item\\Contract\\ItemDefaultExpiryValueVerifier', 'Clog\\Entity\\Item\\Contract\\ItemDiscontinueAction', 'Clog\\Entity\\Item\\Contract\\ItemSearchQuery', 'Clog\\Entity\\Item\\Contract\\ItemStaffWritePolicy', 'Clog\\Entity\\Pattern\\ClogPost\\Contract\\ClogPostSignedInReadPolicy'];
     }
 
     /**

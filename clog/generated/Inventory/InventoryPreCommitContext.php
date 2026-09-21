@@ -8,8 +8,8 @@ declare(strict_types=1);
  * Regenerate with `eleph generate`. This file is machine-owned: edits are
  * detected by the build and rejected.
  *
- * path:   Inventory/InventoryMutationContext.php
- * digest: sha256:541367e656ee8572e31e0ee348a7d338fe8305a738ca51bcc18844b69410a0cb
+ * path:   Inventory/InventoryPreCommitContext.php
+ * digest: sha256:1009fdf50560f0b257422e8d4d9768cc00222e0807d961ee2d3956945c1f461c
  */
 
 namespace Clog\Entity\Inventory;
@@ -17,15 +17,16 @@ namespace Clog\Entity\Inventory;
 use DateTimeImmutable;
 use Eleph\Runtime\Identity\Identifier;
 use Eleph\Runtime\Mutation\ActionCall;
-use Eleph\Runtime\Mutation\MutationContext;
+use Eleph\Runtime\Mutation\EdgeMutation;
+use Eleph\Runtime\Mutation\MutableMutationContext;
 
 /**
  * A pending Inventory mutation, with exact types.
  */
-final readonly class InventoryMutationContext implements MutationContext
+final readonly class InventoryPreCommitContext implements MutableMutationContext
 {
     private function __construct(
-        private MutationContext $context,
+        private MutableMutationContext $context,
     ) {
 
     }
@@ -39,6 +40,65 @@ final readonly class InventoryMutationContext implements MutationContext
 
     public function originalEntity(): ?object {
         return $this->context->originalEntity();
+    }
+
+    public function target(): Identifier {
+        return $this->context->target();
+    }
+
+    public function set(
+        string $field,
+        mixed $value,
+    ): void {
+        $this->context->set($field, $value);
+    }
+
+    public function edge(
+        string $edge,
+    ): EdgeMutation {
+        return $this->context->edge($edge);
+    }
+
+    public function setCreatedAt(
+        DateTimeImmutable $value,
+    ): void {
+        $this->context->set('createdAt', $value);
+    }
+
+    public function setUpdatedAt(
+        DateTimeImmutable $value,
+    ): void {
+        $this->context->set('updatedAt', $value);
+    }
+
+    public function setName(
+        string $value,
+    ): void {
+        $this->context->set('name', $value);
+    }
+
+    public function setDateAdded(
+        DateTimeImmutable $value,
+    ): void {
+        $this->context->set('dateAdded', $value);
+    }
+
+    public function setDateExpiry(
+        ?DateTimeImmutable $value,
+    ): void {
+        $this->context->set('dateExpiry', $value);
+    }
+
+    public function item(): EdgeMutation {
+        return $this->context->edge('item');
+    }
+
+    public function location(): EdgeMutation {
+        return $this->context->edge('location');
+    }
+
+    public function site(): EdgeMutation {
+        return $this->context->edge('site');
     }
 
     public function id(): Identifier {
@@ -191,7 +251,7 @@ final readonly class InventoryMutationContext implements MutationContext
     }
 
     public static function of(
-        MutationContext $context,
+        MutableMutationContext $context,
     ): self {
         return new self($context);
     }

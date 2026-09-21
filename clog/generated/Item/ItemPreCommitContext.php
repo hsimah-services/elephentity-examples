@@ -8,24 +8,26 @@ declare(strict_types=1);
  * Regenerate with `eleph generate`. This file is machine-owned: edits are
  * detected by the build and rejected.
  *
- * path:   Location/LocationMutationContext.php
- * digest: sha256:13ca7979c9d3b6d89d713ff9cd1e6d6b74ae578ebc3dabb819d9d165176b6718
+ * path:   Item/ItemPreCommitContext.php
+ * digest: sha256:8d3eee4ff8648b5458a3306c6ef31ca484c5bd3448fdec12be5347b7745ce866
  */
 
-namespace Clog\Entity\Location;
+namespace Clog\Entity\Item;
 
+use Clog\Entity\Enum\ExpiryUnit;
 use DateTimeImmutable;
 use Eleph\Runtime\Identity\Identifier;
 use Eleph\Runtime\Mutation\ActionCall;
-use Eleph\Runtime\Mutation\MutationContext;
+use Eleph\Runtime\Mutation\EdgeMutation;
+use Eleph\Runtime\Mutation\MutableMutationContext;
 
 /**
- * A pending Location mutation, with exact types.
+ * A pending Item mutation, with exact types.
  */
-final readonly class LocationMutationContext implements MutationContext
+final readonly class ItemPreCommitContext implements MutableMutationContext
 {
     private function __construct(
-        private MutationContext $context,
+        private MutableMutationContext $context,
     ) {
 
     }
@@ -39,6 +41,59 @@ final readonly class LocationMutationContext implements MutationContext
 
     public function originalEntity(): ?object {
         return $this->context->originalEntity();
+    }
+
+    public function target(): Identifier {
+        return $this->context->target();
+    }
+
+    public function set(
+        string $field,
+        mixed $value,
+    ): void {
+        $this->context->set($field, $value);
+    }
+
+    public function edge(
+        string $edge,
+    ): EdgeMutation {
+        return $this->context->edge($edge);
+    }
+
+    public function setCreatedAt(
+        DateTimeImmutable $value,
+    ): void {
+        $this->context->set('createdAt', $value);
+    }
+
+    public function setUpdatedAt(
+        DateTimeImmutable $value,
+    ): void {
+        $this->context->set('updatedAt', $value);
+    }
+
+    public function setName(
+        string $value,
+    ): void {
+        $this->context->set('name', $value);
+    }
+
+    public function setBarcode(
+        ?string $value,
+    ): void {
+        $this->context->set('barcode', $value);
+    }
+
+    public function setDefaultExpiryUnit(
+        ?ExpiryUnit $value,
+    ): void {
+        $this->context->set('defaultExpiryUnit', $value);
+    }
+
+    public function setDefaultExpiryValue(
+        ?int $value,
+    ): void {
+        $this->context->set('defaultExpiryValue', $value);
     }
 
     public function id(): Identifier {
@@ -135,19 +190,50 @@ final readonly class LocationMutationContext implements MutationContext
         return $value;
     }
 
-    /**
-     * @return list<Identifier>
-     */
-    public function pendingSites(): array {
-        return $this->context->pendingEdge('sites');
+    public function originalBarcode(): ?string {
+        $value = $this->context->original('barcode');
+        assert(null === $value || is_string($value));
+        
+        return $value;
     }
 
-    public function isSitesChanged(): bool {
-        return $this->context->isEdgeChanged('sites');
+    public function pendingBarcode(): ?string {
+        $value = $this->context->pending('barcode');
+        assert(null === $value || is_string($value));
+        
+        return $value;
+    }
+
+    public function originalDefaultExpiryUnit(): ?ExpiryUnit {
+        $value = $this->context->original('defaultExpiryUnit');
+        assert(null === $value || $value instanceof ExpiryUnit);
+        
+        return $value;
+    }
+
+    public function pendingDefaultExpiryUnit(): ?ExpiryUnit {
+        $value = $this->context->pending('defaultExpiryUnit');
+        assert(null === $value || $value instanceof ExpiryUnit);
+        
+        return $value;
+    }
+
+    public function originalDefaultExpiryValue(): ?int {
+        $value = $this->context->original('defaultExpiryValue');
+        assert(null === $value || is_int($value));
+        
+        return $value;
+    }
+
+    public function pendingDefaultExpiryValue(): ?int {
+        $value = $this->context->pending('defaultExpiryValue');
+        assert(null === $value || is_int($value));
+        
+        return $value;
     }
 
     public static function of(
-        MutationContext $context,
+        MutableMutationContext $context,
     ): self {
         return new self($context);
     }

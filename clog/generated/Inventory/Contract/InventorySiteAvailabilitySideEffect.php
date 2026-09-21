@@ -8,24 +8,24 @@ declare(strict_types=1);
  * Regenerate with `eleph generate`. This file is machine-owned: edits are
  * detected by the build and rejected.
  *
- * path:   Inventory/Contract/InventorySiteAvailabilityTrigger.php
- * digest: sha256:9556e280bac19f9d8db1dc61ff699ab2670a6d0d1f78701f3d942364c2f61b30
+ * path:   Inventory/Contract/InventorySiteAvailabilitySideEffect.php
+ * digest: sha256:e624f41e6836e3561562c5f04c344a43da70cded0c791b2f4009523fbf25c408
  */
 
 namespace Clog\Entity\Inventory\Contract;
 
-use Clog\Entity\Inventory\InventoryMutationContext;
+use Clog\Entity\Inventory\InventoryPreCommitContext;
 
 /**
  * Rejects a write whose site is not one of its location's available sites — Deep Freezer lists only Cave, so an entry there can never claim the Loft.
  *
  *
- * preCommit: inside the transaction and after the flush, so ids exist. Throw
- * to abort the whole commit. Mutation is not permitted in this phase.
+ * preCommit: update pending fields and relationships before verification and storage.
+ * Throw to cancel the mutation. New entities still have pending IDs.
  */
-interface InventorySiteAvailabilityTrigger
+interface InventorySiteAvailabilitySideEffect
 {
     public function handle(
-        InventoryMutationContext $context,
+        InventoryPreCommitContext $context,
     ): void;
 }

@@ -8,23 +8,24 @@ declare(strict_types=1);
  * Regenerate with `eleph generate`. This file is machine-owned: edits are
  * detected by the build and rejected.
  *
- * path:   Site/SiteMutationContext.php
- * digest: sha256:f759c2ca68edbe0f40e4519e87041e39115bde4b3b5fb06f9109f640ad8a390c
+ * path:   Site/SitePreCommitContext.php
+ * digest: sha256:5b1aa639521a15ba628112c7b1f441e539c51ecf2221f0d8399c249a53007c44
  */
 
 namespace Clog\Entity\Site;
 
 use Eleph\Runtime\Identity\Identifier;
 use Eleph\Runtime\Mutation\ActionCall;
-use Eleph\Runtime\Mutation\MutationContext;
+use Eleph\Runtime\Mutation\EdgeMutation;
+use Eleph\Runtime\Mutation\MutableMutationContext;
 
 /**
  * A pending Site mutation, with exact types.
  */
-final readonly class SiteMutationContext implements MutationContext
+final readonly class SitePreCommitContext implements MutableMutationContext
 {
     private function __construct(
-        private MutationContext $context,
+        private MutableMutationContext $context,
     ) {
 
     }
@@ -38,6 +39,29 @@ final readonly class SiteMutationContext implements MutationContext
 
     public function originalEntity(): ?object {
         return $this->context->originalEntity();
+    }
+
+    public function target(): Identifier {
+        return $this->context->target();
+    }
+
+    public function set(
+        string $field,
+        mixed $value,
+    ): void {
+        $this->context->set($field, $value);
+    }
+
+    public function edge(
+        string $edge,
+    ): EdgeMutation {
+        return $this->context->edge($edge);
+    }
+
+    public function setName(
+        string $value,
+    ): void {
+        $this->context->set('name', $value);
     }
 
     public function id(): Identifier {
@@ -107,7 +131,7 @@ final readonly class SiteMutationContext implements MutationContext
     }
 
     public static function of(
-        MutationContext $context,
+        MutableMutationContext $context,
     ): self {
         return new self($context);
     }
