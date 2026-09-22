@@ -9,16 +9,16 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   Wiring.php
- * digest: sha256:c60d2abe2cee81cc5bb089f028e3fcb64088fd0fff9e04a5fe02ae4b76998cbf
+ * digest: sha256:ae0a34a2f5344f55cbf3f055f973d7b80d73f203cab72cce00ccf160d44af237
  */
 
 namespace Clog\Entity;
 
-use Clog\Entity\Inventory\Contract\InventorySiteAvailabilityTrigger;
+use Clog\Entity\Inventory\Contract\InventorySiteAvailabilitySideEffect;
 use Clog\Entity\Inventory\InventoryHydrator;
 use Clog\Entity\Inventory\InventoryInput;
 use Clog\Entity\Inventory\InventoryReadPolicies;
-use Clog\Entity\Inventory\InventoryTriggers;
+use Clog\Entity\Inventory\InventorySideEffects;
 use Clog\Entity\Inventory\InventoryVerifiers;
 use Clog\Entity\Inventory\InventoryWritePolicies;
 use Clog\Entity\Item\Contract\ItemDefaultExpiryUnitVerifier;
@@ -29,26 +29,26 @@ use Clog\Entity\Item\ItemFinder;
 use Clog\Entity\Item\ItemHydrator;
 use Clog\Entity\Item\ItemInput;
 use Clog\Entity\Item\ItemReadPolicies;
-use Clog\Entity\Item\ItemTriggers;
+use Clog\Entity\Item\ItemSideEffects;
 use Clog\Entity\Item\ItemVerifiers;
 use Clog\Entity\Item\ItemWritePolicies;
 use Clog\Entity\Location\LocationHydrator;
 use Clog\Entity\Location\LocationInput;
 use Clog\Entity\Location\LocationReadPolicies;
-use Clog\Entity\Location\LocationTriggers;
+use Clog\Entity\Location\LocationSideEffects;
 use Clog\Entity\Location\LocationVerifiers;
 use Clog\Entity\Location\LocationWritePolicies;
 use Clog\Entity\Pattern\ClogPost\Contract\ClogPostSignedInReadPolicy;
 use Clog\Entity\Site\SiteHydrator;
 use Clog\Entity\Site\SiteInput;
 use Clog\Entity\Site\SiteReadPolicies;
-use Clog\Entity\Site\SiteTriggers;
+use Clog\Entity\Site\SiteSideEffects;
 use Clog\Entity\Site\SiteVerifiers;
 use Clog\Entity\Site\SiteWritePolicies;
 use Clog\Entity\User\UserHydrator;
 use Clog\Entity\User\UserInput;
 use Clog\Entity\User\UserReadPolicies;
-use Clog\Entity\User\UserTriggers;
+use Clog\Entity\User\UserSideEffects;
 use Clog\Entity\User\UserVerifiers;
 use Clog\Entity\User\UserWritePolicies;
 use Closure;
@@ -70,32 +70,32 @@ final class Wiring
         return [
             InventoryHydrator::class => static fn (ContainerInterface $c): object => new InventoryHydrator(self::resolve($c, ValueDecoder::class)),
             InventoryInput::class => static fn (ContainerInterface $c): object => new InventoryInput(self::resolve($c, ValueDecoder::class)),
-            InventoryTriggers::class => static fn (ContainerInterface $c): object => new InventoryTriggers(self::resolve($c, InventorySiteAvailabilityTrigger::class)),
+            InventorySideEffects::class => static fn (ContainerInterface $c): object => new InventorySideEffects(self::resolve($c, InventorySiteAvailabilitySideEffect::class)),
             InventoryVerifiers::class => static fn (ContainerInterface $c): object => new InventoryVerifiers(),
             InventoryReadPolicies::class => static fn (ContainerInterface $c): object => new InventoryReadPolicies(self::resolve($c, ClogPostSignedInReadPolicy::class)),
             InventoryWritePolicies::class => static fn (ContainerInterface $c): object => new InventoryWritePolicies(),
             ItemHydrator::class => static fn (ContainerInterface $c): object => new ItemHydrator(self::resolve($c, ValueDecoder::class)),
             ItemInput::class => static fn (ContainerInterface $c): object => new ItemInput(self::resolve($c, ValueDecoder::class)),
-            ItemTriggers::class => static fn (ContainerInterface $c): object => new ItemTriggers(),
+            ItemSideEffects::class => static fn (ContainerInterface $c): object => new ItemSideEffects(),
             ItemVerifiers::class => static fn (ContainerInterface $c): object => new ItemVerifiers(self::resolve($c, ItemDefaultExpiryUnitVerifier::class), self::resolve($c, ItemDefaultExpiryValueVerifier::class)),
             ItemReadPolicies::class => static fn (ContainerInterface $c): object => new ItemReadPolicies(self::resolve($c, ClogPostSignedInReadPolicy::class)),
             ItemWritePolicies::class => static fn (ContainerInterface $c): object => new ItemWritePolicies(self::resolve($c, ItemStaffWritePolicy::class)),
             ItemFinder::class => static fn (ContainerInterface $c): object => new ItemFinder(self::resolve($c, ItemSearchQuery::class)),
             LocationHydrator::class => static fn (ContainerInterface $c): object => new LocationHydrator(self::resolve($c, ValueDecoder::class)),
             LocationInput::class => static fn (ContainerInterface $c): object => new LocationInput(self::resolve($c, ValueDecoder::class)),
-            LocationTriggers::class => static fn (ContainerInterface $c): object => new LocationTriggers(),
+            LocationSideEffects::class => static fn (ContainerInterface $c): object => new LocationSideEffects(),
             LocationVerifiers::class => static fn (ContainerInterface $c): object => new LocationVerifiers(),
             LocationReadPolicies::class => static fn (ContainerInterface $c): object => new LocationReadPolicies(self::resolve($c, ClogPostSignedInReadPolicy::class)),
             LocationWritePolicies::class => static fn (ContainerInterface $c): object => new LocationWritePolicies(),
             SiteHydrator::class => static fn (ContainerInterface $c): object => new SiteHydrator(self::resolve($c, ValueDecoder::class)),
             SiteInput::class => static fn (ContainerInterface $c): object => new SiteInput(self::resolve($c, ValueDecoder::class)),
-            SiteTriggers::class => static fn (ContainerInterface $c): object => new SiteTriggers(),
+            SiteSideEffects::class => static fn (ContainerInterface $c): object => new SiteSideEffects(),
             SiteVerifiers::class => static fn (ContainerInterface $c): object => new SiteVerifiers(),
             SiteReadPolicies::class => static fn (ContainerInterface $c): object => new SiteReadPolicies(),
             SiteWritePolicies::class => static fn (ContainerInterface $c): object => new SiteWritePolicies(),
             UserHydrator::class => static fn (ContainerInterface $c): object => new UserHydrator(self::resolve($c, ValueDecoder::class)),
             UserInput::class => static fn (ContainerInterface $c): object => new UserInput(self::resolve($c, ValueDecoder::class)),
-            UserTriggers::class => static fn (ContainerInterface $c): object => new UserTriggers(),
+            UserSideEffects::class => static fn (ContainerInterface $c): object => new UserSideEffects(),
             UserVerifiers::class => static fn (ContainerInterface $c): object => new UserVerifiers(),
             UserReadPolicies::class => static fn (ContainerInterface $c): object => new UserReadPolicies(self::resolve($c, ClogPostSignedInReadPolicy::class)),
             UserWritePolicies::class => static fn (ContainerInterface $c): object => new UserWritePolicies(),

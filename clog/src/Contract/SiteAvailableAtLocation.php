@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Clog\Contract;
 
-use Clog\Entity\Inventory\Contract\InventorySiteAvailabilityTrigger;
-use Clog\Entity\Inventory\InventoryMutationContext;
+use Clog\Entity\Inventory\Contract\InventorySiteAvailabilitySideEffect;
+use Clog\Entity\Inventory\InventoryPreCommitContext;
 use Clog\Entity\Site\Site;
 use Clog\Entity\Site\SiteHydrator;
 use DomainException;
@@ -17,7 +17,7 @@ use Eleph\Runtime\Storage\EdgeFilter;
 /**
  * PreCommit check that Inventory.site belongs to Inventory.location's allowed sites.
  */
-final readonly class SiteAvailableAtLocation implements InventorySiteAvailabilityTrigger
+final readonly class SiteAvailableAtLocation implements InventorySiteAvailabilitySideEffect
 {
     public function __construct(
         private Queries $queries,
@@ -25,7 +25,7 @@ final readonly class SiteAvailableAtLocation implements InventorySiteAvailabilit
     ) {
     }
 
-    public function handle(InventoryMutationContext $context): void
+    public function handle(InventoryPreCommitContext $context): void
     {
         $location = $context->pendingLocation();
         $sites = $context->pendingSite();

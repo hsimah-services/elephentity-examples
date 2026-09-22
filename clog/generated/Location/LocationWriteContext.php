@@ -9,12 +9,13 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   Location/LocationWriteContext.php
- * digest: sha256:7fcdc99fb159a2db2e88b97fe50abaf0a4d4be8157c38d8535743fe26f985d38
+ * digest: sha256:8fbfaaea1be047336337a959f4c29294d510aaeb63c0c0edba061e07c311edea
  */
 
 namespace Clog\Entity\Location;
 
 use DateTimeImmutable;
+use Eleph\Runtime\Mutation\ActionCall;
 use Eleph\Runtime\Mutation\MutationContext;
 use Eleph\Runtime\Policy\WriteContext;
 use Eleph\Runtime\Policy\WriteOperation;
@@ -25,6 +26,13 @@ final readonly class LocationWriteContext implements WriteContext
         private WriteContext $context,
     ) {
 
+    }
+
+    /**
+     * @return list<ActionCall>
+     */
+    public function actions(): array {
+        return $this->context->actions();
     }
 
     public static function of(

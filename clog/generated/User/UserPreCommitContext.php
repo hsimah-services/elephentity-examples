@@ -8,24 +8,25 @@ declare(strict_types=1);
  * Regenerate with `eleph generate`. This file is machine-owned: edits are
  * detected by the build and rejected.
  *
- * path:   Location/LocationMutationContext.php
- * digest: sha256:13ca7979c9d3b6d89d713ff9cd1e6d6b74ae578ebc3dabb819d9d165176b6718
+ * path:   User/UserPreCommitContext.php
+ * digest: sha256:c63ab3a6760dc2b21c243616422229c67d823ad585d5df7cb9c100aca3e987d1
  */
 
-namespace Clog\Entity\Location;
+namespace Clog\Entity\User;
 
 use DateTimeImmutable;
 use Eleph\Runtime\Identity\Identifier;
 use Eleph\Runtime\Mutation\ActionCall;
-use Eleph\Runtime\Mutation\MutationContext;
+use Eleph\Runtime\Mutation\EdgeMutation;
+use Eleph\Runtime\Mutation\MutableMutationContext;
 
 /**
- * A pending Location mutation, with exact types.
+ * A pending User mutation, with exact types.
  */
-final readonly class LocationMutationContext implements MutationContext
+final readonly class UserPreCommitContext implements MutableMutationContext
 {
     private function __construct(
-        private MutationContext $context,
+        private MutableMutationContext $context,
     ) {
 
     }
@@ -39,6 +40,41 @@ final readonly class LocationMutationContext implements MutationContext
 
     public function originalEntity(): ?object {
         return $this->context->originalEntity();
+    }
+
+    public function target(): Identifier {
+        return $this->context->target();
+    }
+
+    public function set(
+        string $field,
+        mixed $value,
+    ): void {
+        $this->context->set($field, $value);
+    }
+
+    public function edge(
+        string $edge,
+    ): EdgeMutation {
+        return $this->context->edge($edge);
+    }
+
+    public function setCreatedAt(
+        DateTimeImmutable $value,
+    ): void {
+        $this->context->set('createdAt', $value);
+    }
+
+    public function setUpdatedAt(
+        DateTimeImmutable $value,
+    ): void {
+        $this->context->set('updatedAt', $value);
+    }
+
+    public function setBio(
+        ?string $value,
+    ): void {
+        $this->context->set('bio', $value);
     }
 
     public function id(): Identifier {
@@ -121,33 +157,22 @@ final readonly class LocationMutationContext implements MutationContext
         return $value;
     }
 
-    public function originalName(): ?string {
-        $value = $this->context->original('name');
+    public function originalBio(): ?string {
+        $value = $this->context->original('bio');
         assert(null === $value || is_string($value));
         
         return $value;
     }
 
-    public function pendingName(): ?string {
-        $value = $this->context->pending('name');
+    public function pendingBio(): ?string {
+        $value = $this->context->pending('bio');
         assert(null === $value || is_string($value));
         
         return $value;
-    }
-
-    /**
-     * @return list<Identifier>
-     */
-    public function pendingSites(): array {
-        return $this->context->pendingEdge('sites');
-    }
-
-    public function isSitesChanged(): bool {
-        return $this->context->isEdgeChanged('sites');
     }
 
     public static function of(
-        MutationContext $context,
+        MutableMutationContext $context,
     ): self {
         return new self($context);
     }

@@ -9,7 +9,7 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   class-map.php
- * digest: sha256:841321005575a2f59520499ad31b52e0750619616a06fc50d9ac2b8c30425bda
+ * digest: sha256:f2182bdb830d5ceeab60ebdc15829993f55861c26817bf561d7ad55ac2cb2068
  */
 
 return [
@@ -23,15 +23,16 @@ return [
     'classes' => [
         'Clog\\Entity\\Catalogue' => 'Catalogue.php',
         'Clog\\Entity\\Enum\\ExpiryUnit' => 'Enum/ExpiryUnit.php',
-        'Clog\\Entity\\Inventory\\Contract\\InventorySiteAvailabilityTrigger' => 'Inventory/Contract/InventorySiteAvailabilityTrigger.php',
+        'Clog\\Entity\\Inventory\\Contract\\InventorySiteAvailabilitySideEffect' => 'Inventory/Contract/InventorySiteAvailabilitySideEffect.php',
         'Clog\\Entity\\Inventory\\Inventory' => 'Inventory/Inventory.php',
         'Clog\\Entity\\Inventory\\InventoryDeleter' => 'Inventory/InventoryDeleter.php',
         'Clog\\Entity\\Inventory\\InventoryHydrator' => 'Inventory/InventoryHydrator.php',
         'Clog\\Entity\\Inventory\\InventoryInput' => 'Inventory/InventoryInput.php',
         'Clog\\Entity\\Inventory\\InventoryMutationContext' => 'Inventory/InventoryMutationContext.php',
         'Clog\\Entity\\Inventory\\InventoryMutator' => 'Inventory/InventoryMutator.php',
+        'Clog\\Entity\\Inventory\\InventoryPreCommitContext' => 'Inventory/InventoryPreCommitContext.php',
         'Clog\\Entity\\Inventory\\InventoryReadPolicies' => 'Inventory/InventoryReadPolicies.php',
-        'Clog\\Entity\\Inventory\\InventoryTriggers' => 'Inventory/InventoryTriggers.php',
+        'Clog\\Entity\\Inventory\\InventorySideEffects' => 'Inventory/InventorySideEffects.php',
         'Clog\\Entity\\Inventory\\InventoryVerifiers' => 'Inventory/InventoryVerifiers.php',
         'Clog\\Entity\\Inventory\\InventoryWriteContext' => 'Inventory/InventoryWriteContext.php',
         'Clog\\Entity\\Inventory\\InventoryWritePolicies' => 'Inventory/InventoryWritePolicies.php',
@@ -49,8 +50,9 @@ return [
         'Clog\\Entity\\Item\\ItemInput' => 'Item/ItemInput.php',
         'Clog\\Entity\\Item\\ItemMutationContext' => 'Item/ItemMutationContext.php',
         'Clog\\Entity\\Item\\ItemMutator' => 'Item/ItemMutator.php',
+        'Clog\\Entity\\Item\\ItemPreCommitContext' => 'Item/ItemPreCommitContext.php',
         'Clog\\Entity\\Item\\ItemReadPolicies' => 'Item/ItemReadPolicies.php',
-        'Clog\\Entity\\Item\\ItemTriggers' => 'Item/ItemTriggers.php',
+        'Clog\\Entity\\Item\\ItemSideEffects' => 'Item/ItemSideEffects.php',
         'Clog\\Entity\\Item\\ItemVerifiers' => 'Item/ItemVerifiers.php',
         'Clog\\Entity\\Item\\ItemWriteContext' => 'Item/ItemWriteContext.php',
         'Clog\\Entity\\Item\\ItemWritePolicies' => 'Item/ItemWritePolicies.php',
@@ -60,8 +62,9 @@ return [
         'Clog\\Entity\\Location\\LocationInput' => 'Location/LocationInput.php',
         'Clog\\Entity\\Location\\LocationMutationContext' => 'Location/LocationMutationContext.php',
         'Clog\\Entity\\Location\\LocationMutator' => 'Location/LocationMutator.php',
+        'Clog\\Entity\\Location\\LocationPreCommitContext' => 'Location/LocationPreCommitContext.php',
         'Clog\\Entity\\Location\\LocationReadPolicies' => 'Location/LocationReadPolicies.php',
-        'Clog\\Entity\\Location\\LocationTriggers' => 'Location/LocationTriggers.php',
+        'Clog\\Entity\\Location\\LocationSideEffects' => 'Location/LocationSideEffects.php',
         'Clog\\Entity\\Location\\LocationVerifiers' => 'Location/LocationVerifiers.php',
         'Clog\\Entity\\Location\\LocationWriteContext' => 'Location/LocationWriteContext.php',
         'Clog\\Entity\\Location\\LocationWritePolicies' => 'Location/LocationWritePolicies.php',
@@ -74,8 +77,9 @@ return [
         'Clog\\Entity\\Site\\SiteInput' => 'Site/SiteInput.php',
         'Clog\\Entity\\Site\\SiteMutationContext' => 'Site/SiteMutationContext.php',
         'Clog\\Entity\\Site\\SiteMutator' => 'Site/SiteMutator.php',
+        'Clog\\Entity\\Site\\SitePreCommitContext' => 'Site/SitePreCommitContext.php',
         'Clog\\Entity\\Site\\SiteReadPolicies' => 'Site/SiteReadPolicies.php',
-        'Clog\\Entity\\Site\\SiteTriggers' => 'Site/SiteTriggers.php',
+        'Clog\\Entity\\Site\\SiteSideEffects' => 'Site/SiteSideEffects.php',
         'Clog\\Entity\\Site\\SiteVerifiers' => 'Site/SiteVerifiers.php',
         'Clog\\Entity\\Site\\SiteWriteContext' => 'Site/SiteWriteContext.php',
         'Clog\\Entity\\Site\\SiteWritePolicies' => 'Site/SiteWritePolicies.php',
@@ -85,8 +89,9 @@ return [
         'Clog\\Entity\\User\\UserInput' => 'User/UserInput.php',
         'Clog\\Entity\\User\\UserMutationContext' => 'User/UserMutationContext.php',
         'Clog\\Entity\\User\\UserMutator' => 'User/UserMutator.php',
+        'Clog\\Entity\\User\\UserPreCommitContext' => 'User/UserPreCommitContext.php',
         'Clog\\Entity\\User\\UserReadPolicies' => 'User/UserReadPolicies.php',
-        'Clog\\Entity\\User\\UserTriggers' => 'User/UserTriggers.php',
+        'Clog\\Entity\\User\\UserSideEffects' => 'User/UserSideEffects.php',
         'Clog\\Entity\\User\\UserVerifiers' => 'User/UserVerifiers.php',
         'Clog\\Entity\\User\\UserWriteContext' => 'User/UserWriteContext.php',
         'Clog\\Entity\\User\\UserWritePolicies' => 'User/UserWritePolicies.php',

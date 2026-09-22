@@ -9,12 +9,13 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   Inventory/InventoryWriteContext.php
- * digest: sha256:6aa5c7d9066dee382f69bedbdaac733ae7ff4843d479f5e2d7e0e6802c62a470
+ * digest: sha256:da425a81d619a876a7a5f601ba94e9201095c8e31f1b4a6ad142dfb86097389d
  */
 
 namespace Clog\Entity\Inventory;
 
 use DateTimeImmutable;
+use Eleph\Runtime\Mutation\ActionCall;
 use Eleph\Runtime\Mutation\MutationContext;
 use Eleph\Runtime\Policy\WriteContext;
 use Eleph\Runtime\Policy\WriteOperation;
@@ -25,6 +26,13 @@ final readonly class InventoryWriteContext implements WriteContext
         private WriteContext $context,
     ) {
 
+    }
+
+    /**
+     * @return list<ActionCall>
+     */
+    public function actions(): array {
+        return $this->context->actions();
     }
 
     public static function of(

@@ -17,8 +17,9 @@ From this directory:
 ```
 
 The four gates check canonical specs, validation, generated-file drift, and integration
-conformance. The orchestrator and PHP builder use the 0.5 release line; WordPress and
-WPGraphQL builders use 0.2. Composer locks their versions and Cargo locks their Rust
+conformance. The orchestrator and PHP builder use 0.6; the WordPress builder uses 0.4 and
+the WPGraphQL builder uses 0.3. Compiler/runtime 0.10, WordPress integration 0.2.2,
+and WPGraphQL integration 0.2 complete the IR 1.2 mutation lifecycle stack. Composer locks their versions and Cargo locks their Rust
 dependencies. Rebuild after generator updates, then regenerate with
 `../tools/php vendor/bin/eleph generate` and commit the signed output.
 
@@ -68,7 +69,7 @@ storage actually exists in, so a client reading `location { sites { name } }` se
 the sites worth offering for that location, with no query the spec did not already
 expose. Checking that `Inventory.site` actually falls within `Inventory.location`'s
 `sites` is a rule about two edges on the row plus an edge on a different entity — past
-what a field `verify:` can reach — so it is a `preCommit` trigger instead:
+what a field `verify:` can reach — so it is a `preCommit` side effect instead:
 `Inventory.siteAvailability`, implemented by `src/Contract/SiteAvailableAtLocation.php`,
 which queries `Location.sites` and rejects the commit if the pending site is not in it.
 

@@ -9,12 +9,13 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   User/UserWriteContext.php
- * digest: sha256:1a4ce733ee279b13ad6dfca6d09fd8e32493e830801d7e86e5480af2fdee3224
+ * digest: sha256:12c74577ffb20d57358738b59354844c27efd563d9d2984829bf0b093ff51bb2
  */
 
 namespace Clog\Entity\User;
 
 use DateTimeImmutable;
+use Eleph\Runtime\Mutation\ActionCall;
 use Eleph\Runtime\Mutation\MutationContext;
 use Eleph\Runtime\Policy\WriteContext;
 use Eleph\Runtime\Policy\WriteOperation;
@@ -25,6 +26,13 @@ final readonly class UserWriteContext implements WriteContext
         private WriteContext $context,
     ) {
 
+    }
+
+    /**
+     * @return list<ActionCall>
+     */
+    public function actions(): array {
+        return $this->context->actions();
     }
 
     public static function of(

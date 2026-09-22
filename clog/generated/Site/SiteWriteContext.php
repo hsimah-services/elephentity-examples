@@ -9,11 +9,12 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   Site/SiteWriteContext.php
- * digest: sha256:7692c2721758da105497ad824429c58dab2e1b26b467a82351b068091a111a73
+ * digest: sha256:32bda81f37e499b9698cce083b355d9294cfe4032f0cb5e9e8951d6b8085eb71
  */
 
 namespace Clog\Entity\Site;
 
+use Eleph\Runtime\Mutation\ActionCall;
 use Eleph\Runtime\Mutation\MutationContext;
 use Eleph\Runtime\Policy\WriteContext;
 use Eleph\Runtime\Policy\WriteOperation;
@@ -24,6 +25,13 @@ final readonly class SiteWriteContext implements WriteContext
         private WriteContext $context,
     ) {
 
+    }
+
+    /**
+     * @return list<ActionCall>
+     */
+    public function actions(): array {
+        return $this->context->actions();
     }
 
     public static function of(

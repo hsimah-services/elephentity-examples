@@ -9,13 +9,14 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   User/UserMutationContext.php
- * digest: sha256:48458bce9de1aba52df6297f9bc9cd65b106f79519db9b5afafa73ada96f8bba
+ * digest: sha256:9b7417e6adebfb65348fc5629801e0aa9a95cf1743b4d75a869f55b3a9f886c4
  */
 
 namespace Clog\Entity\User;
 
 use DateTimeImmutable;
 use Eleph\Runtime\Identity\Identifier;
+use Eleph\Runtime\Mutation\ActionCall;
 use Eleph\Runtime\Mutation\MutationContext;
 
 /**
@@ -27,6 +28,17 @@ final readonly class UserMutationContext implements MutationContext
         private MutationContext $context,
     ) {
 
+    }
+
+    /**
+     * @return list<ActionCall>
+     */
+    public function actions(): array {
+        return $this->context->actions();
+    }
+
+    public function originalEntity(): ?object {
+        return $this->context->originalEntity();
     }
 
     public function id(): Identifier {

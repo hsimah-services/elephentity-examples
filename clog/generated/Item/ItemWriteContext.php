@@ -9,13 +9,14 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   Item/ItemWriteContext.php
- * digest: sha256:1bbc0cc204725c23486a6765ecf8273cd2c366a36a6b7f6e968562a0785de9b6
+ * digest: sha256:f4fe08e003b7cf04fbb40979c2e66d12c2587b09d70af84368001f73d013da1b
  */
 
 namespace Clog\Entity\Item;
 
 use Clog\Entity\Enum\ExpiryUnit;
 use DateTimeImmutable;
+use Eleph\Runtime\Mutation\ActionCall;
 use Eleph\Runtime\Mutation\MutationContext;
 use Eleph\Runtime\Policy\WriteContext;
 use Eleph\Runtime\Policy\WriteOperation;
@@ -26,6 +27,13 @@ final readonly class ItemWriteContext implements WriteContext
         private WriteContext $context,
     ) {
 
+    }
+
+    /**
+     * @return list<ActionCall>
+     */
+    public function actions(): array {
+        return $this->context->actions();
     }
 
     public static function of(

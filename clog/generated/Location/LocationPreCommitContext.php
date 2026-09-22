@@ -8,8 +8,8 @@ declare(strict_types=1);
  * Regenerate with `eleph generate`. This file is machine-owned: edits are
  * detected by the build and rejected.
  *
- * path:   Location/LocationMutationContext.php
- * digest: sha256:13ca7979c9d3b6d89d713ff9cd1e6d6b74ae578ebc3dabb819d9d165176b6718
+ * path:   Location/LocationPreCommitContext.php
+ * digest: sha256:621609f085d2117d692de960cea1a4836a5a5d4a8c7b061deccd2ed98e8ef320
  */
 
 namespace Clog\Entity\Location;
@@ -17,15 +17,16 @@ namespace Clog\Entity\Location;
 use DateTimeImmutable;
 use Eleph\Runtime\Identity\Identifier;
 use Eleph\Runtime\Mutation\ActionCall;
-use Eleph\Runtime\Mutation\MutationContext;
+use Eleph\Runtime\Mutation\EdgeMutation;
+use Eleph\Runtime\Mutation\MutableMutationContext;
 
 /**
  * A pending Location mutation, with exact types.
  */
-final readonly class LocationMutationContext implements MutationContext
+final readonly class LocationPreCommitContext implements MutableMutationContext
 {
     private function __construct(
-        private MutationContext $context,
+        private MutableMutationContext $context,
     ) {
 
     }
@@ -39,6 +40,45 @@ final readonly class LocationMutationContext implements MutationContext
 
     public function originalEntity(): ?object {
         return $this->context->originalEntity();
+    }
+
+    public function target(): Identifier {
+        return $this->context->target();
+    }
+
+    public function set(
+        string $field,
+        mixed $value,
+    ): void {
+        $this->context->set($field, $value);
+    }
+
+    public function edge(
+        string $edge,
+    ): EdgeMutation {
+        return $this->context->edge($edge);
+    }
+
+    public function setCreatedAt(
+        DateTimeImmutable $value,
+    ): void {
+        $this->context->set('createdAt', $value);
+    }
+
+    public function setUpdatedAt(
+        DateTimeImmutable $value,
+    ): void {
+        $this->context->set('updatedAt', $value);
+    }
+
+    public function setName(
+        string $value,
+    ): void {
+        $this->context->set('name', $value);
+    }
+
+    public function sites(): EdgeMutation {
+        return $this->context->edge('sites');
     }
 
     public function id(): Identifier {
@@ -147,7 +187,7 @@ final readonly class LocationMutationContext implements MutationContext
     }
 
     public static function of(
-        MutationContext $context,
+        MutableMutationContext $context,
     ): self {
         return new self($context);
     }

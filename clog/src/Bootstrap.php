@@ -11,10 +11,10 @@ use Clog\Contract\SignedInUsers;
 use Clog\Contract\SiteAvailableAtLocation;
 use Clog\Contract\StaffMayWriteItems;
 use Clog\Entity\Catalogue;
-use Clog\Entity\Inventory\Contract\InventorySiteAvailabilityTrigger;
+use Clog\Entity\Inventory\Contract\InventorySiteAvailabilitySideEffect;
 use Clog\Entity\Inventory\InventoryHydrator;
 use Clog\Entity\Inventory\InventoryInput;
-use Clog\Entity\Inventory\InventoryTriggers;
+use Clog\Entity\Inventory\InventorySideEffects;
 use Clog\Entity\Inventory\InventoryVerifiers;
 use Clog\Entity\Item\Contract\ItemDefaultExpiryUnitVerifier;
 use Clog\Entity\Item\Contract\ItemDefaultExpiryValueVerifier;
@@ -24,20 +24,20 @@ use Clog\Entity\Item\Contract\ItemStaffWritePolicy;
 use Clog\Entity\Item\ItemFinder;
 use Clog\Entity\Item\ItemHydrator;
 use Clog\Entity\Item\ItemInput;
-use Clog\Entity\Item\ItemTriggers;
+use Clog\Entity\Item\ItemSideEffects;
 use Clog\Entity\Item\ItemVerifiers;
 use Clog\Entity\Location\LocationHydrator;
 use Clog\Entity\Location\LocationInput;
-use Clog\Entity\Location\LocationTriggers;
+use Clog\Entity\Location\LocationSideEffects;
 use Clog\Entity\Location\LocationVerifiers;
 use Clog\Entity\Pattern\ClogPost\Contract\ClogPostSignedInReadPolicy;
 use Clog\Entity\Site\SiteHydrator;
 use Clog\Entity\Site\SiteInput;
-use Clog\Entity\Site\SiteTriggers;
+use Clog\Entity\Site\SiteSideEffects;
 use Clog\Entity\Site\SiteVerifiers;
 use Clog\Entity\User\UserHydrator;
 use Clog\Entity\User\UserInput;
-use Clog\Entity\User\UserTriggers;
+use Clog\Entity\User\UserSideEffects;
 use Clog\Entity\User\UserVerifiers;
 use Eleph\Runtime\Catalogue\BootCheck;
 use Eleph\Runtime\Gateway\Runtime;
@@ -173,7 +173,7 @@ final class Bootstrap
 
             ->set(ItemHydrator::class, static fn (): object => new ItemHydrator($decoder))
             ->set(ItemInput::class, static fn (): object => new ItemInput($decoder))
-            ->set(ItemTriggers::class, static fn (): object => new ItemTriggers())
+            ->set(ItemSideEffects::class, static fn (): object => new ItemSideEffects())
             ->set(ItemVerifiers::class, static fn (Container $c): object => new ItemVerifiers(
                 $c->get(ItemDefaultExpiryUnitVerifier::class),
                 $c->get(ItemDefaultExpiryValueVerifier::class),
@@ -184,24 +184,24 @@ final class Bootstrap
 
             ->set(LocationHydrator::class, static fn (): object => new LocationHydrator($decoder))
             ->set(LocationInput::class, static fn (): object => new LocationInput($decoder))
-            ->set(LocationTriggers::class, static fn (): object => new LocationTriggers())
+            ->set(LocationSideEffects::class, static fn (): object => new LocationSideEffects())
             ->set(LocationVerifiers::class, static fn (): object => new LocationVerifiers())
 
             ->set(InventoryHydrator::class, static fn (): object => new InventoryHydrator($decoder))
             ->set(InventoryInput::class, static fn (): object => new InventoryInput($decoder))
-            ->set(InventoryTriggers::class, static fn (Container $c): object => new InventoryTriggers(
-                $c->get(InventorySiteAvailabilityTrigger::class),
+            ->set(InventorySideEffects::class, static fn (Container $c): object => new InventorySideEffects(
+                $c->get(InventorySiteAvailabilitySideEffect::class),
             ))
             ->set(InventoryVerifiers::class, static fn (): object => new InventoryVerifiers())
 
             ->set(SiteHydrator::class, static fn (): object => new SiteHydrator($decoder))
             ->set(SiteInput::class, static fn (): object => new SiteInput($decoder))
-            ->set(SiteTriggers::class, static fn (): object => new SiteTriggers())
+            ->set(SiteSideEffects::class, static fn (): object => new SiteSideEffects())
             ->set(SiteVerifiers::class, static fn (): object => new SiteVerifiers())
 
             ->set(UserHydrator::class, static fn (): object => new UserHydrator($decoder))
             ->set(UserInput::class, static fn (): object => new UserInput($decoder))
-            ->set(UserTriggers::class, static fn (): object => new UserTriggers())
+            ->set(UserSideEffects::class, static fn (): object => new UserSideEffects())
             ->set(UserVerifiers::class, static fn (): object => new UserVerifiers())
 
             ->bind(ItemSearchQuery::class, static fn (Container $c): object => new ItemSearch(
@@ -215,7 +215,7 @@ final class Bootstrap
             ->bind(ClogPostSignedInReadPolicy::class, static fn (): object => new SignedInUsers())
             ->bind(ItemStaffWritePolicy::class, static fn (): object => new StaffMayWriteItems())
             ->bind(ItemDiscontinueAction::class, static fn (): object => new DiscontinueItem())
-            ->bind(InventorySiteAvailabilityTrigger::class, static fn (Container $c): object => new SiteAvailableAtLocation(
+            ->bind(InventorySiteAvailabilitySideEffect::class, static fn (Container $c): object => new SiteAvailableAtLocation(
                 $c->get(Queries::class),
                 $c->get(SiteHydrator::class),
             ));
