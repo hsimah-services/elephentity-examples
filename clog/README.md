@@ -141,3 +141,5 @@ named, testable class the application cannot boot without.
 `snapshots.php` reads `wp_posts` and `wp_postmeta` directly to build a SQL dump. With
 entities in custom tables it needs rewriting against those, which is a straightforward
 change but not one the spec describes.
+
+Build tools come from `elephentity/cli` ^0.11 and its schema dependency. Clog no longer installs the monorepo bundle. Runtime, WordPress and WPGraphQL remain explicit production dependencies.
