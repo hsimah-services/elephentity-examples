@@ -9,7 +9,7 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   Site/SiteMutator.php
- * digest: sha256:1bdb640de6ea00b517a0670f9fd547b138c1911654b543d5c6bb6d187bad70e1
+ * digest: sha256:8b4fed04056aa5aa55383d4990534b8d15363c88b91ac6f00c6316390e82be9e
  */
 
 namespace Clog\Entity\Site;
@@ -31,7 +31,7 @@ final class SiteMutator
         string $name,
     ): self {
         $this->buffer->set('name', $name);
-        
+
         return $this;
     }
 }

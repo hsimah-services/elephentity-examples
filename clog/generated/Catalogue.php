@@ -9,7 +9,7 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   Catalogue.php
- * digest: sha256:0f0eff33bfdf6006c3a9e1b1d0b93224eecb332ec5dd0aa37569c9f2d3bd8695
+ * digest: sha256:401a622ae12abd791692a8b4574a4b9851bfa0e269418ae3a57df6de25ec9a8b
  */
 
 namespace Clog\Entity;
@@ -96,9 +96,9 @@ final readonly class Catalogue implements EntityCatalogue
             'User' => $this->container->get(UserHydrator::class),
             default => throw new RuntimeException(sprintf('No entity named "%s".', $entity)),
         };
-        
+
         assert($service instanceof Hydrator);
-        
+
         return $service;
     }
 
@@ -113,9 +113,9 @@ final readonly class Catalogue implements EntityCatalogue
             'User' => $this->container->get(UserVerifiers::class),
             default => throw new RuntimeException(sprintf('No entity named "%s".', $entity)),
         };
-        
+
         assert($service instanceof EntityVerifiers);
-        
+
         return $service;
     }
 
@@ -130,41 +130,41 @@ final readonly class Catalogue implements EntityCatalogue
             'User' => $this->container->get(UserSideEffects::class),
             default => throw new RuntimeException(sprintf('No entity named "%s".', $entity)),
         };
-        
+
         assert($service instanceof EntitySideEffects);
-        
+
         return $service;
     }
 
     private function readPoliciesInventoryReadPolicies(): EntityReadPolicies {
         $policies = $this->container->get(InventoryReadPolicies::class);
-        
+
         assert($policies instanceof InventoryReadPolicies);
-        
+
         return $policies;
     }
 
     private function readPoliciesItemReadPolicies(): EntityReadPolicies {
         $policies = $this->container->get(ItemReadPolicies::class);
-        
+
         assert($policies instanceof ItemReadPolicies);
-        
+
         return $policies;
     }
 
     private function readPoliciesLocationReadPolicies(): EntityReadPolicies {
         $policies = $this->container->get(LocationReadPolicies::class);
-        
+
         assert($policies instanceof LocationReadPolicies);
-        
+
         return $policies;
     }
 
     private function readPoliciesUserReadPolicies(): EntityReadPolicies {
         $policies = $this->container->get(UserReadPolicies::class);
-        
+
         assert($policies instanceof UserReadPolicies);
-        
+
         return $policies;
     }
 
@@ -183,9 +183,9 @@ final readonly class Catalogue implements EntityCatalogue
 
     private function writePoliciesItemWritePolicies(): EntityWritePolicies {
         $policies = $this->container->get(ItemWritePolicies::class);
-        
+
         assert($policies instanceof ItemWritePolicies);
-        
+
         return $policies;
     }
 
@@ -249,6 +249,22 @@ final readonly class Catalogue implements EntityCatalogue
             'Location' => ['name'],
             'Site' => ['name'],
             'User' => [],
+            default => [],
+        };
+    }
+
+    /**
+     * @return list<string>
+     */
+    public function nonNullableFields(
+        string $entity,
+    ): array {
+        return match ($entity) {
+            'Inventory' => ['createdAt', 'updatedAt', 'name', 'dateAdded'],
+            'Item' => ['createdAt', 'updatedAt', 'name'],
+            'Location' => ['createdAt', 'updatedAt', 'name'],
+            'Site' => ['name'],
+            'User' => ['createdAt', 'updatedAt'],
             default => [],
         };
     }
@@ -324,9 +340,9 @@ final readonly class Catalogue implements EntityCatalogue
             'Item' => $this->container->get(ItemFinder::class),
             default => throw new RuntimeException(sprintf('%s declares no queries.', $entity)),
         };
-        
+
         assert(is_object($finder));
-        
+
         return $finder;
     }
 
@@ -379,9 +395,9 @@ final readonly class Catalogue implements EntityCatalogue
         array $args,
     ): array {
         $input = $this->container->get(InventoryInput::class);
-        
+
         assert($input instanceof InventoryInput);
-        
+
         return $input->decodeAction($action, $args);
     }
 
@@ -394,9 +410,9 @@ final readonly class Catalogue implements EntityCatalogue
         array $args,
     ): array {
         $input = $this->container->get(ItemInput::class);
-        
+
         assert($input instanceof ItemInput);
-        
+
         return $input->decodeAction($action, $args);
     }
 
@@ -409,9 +425,9 @@ final readonly class Catalogue implements EntityCatalogue
         array $args,
     ): array {
         $input = $this->container->get(LocationInput::class);
-        
+
         assert($input instanceof LocationInput);
-        
+
         return $input->decodeAction($action, $args);
     }
 
@@ -424,9 +440,9 @@ final readonly class Catalogue implements EntityCatalogue
         array $args,
     ): array {
         $input = $this->container->get(SiteInput::class);
-        
+
         assert($input instanceof SiteInput);
-        
+
         return $input->decodeAction($action, $args);
     }
 
@@ -439,9 +455,9 @@ final readonly class Catalogue implements EntityCatalogue
         array $args,
     ): array {
         $input = $this->container->get(UserInput::class);
-        
+
         assert($input instanceof UserInput);
-        
+
         return $input->decodeAction($action, $args);
     }
 
@@ -480,9 +496,9 @@ final readonly class Catalogue implements EntityCatalogue
             'User' => $this->container->get(UserInput::class),
             default => throw new RuntimeException(sprintf('No entity named "%s".', $entity)),
         };
-        
+
         assert(is_object($applier) && method_exists($applier, 'apply'));
-        
+
         $applier->apply($buffer, $input);
     }
 
@@ -504,9 +520,9 @@ final readonly class Catalogue implements EntityCatalogue
         string $class,
     ): object {
         $service = $this->container->get($class);
-        
+
         assert($service instanceof $class);
-        
+
         return $service;
     }
 }

@@ -9,7 +9,7 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   Item/ItemPreCommitContext.php
- * digest: sha256:8d3eee4ff8648b5458a3306c6ef31ca484c5bd3448fdec12be5347b7745ce866
+ * digest: sha256:d3a00ef4bc4fe1ef75050dad640545a31a1da41c807797cde7c0de8de9709a1e
  */
 
 namespace Clog\Entity\Item;
@@ -151,84 +151,84 @@ final readonly class ItemPreCommitContext implements MutableMutationContext
     public function originalCreatedAt(): ?DateTimeImmutable {
         $value = $this->context->original('createdAt');
         assert(null === $value || $value instanceof DateTimeImmutable);
-        
+
         return $value;
     }
 
     public function pendingCreatedAt(): ?DateTimeImmutable {
         $value = $this->context->pending('createdAt');
         assert(null === $value || $value instanceof DateTimeImmutable);
-        
+
         return $value;
     }
 
     public function originalUpdatedAt(): ?DateTimeImmutable {
         $value = $this->context->original('updatedAt');
         assert(null === $value || $value instanceof DateTimeImmutable);
-        
+
         return $value;
     }
 
     public function pendingUpdatedAt(): ?DateTimeImmutable {
         $value = $this->context->pending('updatedAt');
         assert(null === $value || $value instanceof DateTimeImmutable);
-        
+
         return $value;
     }
 
     public function originalName(): ?string {
         $value = $this->context->original('name');
         assert(null === $value || is_string($value));
-        
+
         return $value;
     }
 
     public function pendingName(): ?string {
         $value = $this->context->pending('name');
         assert(null === $value || is_string($value));
-        
+
         return $value;
     }
 
     public function originalBarcode(): ?string {
         $value = $this->context->original('barcode');
         assert(null === $value || is_string($value));
-        
+
         return $value;
     }
 
     public function pendingBarcode(): ?string {
         $value = $this->context->pending('barcode');
         assert(null === $value || is_string($value));
-        
+
         return $value;
     }
 
     public function originalDefaultExpiryUnit(): ?ExpiryUnit {
         $value = $this->context->original('defaultExpiryUnit');
         assert(null === $value || $value instanceof ExpiryUnit);
-        
+
         return $value;
     }
 
     public function pendingDefaultExpiryUnit(): ?ExpiryUnit {
         $value = $this->context->pending('defaultExpiryUnit');
         assert(null === $value || $value instanceof ExpiryUnit);
-        
+
         return $value;
     }
 
     public function originalDefaultExpiryValue(): ?int {
         $value = $this->context->original('defaultExpiryValue');
         assert(null === $value || is_int($value));
-        
+
         return $value;
     }
 
     public function pendingDefaultExpiryValue(): ?int {
         $value = $this->context->pending('defaultExpiryValue');
         assert(null === $value || is_int($value));
-        
+
         return $value;
     }
 

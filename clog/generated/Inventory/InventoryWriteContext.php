@@ -9,7 +9,7 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   Inventory/InventoryWriteContext.php
- * digest: sha256:da425a81d619a876a7a5f601ba94e9201095c8e31f1b4a6ad142dfb86097389d
+ * digest: sha256:462a35247fb7ceb16edcc778bf89fad327d79e1d60c5ea2f558ddf3e0cfdd09c
  */
 
 namespace Clog\Entity\Inventory;
@@ -64,70 +64,70 @@ final readonly class InventoryWriteContext implements WriteContext
     public function originalCreatedAt(): ?DateTimeImmutable {
         $value = $this->context->mutation()?->original('createdAt');
         assert(null === $value || $value instanceof DateTimeImmutable);
-        
+
         return $value;
     }
 
     public function pendingCreatedAt(): ?DateTimeImmutable {
         $value = $this->context->mutation()?->pending('createdAt');
         assert(null === $value || $value instanceof DateTimeImmutable);
-        
+
         return $value;
     }
 
     public function originalUpdatedAt(): ?DateTimeImmutable {
         $value = $this->context->mutation()?->original('updatedAt');
         assert(null === $value || $value instanceof DateTimeImmutable);
-        
+
         return $value;
     }
 
     public function pendingUpdatedAt(): ?DateTimeImmutable {
         $value = $this->context->mutation()?->pending('updatedAt');
         assert(null === $value || $value instanceof DateTimeImmutable);
-        
+
         return $value;
     }
 
     public function originalName(): ?string {
         $value = $this->context->mutation()?->original('name');
         assert(null === $value || is_string($value));
-        
+
         return $value;
     }
 
     public function pendingName(): ?string {
         $value = $this->context->mutation()?->pending('name');
         assert(null === $value || is_string($value));
-        
+
         return $value;
     }
 
     public function originalDateAdded(): ?DateTimeImmutable {
         $value = $this->context->mutation()?->original('dateAdded');
         assert(null === $value || $value instanceof DateTimeImmutable);
-        
+
         return $value;
     }
 
     public function pendingDateAdded(): ?DateTimeImmutable {
         $value = $this->context->mutation()?->pending('dateAdded');
         assert(null === $value || $value instanceof DateTimeImmutable);
-        
+
         return $value;
     }
 
     public function originalDateExpiry(): ?DateTimeImmutable {
         $value = $this->context->mutation()?->original('dateExpiry');
         assert(null === $value || $value instanceof DateTimeImmutable);
-        
+
         return $value;
     }
 
     public function pendingDateExpiry(): ?DateTimeImmutable {
         $value = $this->context->mutation()?->pending('dateExpiry');
         assert(null === $value || $value instanceof DateTimeImmutable);
-        
+
         return $value;
     }
 }

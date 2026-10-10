@@ -9,7 +9,7 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   User/UserReadPolicies.php
- * digest: sha256:31ad237fc6b613edd8374d4ab5589867e37a26572550ede986d3e987dea32464
+ * digest: sha256:0d2641419bd28e7031c405d98cdae99bf257bc23afa717c9a1dce5ecc9ce588e
  */
 
 namespace Clog\Entity\User;
@@ -41,7 +41,7 @@ final readonly class UserReadPolicies implements EntityReadPolicies
         if (PolicyOutcome::Skip !== $decision->outcome) {
             return $decision->withPolicy('signedIn');
         }
-        
+
         return PolicyDecision::deny('No policy allowed this read.')->withPolicy('terminal');
     }
 }

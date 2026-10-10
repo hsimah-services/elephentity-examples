@@ -9,7 +9,7 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   Wiring.php
- * digest: sha256:ae0a34a2f5344f55cbf3f055f973d7b80d73f203cab72cce00ccf160d44af237
+ * digest: sha256:e5921aff110fcb5f0a9024682093f9ceb77278345914ac84f5b8a6cc69b3db6a
  */
 
 namespace Clog\Entity;
@@ -112,9 +112,9 @@ final class Wiring
         string $class,
     ): object {
         $service = $c->get($class);
-        
+
         assert($service instanceof $class);
-        
+
         return $service;
     }
 }

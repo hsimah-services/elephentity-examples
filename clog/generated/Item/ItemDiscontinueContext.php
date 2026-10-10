@@ -9,12 +9,14 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   Item/ItemDiscontinueContext.php
- * digest: sha256:0fc9a9a98d2dcb60d0f58f89de3065ad073ea5740bfbad91744933ca449ae5d6
+ * digest: sha256:288d872ed94d0aff156357b3a3a97923edeb4b7f48d32c937fcdf0ee13d62aa1
  */
 
 namespace Clog\Entity\Item;
 
 use Eleph\Runtime\Mutation\MutationBuffer;
+use Eleph\Runtime\Mutation\MutationContext;
+use LogicException;
 
 /**
  * Everything Item::discontinue() is allowed to write, and nothing else.
@@ -27,11 +29,22 @@ final class ItemDiscontinueContext
 
     }
 
+    /**
+     * Read original and pending state without widening the action's writes.
+     */
+    public function context(): ItemMutationContext {
+        if (!$this->buffer instanceof MutationContext) {
+            throw new LogicException('Action buffer must expose mutation state.');
+        }
+
+        return ItemMutationContext::of($this->buffer);
+    }
+
     public function setBarcode(
         ?string $barcode,
     ): self {
         $this->buffer->set('barcode', $barcode);
-        
+
         return $this;
     }
 

@@ -9,7 +9,7 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   User/UserMutator.php
- * digest: sha256:89f47823d5432e1d48a352107dfccd363e96cbd06b5af847987361bfa4a2b219
+ * digest: sha256:cbdabb7bd70a0f0ff7f592d6c6811bbbf71d61aa1bbea777329244c74859cfc2
  */
 
 namespace Clog\Entity\User;
@@ -34,7 +34,7 @@ final class UserMutator
         ?string $bio,
     ): self {
         $this->buffer->set('bio', $bio);
-        
+
         return $this;
     }
 }

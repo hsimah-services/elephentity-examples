@@ -9,7 +9,7 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   Site/SitePreCommitContext.php
- * digest: sha256:5b1aa639521a15ba628112c7b1f441e539c51ecf2221f0d8399c249a53007c44
+ * digest: sha256:43fceb7191221c5a6182c9a85605a2a7220e5df9823220f4e99754a15fc3e927
  */
 
 namespace Clog\Entity\Site;
@@ -119,14 +119,14 @@ final readonly class SitePreCommitContext implements MutableMutationContext
     public function originalName(): ?string {
         $value = $this->context->original('name');
         assert(null === $value || is_string($value));
-        
+
         return $value;
     }
 
     public function pendingName(): ?string {
         $value = $this->context->pending('name');
         assert(null === $value || is_string($value));
-        
+
         return $value;
     }
 

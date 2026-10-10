@@ -9,7 +9,7 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   Item/ItemVerifiers.php
- * digest: sha256:055912673f509ce290416e5723fb2d8cc668a56313b701e59810fce911374318
+ * digest: sha256:edc194e2892ddeee30ff374f89254aba7044d76397aad7afb7a9bd8bf9b14165
  */
 
 namespace Clog\Entity\Item;
@@ -56,8 +56,8 @@ final readonly class ItemVerifiers implements EntityVerifiers
         mixed $value,
         MutationContext $context,
     ): Verification {
-        assert($value instanceof ExpiryUnit);
-        
+        assert(null === $value || $value instanceof ExpiryUnit);
+
         return $this->defaultExpiryUnitVerifier->verify($value, ItemMutationContext::of($context));
     }
 
@@ -65,8 +65,8 @@ final readonly class ItemVerifiers implements EntityVerifiers
         mixed $value,
         MutationContext $context,
     ): Verification {
-        assert(is_int($value));
-        
+        assert(null === $value || is_int($value));
+
         return $this->defaultExpiryValueVerifier->verify($value, ItemMutationContext::of($context));
     }
 }

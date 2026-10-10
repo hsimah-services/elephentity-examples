@@ -9,7 +9,7 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   Site/SiteWriteContext.php
- * digest: sha256:32bda81f37e499b9698cce083b355d9294cfe4032f0cb5e9e8951d6b8085eb71
+ * digest: sha256:dffd74dd98b8a103f80c2dffbc0926a68d3a3f009e0a115fd6611f5d54b67708
  */
 
 namespace Clog\Entity\Site;
@@ -63,14 +63,14 @@ final readonly class SiteWriteContext implements WriteContext
     public function originalName(): ?string {
         $value = $this->context->mutation()?->original('name');
         assert(null === $value || is_string($value));
-        
+
         return $value;
     }
 
     public function pendingName(): ?string {
         $value = $this->context->mutation()?->pending('name');
         assert(null === $value || is_string($value));
-        
+
         return $value;
     }
 }

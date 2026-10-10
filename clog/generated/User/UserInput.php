@@ -9,7 +9,7 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   User/UserInput.php
- * digest: sha256:be2fac21bdb3de75e5d496f08f77d1bbe4df322d61b05b6bf62cd285e0e759e4
+ * digest: sha256:6ddfd636c903f2104ce1a01bb62a03ec73eed65a78bc27aeef87b7042b683aa3
  */
 
 namespace Clog\Entity\User;
@@ -35,13 +35,13 @@ final readonly class UserInput
         if (null === $value) {
             return null;
         }
-        
+
         return $this->decode->string($value, 'User.bio');
     }
 
     /**
-     * Only what the caller supplied. A key that is absent is left alone,
-     * which is what makes a partial update partial.
+     * Seeds declared defaults on create and applies explicit input.
+     * Absent update keys and existing pending values are not reset by defaults.
      *
      * @param array<string, mixed> $input
      */
@@ -63,7 +63,7 @@ final readonly class UserInput
         array $args,
     ): array {
         return match ($action) {
-        
+
             default => throw new InvalidArgumentException(sprintf('Unknown action %s.', $action)),
         };
     }

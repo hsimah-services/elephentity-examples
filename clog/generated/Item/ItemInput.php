@@ -9,7 +9,7 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   Item/ItemInput.php
- * digest: sha256:423a0f3e28d9d4fd7128664999b7d0f986978c7024134c8fadd0d242760ee535
+ * digest: sha256:54787212f00e3201ecd25fcba1f3fd339c222284d887a8904a4c915a1b5c720a
  */
 
 namespace Clog\Entity\Item;
@@ -36,7 +36,7 @@ final readonly class ItemInput
         if (null === $value) {
             return null;
         }
-        
+
         return $this->decode->string($value, 'Item.name');
     }
 
@@ -46,7 +46,7 @@ final readonly class ItemInput
         if (null === $value) {
             return null;
         }
-        
+
         return $this->decode->string($value, 'Item.barcode');
     }
 
@@ -56,7 +56,7 @@ final readonly class ItemInput
         if (null === $value) {
             return null;
         }
-        
+
         return $this->decode->enum(ExpiryUnit::class, $value, 'Item.defaultExpiryUnit');
     }
 
@@ -66,13 +66,13 @@ final readonly class ItemInput
         if (null === $value) {
             return null;
         }
-        
+
         return $this->decode->int($value, 'Item.defaultExpiryValue');
     }
 
     /**
-     * Only what the caller supplied. A key that is absent is left alone,
-     * which is what makes a partial update partial.
+     * Seeds declared defaults on create and applies explicit input.
+     * Absent update keys and existing pending values are not reset by defaults.
      *
      * @param array<string, mixed> $input
      */
@@ -83,15 +83,15 @@ final readonly class ItemInput
         if (array_key_exists('name', $input)) {
             $buffer->set('name', $this->name($input['name']));
         }
-        
+
         if (array_key_exists('barcode', $input)) {
             $buffer->set('barcode', $this->barcode($input['barcode']));
         }
-        
+
         if (array_key_exists('defaultExpiryUnit', $input)) {
             $buffer->set('defaultExpiryUnit', $this->defaultExpiryUnit($input['defaultExpiryUnit']));
         }
-        
+
         if (array_key_exists('defaultExpiryValue', $input)) {
             $buffer->set('defaultExpiryValue', $this->defaultExpiryValue($input['defaultExpiryValue']));
         }

@@ -9,7 +9,7 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   Location/LocationInput.php
- * digest: sha256:c7735d51d89431ba5376c070cda6041fea21c7b6bba0ae79076655eae8a82eac
+ * digest: sha256:6dc605d2299568217f6acb5fabf936eadfb3c35bc64441141c251ba76adaad51
  */
 
 namespace Clog\Entity\Location;
@@ -36,7 +36,7 @@ final readonly class LocationInput
         if (null === $value) {
             return null;
         }
-        
+
         return $this->decode->string($value, 'Location.name');
     }
 
@@ -49,23 +49,23 @@ final readonly class LocationInput
         if (null === $value) {
             return [];
         }
-        
+
         if (!is_array($value)) {
             throw new InvalidArgumentException(sprintf('%s takes a list of ids.', 'Location.sites'));
         }
-        
+
         $ids = [];
-        
+
         foreach ($value as $id) {
             $ids[] = $this->decode->id($id, 'Location.sites');
         }
-        
+
         return $ids;
     }
 
     /**
-     * Only what the caller supplied. A key that is absent is left alone,
-     * which is what makes a partial update partial.
+     * Seeds declared defaults on create and applies explicit input.
+     * Absent update keys and existing pending values are not reset by defaults.
      *
      * @param array<string, mixed> $input
      */
@@ -76,7 +76,7 @@ final readonly class LocationInput
         if (array_key_exists('name', $input)) {
             $buffer->set('name', $this->name($input['name']));
         }
-        
+
         if (array_key_exists('sites', $input)) {
             $buffer->edge('sites')->set($this->sites($input['sites']));
         }
@@ -91,7 +91,7 @@ final readonly class LocationInput
         array $args,
     ): array {
         return match ($action) {
-        
+
             default => throw new InvalidArgumentException(sprintf('Unknown action %s.', $action)),
         };
     }

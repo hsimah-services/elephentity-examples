@@ -9,7 +9,7 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   Inventory/Inventory.php
- * digest: sha256:45ae0da9818e3868e7f3fe15c1e0298f30c1d31044cc83674914c8dd6cab6575
+ * digest: sha256:319dc4b393d1cad6e00bb26cd976f3960807ae43cbc4475853d1cd94039bb4ba
  */
 
 namespace Clog\Entity\Inventory;
@@ -85,7 +85,7 @@ final class Inventory implements ClogPost
     public function getItem(): ?Item {
         $related = $this->edges->toOne('Inventory', $this->id, 'item');
         assert(null === $related || $related instanceof Item);
-        
+
         return $related;
     }
 
@@ -95,7 +95,7 @@ final class Inventory implements ClogPost
     public function getLocation(): ?Location {
         $related = $this->edges->toOne('Inventory', $this->id, 'location');
         assert(null === $related || $related instanceof Location);
-        
+
         return $related;
     }
 
@@ -105,7 +105,7 @@ final class Inventory implements ClogPost
     public function site(): EntityQuery {
         /** @var EntityQuery<Site> $related */
         $related = $this->edges->toMany('Inventory', $this->id, 'site');
-        
+
         return $related;
     }
 

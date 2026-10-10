@@ -9,7 +9,7 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   User/UserMutationContext.php
- * digest: sha256:9b7417e6adebfb65348fc5629801e0aa9a95cf1743b4d75a869f55b3a9f886c4
+ * digest: sha256:ca4bbf8d9c94c9c53af5bd922464b92d5e56539103aba6268845c09b3a63a309
  */
 
 namespace Clog\Entity\User;
@@ -96,42 +96,42 @@ final readonly class UserMutationContext implements MutationContext
     public function originalCreatedAt(): ?DateTimeImmutable {
         $value = $this->context->original('createdAt');
         assert(null === $value || $value instanceof DateTimeImmutable);
-        
+
         return $value;
     }
 
     public function pendingCreatedAt(): ?DateTimeImmutable {
         $value = $this->context->pending('createdAt');
         assert(null === $value || $value instanceof DateTimeImmutable);
-        
+
         return $value;
     }
 
     public function originalUpdatedAt(): ?DateTimeImmutable {
         $value = $this->context->original('updatedAt');
         assert(null === $value || $value instanceof DateTimeImmutable);
-        
+
         return $value;
     }
 
     public function pendingUpdatedAt(): ?DateTimeImmutable {
         $value = $this->context->pending('updatedAt');
         assert(null === $value || $value instanceof DateTimeImmutable);
-        
+
         return $value;
     }
 
     public function originalBio(): ?string {
         $value = $this->context->original('bio');
         assert(null === $value || is_string($value));
-        
+
         return $value;
     }
 
     public function pendingBio(): ?string {
         $value = $this->context->pending('bio');
         assert(null === $value || is_string($value));
-        
+
         return $value;
     }
 
