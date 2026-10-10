@@ -9,7 +9,7 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   Site/SiteMutationContext.php
- * digest: sha256:f759c2ca68edbe0f40e4519e87041e39115bde4b3b5fb06f9109f640ad8a390c
+ * digest: sha256:5b8723c5a870af25bf7fd85023925c8ce2f58961c6103b2e4df0b3e5d0780546
  */
 
 namespace Clog\Entity\Site;
@@ -95,14 +95,14 @@ final readonly class SiteMutationContext implements MutationContext
     public function originalName(): ?string {
         $value = $this->context->original('name');
         assert(null === $value || is_string($value));
-        
+
         return $value;
     }
 
     public function pendingName(): ?string {
         $value = $this->context->pending('name');
         assert(null === $value || is_string($value));
-        
+
         return $value;
     }
 

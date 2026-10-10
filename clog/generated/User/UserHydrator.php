@@ -9,7 +9,7 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   User/UserHydrator.php
- * digest: sha256:bea49548dea8d7c34e0498b5f37c30b1ed3b58ecedb226f7c11769e330e7da8d
+ * digest: sha256:e1d16370f4162deb5d53a32dbb37d9e54137e16011ec8230b76ad35d99aa9203
  */
 
 namespace Clog\Entity\User;
@@ -49,7 +49,7 @@ final readonly class UserHydrator implements Hydrator
         Record $record,
     ): DateTimeImmutable {
         $value = $record->value('createdAt');
-        
+
         return $this->decode->datetime($value, 'User.createdAt');
     }
 
@@ -57,7 +57,7 @@ final readonly class UserHydrator implements Hydrator
         Record $record,
     ): DateTimeImmutable {
         $value = $record->value('updatedAt');
-        
+
         return $this->decode->datetime($value, 'User.updatedAt');
     }
 
@@ -65,7 +65,7 @@ final readonly class UserHydrator implements Hydrator
         Record $record,
     ): ?string {
         $value = $record->value('bio');
-        
+
         return null === $value ? null : $this->decode->string($value, 'User.bio');
     }
 }

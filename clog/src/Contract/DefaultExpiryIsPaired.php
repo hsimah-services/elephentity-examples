@@ -17,7 +17,7 @@ use Eleph\Runtime\Verification\Violation;
  */
 final readonly class DefaultExpiryIsPaired implements ItemDefaultExpiryUnitVerifier, ItemDefaultExpiryValueVerifier
 {
-    public function verify(ExpiryUnit|int $value, ItemMutationContext $context): Verification
+    public function verify(ExpiryUnit|int|null $value, ItemMutationContext $context): Verification
     {
         // pending() includes original values for untouched fields.
         $unit = $context->pendingDefaultExpiryUnit();

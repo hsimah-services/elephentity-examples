@@ -9,7 +9,7 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   Item/ItemHydrator.php
- * digest: sha256:01e29257f5d906e76177df33e58d131d9a3d6553b77ef2c01a14c99f7773a4e3
+ * digest: sha256:2bff7f65f73ffa583ba04aa0e1d37f6f6b14361bf205f0d27de01ea87653d168
  */
 
 namespace Clog\Entity\Item;
@@ -54,7 +54,7 @@ final readonly class ItemHydrator implements Hydrator
         Record $record,
     ): DateTimeImmutable {
         $value = $record->value('createdAt');
-        
+
         return $this->decode->datetime($value, 'Item.createdAt');
     }
 
@@ -62,7 +62,7 @@ final readonly class ItemHydrator implements Hydrator
         Record $record,
     ): DateTimeImmutable {
         $value = $record->value('updatedAt');
-        
+
         return $this->decode->datetime($value, 'Item.updatedAt');
     }
 
@@ -70,7 +70,7 @@ final readonly class ItemHydrator implements Hydrator
         Record $record,
     ): string {
         $value = $record->value('name');
-        
+
         return $this->decode->string($value, 'Item.name');
     }
 
@@ -78,7 +78,7 @@ final readonly class ItemHydrator implements Hydrator
         Record $record,
     ): ?string {
         $value = $record->value('barcode');
-        
+
         return null === $value ? null : $this->decode->string($value, 'Item.barcode');
     }
 
@@ -86,7 +86,7 @@ final readonly class ItemHydrator implements Hydrator
         Record $record,
     ): ?ExpiryUnit {
         $value = $record->value('defaultExpiryUnit');
-        
+
         return null === $value ? null : $this->decode->enum(ExpiryUnit::class, $value, 'Item.defaultExpiryUnit');
     }
 
@@ -94,7 +94,7 @@ final readonly class ItemHydrator implements Hydrator
         Record $record,
     ): ?int {
         $value = $record->value('defaultExpiryValue');
-        
+
         return null === $value ? null : $this->decode->int($value, 'Item.defaultExpiryValue');
     }
 }

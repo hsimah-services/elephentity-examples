@@ -9,7 +9,7 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   Item/ItemWriteContext.php
- * digest: sha256:f4fe08e003b7cf04fbb40979c2e66d12c2587b09d70af84368001f73d013da1b
+ * digest: sha256:5423e9d920f33088e789efe3ffb0a3fef8605fc78919432f84e9522b088b5b2b
  */
 
 namespace Clog\Entity\Item;
@@ -65,84 +65,84 @@ final readonly class ItemWriteContext implements WriteContext
     public function originalCreatedAt(): ?DateTimeImmutable {
         $value = $this->context->mutation()?->original('createdAt');
         assert(null === $value || $value instanceof DateTimeImmutable);
-        
+
         return $value;
     }
 
     public function pendingCreatedAt(): ?DateTimeImmutable {
         $value = $this->context->mutation()?->pending('createdAt');
         assert(null === $value || $value instanceof DateTimeImmutable);
-        
+
         return $value;
     }
 
     public function originalUpdatedAt(): ?DateTimeImmutable {
         $value = $this->context->mutation()?->original('updatedAt');
         assert(null === $value || $value instanceof DateTimeImmutable);
-        
+
         return $value;
     }
 
     public function pendingUpdatedAt(): ?DateTimeImmutable {
         $value = $this->context->mutation()?->pending('updatedAt');
         assert(null === $value || $value instanceof DateTimeImmutable);
-        
+
         return $value;
     }
 
     public function originalName(): ?string {
         $value = $this->context->mutation()?->original('name');
         assert(null === $value || is_string($value));
-        
+
         return $value;
     }
 
     public function pendingName(): ?string {
         $value = $this->context->mutation()?->pending('name');
         assert(null === $value || is_string($value));
-        
+
         return $value;
     }
 
     public function originalBarcode(): ?string {
         $value = $this->context->mutation()?->original('barcode');
         assert(null === $value || is_string($value));
-        
+
         return $value;
     }
 
     public function pendingBarcode(): ?string {
         $value = $this->context->mutation()?->pending('barcode');
         assert(null === $value || is_string($value));
-        
+
         return $value;
     }
 
     public function originalDefaultExpiryUnit(): ?ExpiryUnit {
         $value = $this->context->mutation()?->original('defaultExpiryUnit');
         assert(null === $value || $value instanceof ExpiryUnit);
-        
+
         return $value;
     }
 
     public function pendingDefaultExpiryUnit(): ?ExpiryUnit {
         $value = $this->context->mutation()?->pending('defaultExpiryUnit');
         assert(null === $value || $value instanceof ExpiryUnit);
-        
+
         return $value;
     }
 
     public function originalDefaultExpiryValue(): ?int {
         $value = $this->context->mutation()?->original('defaultExpiryValue');
         assert(null === $value || is_int($value));
-        
+
         return $value;
     }
 
     public function pendingDefaultExpiryValue(): ?int {
         $value = $this->context->mutation()?->pending('defaultExpiryValue');
         assert(null === $value || is_int($value));
-        
+
         return $value;
     }
 

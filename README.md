@@ -39,3 +39,5 @@ Review unexpected drift before replacing output.
 See [`.llms/cross-repo.md`](.llms/cross-repo.md) for affected consumers and required
 tracking issues. Follow [the issue template](.llms/issue-template.md) before pushing
 contract changes.
+
+Clog 0.3 uses runtime 0.13.1, PHP builder 0.7 and WordPress 0.4. Generated nullable verifier contracts accept null, and the paired expiry verifier validates clearing either field as well as setting it. Create defaults are generated; partial updates keep omitted values. Regenerate after upgrading the builder. No storage migration is included.

@@ -9,7 +9,7 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   User/UserPreCommitContext.php
- * digest: sha256:c63ab3a6760dc2b21c243616422229c67d823ad585d5df7cb9c100aca3e987d1
+ * digest: sha256:39be6ee6e5b16aa7332b7939c5a81ece2bb9daba08cba3280b8f33a5f25a38cc
  */
 
 namespace Clog\Entity\User;
@@ -132,42 +132,42 @@ final readonly class UserPreCommitContext implements MutableMutationContext
     public function originalCreatedAt(): ?DateTimeImmutable {
         $value = $this->context->original('createdAt');
         assert(null === $value || $value instanceof DateTimeImmutable);
-        
+
         return $value;
     }
 
     public function pendingCreatedAt(): ?DateTimeImmutable {
         $value = $this->context->pending('createdAt');
         assert(null === $value || $value instanceof DateTimeImmutable);
-        
+
         return $value;
     }
 
     public function originalUpdatedAt(): ?DateTimeImmutable {
         $value = $this->context->original('updatedAt');
         assert(null === $value || $value instanceof DateTimeImmutable);
-        
+
         return $value;
     }
 
     public function pendingUpdatedAt(): ?DateTimeImmutable {
         $value = $this->context->pending('updatedAt');
         assert(null === $value || $value instanceof DateTimeImmutable);
-        
+
         return $value;
     }
 
     public function originalBio(): ?string {
         $value = $this->context->original('bio');
         assert(null === $value || is_string($value));
-        
+
         return $value;
     }
 
     public function pendingBio(): ?string {
         $value = $this->context->pending('bio');
         assert(null === $value || is_string($value));
-        
+
         return $value;
     }
 

@@ -9,7 +9,7 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   User/UserWriteContext.php
- * digest: sha256:12c74577ffb20d57358738b59354844c27efd563d9d2984829bf0b093ff51bb2
+ * digest: sha256:e41c80631137546c2fe2cdfba613f624073812312f1f373d45b7b29d32ab5d62
  */
 
 namespace Clog\Entity\User;
@@ -64,42 +64,42 @@ final readonly class UserWriteContext implements WriteContext
     public function originalCreatedAt(): ?DateTimeImmutable {
         $value = $this->context->mutation()?->original('createdAt');
         assert(null === $value || $value instanceof DateTimeImmutable);
-        
+
         return $value;
     }
 
     public function pendingCreatedAt(): ?DateTimeImmutable {
         $value = $this->context->mutation()?->pending('createdAt');
         assert(null === $value || $value instanceof DateTimeImmutable);
-        
+
         return $value;
     }
 
     public function originalUpdatedAt(): ?DateTimeImmutable {
         $value = $this->context->mutation()?->original('updatedAt');
         assert(null === $value || $value instanceof DateTimeImmutable);
-        
+
         return $value;
     }
 
     public function pendingUpdatedAt(): ?DateTimeImmutable {
         $value = $this->context->mutation()?->pending('updatedAt');
         assert(null === $value || $value instanceof DateTimeImmutable);
-        
+
         return $value;
     }
 
     public function originalBio(): ?string {
         $value = $this->context->mutation()?->original('bio');
         assert(null === $value || is_string($value));
-        
+
         return $value;
     }
 
     public function pendingBio(): ?string {
         $value = $this->context->mutation()?->pending('bio');
         assert(null === $value || is_string($value));
-        
+
         return $value;
     }
 }

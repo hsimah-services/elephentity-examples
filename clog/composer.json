@@ -5,15 +5,15 @@
     "license": "Apache-2.0",
     "require": {
         "php": ">=8.3",
-        "elephentity/runtime": "^0.10",
-        "elephentity/wordpress": "^0.3",
-        "elephentity/wpgraphql": "^0.2"
+        "elephentity/runtime": "^0.13.1",
+        "elephentity/wordpress": "^0.4",
+        "elephentity/wpgraphql": "^0.3"
     },
     "require-dev": {
         "axepress/wp-graphql-stubs": "^2.22",
-        "elephentity/cli": "^0.11",
+        "elephentity/cli": "^0.13.1",
         "elephentity/codegen": "^0.6",
-        "elephentity/codegen-php": "^0.6",
+        "elephentity/codegen-php": "^0.7",
         "elephentity/codegen-wordpress": "^0.5",
         "elephentity/codegen-wpgraphql": "^0.3",
         "friendsofphp/php-cs-fixer": "^3.64",
@@ -44,7 +44,10 @@
             "@eleph-check",
             "@test"
         ],
-        "test": "php tests/site-availability.php"
+        "test": [
+            "@php tests/site-availability.php",
+            "@php tests/expiry-pairing.php"
+        ]
     },
     "config": {
         "sort-packages": true

@@ -9,7 +9,7 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   Item/ItemWritePolicies.php
- * digest: sha256:8ffe5b1c11da6f310cf055b40476f4cfae72700d93a466f6a429ae3d7505ece5
+ * digest: sha256:382d318ce64c92e791df1367421ba9e647240f345d4238e0532a0e07c860c9cd
  */
 
 namespace Clog\Entity\Item;
@@ -43,7 +43,7 @@ final readonly class ItemWritePolicies implements EntityWritePolicies
         if (PolicyOutcome::Skip !== $decision->outcome) {
             return $decision->withPolicy('staff');
         }
-        
+
         return PolicyDecision::deny('No policy allowed this write.')->withPolicy('terminal');
     }
 }

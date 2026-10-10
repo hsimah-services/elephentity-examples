@@ -9,7 +9,7 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   Inventory/InventoryHydrator.php
- * digest: sha256:c1e153e0241c725549aed2cde00306cb637a3bf20b091dfd4c48807710324698
+ * digest: sha256:97d70929d9de69bf7f602d7957f8f49ae6c728d03a20efa05ab0ca750271a177
  */
 
 namespace Clog\Entity\Inventory;
@@ -52,7 +52,7 @@ final readonly class InventoryHydrator implements Hydrator
         Record $record,
     ): DateTimeImmutable {
         $value = $record->value('createdAt');
-        
+
         return $this->decode->datetime($value, 'Inventory.createdAt');
     }
 
@@ -60,7 +60,7 @@ final readonly class InventoryHydrator implements Hydrator
         Record $record,
     ): DateTimeImmutable {
         $value = $record->value('updatedAt');
-        
+
         return $this->decode->datetime($value, 'Inventory.updatedAt');
     }
 
@@ -68,7 +68,7 @@ final readonly class InventoryHydrator implements Hydrator
         Record $record,
     ): string {
         $value = $record->value('name');
-        
+
         return $this->decode->string($value, 'Inventory.name');
     }
 
@@ -76,7 +76,7 @@ final readonly class InventoryHydrator implements Hydrator
         Record $record,
     ): DateTimeImmutable {
         $value = $record->value('dateAdded');
-        
+
         return $this->decode->datetime($value, 'Inventory.dateAdded');
     }
 
@@ -84,7 +84,7 @@ final readonly class InventoryHydrator implements Hydrator
         Record $record,
     ): ?DateTimeImmutable {
         $value = $record->value('dateExpiry');
-        
+
         return null === $value ? null : $this->decode->datetime($value, 'Inventory.dateExpiry');
     }
 }

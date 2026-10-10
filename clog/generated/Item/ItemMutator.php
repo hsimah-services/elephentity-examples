@@ -9,7 +9,7 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   Item/ItemMutator.php
- * digest: sha256:3f9d467e69a38db9f9460c9165dc0bdc660019eb55d0a1da8574d32df370c2e3
+ * digest: sha256:a7393ea626d97716c1028ff01f24f65d8de3214230a8063b5c65082e0e879e04
  */
 
 namespace Clog\Entity\Item;
@@ -37,7 +37,7 @@ final class ItemMutator
         string $name,
     ): self {
         $this->buffer->set('name', $name);
-        
+
         return $this;
     }
 
@@ -45,7 +45,7 @@ final class ItemMutator
         ?string $barcode,
     ): self {
         $this->buffer->set('barcode', $barcode);
-        
+
         return $this;
     }
 
@@ -53,7 +53,7 @@ final class ItemMutator
         ?ExpiryUnit $defaultExpiryUnit,
     ): self {
         $this->buffer->set('defaultExpiryUnit', $defaultExpiryUnit);
-        
+
         return $this;
     }
 
@@ -61,7 +61,7 @@ final class ItemMutator
         ?int $defaultExpiryValue,
     ): self {
         $this->buffer->set('defaultExpiryValue', $defaultExpiryValue);
-        
+
         return $this;
     }
 

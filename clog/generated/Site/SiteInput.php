@@ -9,7 +9,7 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   Site/SiteInput.php
- * digest: sha256:37997ade6ef71d9e497cccb52975a156e1cb6e5bac8109e61c8ec34995758ece
+ * digest: sha256:3aa720ccc908b0a00e8308e1bf70ddf75e229400425d7fa427af3ab93ffab3e0
  */
 
 namespace Clog\Entity\Site;
@@ -35,13 +35,13 @@ final readonly class SiteInput
         if (null === $value) {
             return null;
         }
-        
+
         return $this->decode->string($value, 'Site.name');
     }
 
     /**
-     * Only what the caller supplied. A key that is absent is left alone,
-     * which is what makes a partial update partial.
+     * Seeds declared defaults on create and applies explicit input.
+     * Absent update keys and existing pending values are not reset by defaults.
      *
      * @param array<string, mixed> $input
      */
@@ -63,7 +63,7 @@ final readonly class SiteInput
         array $args,
     ): array {
         return match ($action) {
-        
+
             default => throw new InvalidArgumentException(sprintf('Unknown action %s.', $action)),
         };
     }

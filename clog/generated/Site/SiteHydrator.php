@@ -9,7 +9,7 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   Site/SiteHydrator.php
- * digest: sha256:5c063c5f7b3564109881035ce55d24ad6df1830a1605759be61b3722310eec4d
+ * digest: sha256:3daf8f4d1e5ffd60f2f5f5a512e13bb7a4539008ce55456e1ee4ccb3b1429f96
  */
 
 namespace Clog\Entity\Site;
@@ -46,7 +46,7 @@ final readonly class SiteHydrator implements Hydrator
         Record $record,
     ): string {
         $value = $record->value('name');
-        
+
         return $this->decode->string($value, 'Site.name');
     }
 }
