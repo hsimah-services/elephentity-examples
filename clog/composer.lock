@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a18b577ddf968a8e209d23089553a2b3",
+    "content-hash": "4e96126bf605dbb6c7256c8edbd37c14",
     "packages": [
         {
             "name": "elephentity/runtime",
@@ -49,16 +49,16 @@
         },
         {
             "name": "elephentity/wordpress",
-            "version": "v0.2.2",
+            "version": "v0.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hsimah-services/elephentity-wordpress.git",
-                "reference": "a91168bc6ed635d68c332b8f0deed7b9bf25dd46"
+                "reference": "24ae45ca553df71babc3c32625b4e3fd96f0d114"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hsimah-services/elephentity-wordpress/zipball/a91168bc6ed635d68c332b8f0deed7b9bf25dd46",
-                "reference": "a91168bc6ed635d68c332b8f0deed7b9bf25dd46",
+                "url": "https://api.github.com/repos/hsimah-services/elephentity-wordpress/zipball/24ae45ca553df71babc3c32625b4e3fd96f0d114",
+                "reference": "24ae45ca553df71babc3c32625b4e3fd96f0d114",
                 "shasum": ""
             },
             "require": {
@@ -84,9 +84,9 @@
             "description": "WordPress storage adaptor for Elephentity. The only package permitted to reference WP symbols.",
             "support": {
                 "issues": "https://github.com/hsimah-services/elephentity-wordpress/issues",
-                "source": "https://github.com/hsimah-services/elephentity-wordpress/tree/v0.2.2"
+                "source": "https://github.com/hsimah-services/elephentity-wordpress/tree/v0.3.0"
             },
-            "time": "2026-09-22T01:05:58+00:00"
+            "time": "2026-10-10T20:00:31+00:00"
         },
         {
             "name": "elephentity/wpgraphql",
@@ -706,16 +706,16 @@
         },
         {
             "name": "elephentity/codegen-wordpress",
-            "version": "v0.4.0",
+            "version": "v0.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hsimah-services/elephentity-codegen-wordpress.git",
-                "reference": "cfb27ea5d9723895567c517e0d2c540ae6ece71d"
+                "reference": "49e715713c27e8deab4b6e66c3f753cf21034a9f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hsimah-services/elephentity-codegen-wordpress/zipball/cfb27ea5d9723895567c517e0d2c540ae6ece71d",
-                "reference": "cfb27ea5d9723895567c517e0d2c540ae6ece71d",
+                "url": "https://api.github.com/repos/hsimah-services/elephentity-codegen-wordpress/zipball/49e715713c27e8deab4b6e66c3f753cf21034a9f",
+                "reference": "49e715713c27e8deab4b6e66c3f753cf21034a9f",
                 "shasum": ""
             },
             "require": {
@@ -743,9 +743,9 @@
             "description": "The WordPress builder for Elephentity: compiles the IR into the physical schema WordPress needs. Build-time only.",
             "support": {
                 "issues": "https://github.com/hsimah-services/elephentity-codegen-wordpress/issues",
-                "source": "https://github.com/hsimah-services/elephentity-codegen-wordpress/tree/v0.4.0"
+                "source": "https://github.com/hsimah-services/elephentity-codegen-wordpress/tree/v0.5.0"
             },
-            "time": "2026-09-21T18:50:11+00:00"
+            "time": "2026-10-10T20:00:35+00:00"
         },
         {
             "name": "elephentity/codegen-wpgraphql",
@@ -3668,16 +3668,16 @@
         },
         {
             "name": "symfony/yaml",
-            "version": "v7.4.18",
+            "version": "v7.4.20",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
-                "reference": "4cef939e55b8a21c5780418de0d98ab00d0736e1"
+                "reference": "0222bf4dfaa1e3ceb8fff579635d655f2950d5a7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/yaml/zipball/4cef939e55b8a21c5780418de0d98ab00d0736e1",
-                "reference": "4cef939e55b8a21c5780418de0d98ab00d0736e1",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/0222bf4dfaa1e3ceb8fff579635d655f2950d5a7",
+                "reference": "0222bf4dfaa1e3ceb8fff579635d655f2950d5a7",
                 "shasum": ""
             },
             "require": {
@@ -3720,7 +3720,7 @@
             "description": "Loads and dumps YAML files",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/yaml/tree/v7.4.18"
+                "source": "https://github.com/symfony/yaml/tree/v7.4.20"
             },
             "funding": [
                 {
@@ -3740,7 +3740,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-08-30T00:47:26+00:00"
+            "time": "2026-09-26T06:31:10+00:00"
         }
     ],
     "aliases": [],

@@ -9,7 +9,7 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   storage-manifest.php
- * digest: sha256:696afb7ff70a3caa7994ff2480c40ae17b8ad4e3b9d5f6bfd3aee80ceb172777
+ * digest: sha256:d0ca6a97e5ae415f19c09d7ac55ecec86ec82a2ab597a2d4d06e9ab7c801027c
  */
 
 namespace Eleph\WordPress\Manifest;
@@ -102,6 +102,26 @@ return new StorageManifest(
             null,
             'clog_location',
         ),
+        'Inventory.site' => new EdgePlacement(
+            'Inventory',
+            'site',
+            'Site',
+            RelationKind::ManyToMany,
+            'clog_inventory_site',
+            'inventory_id',
+            'site_id',
+            'clog_site',
+        ),
+        'Location.sites' => new EdgePlacement(
+            'Location',
+            'sites',
+            'Site',
+            RelationKind::ManyToMany,
+            'clog_location_sites',
+            'location_id',
+            'site_id',
+            'clog_site',
+        ),
     ],
     columns: [
         'Inventory' => ['createdAt' => 'created_at', 'updatedAt' => 'updated_at', 'name' => 'name', 'dateAdded' => 'date_added', 'dateExpiry' => 'date_expiry'],
@@ -111,24 +131,36 @@ return new StorageManifest(
         'User' => ['createdAt' => 'created_at', 'updatedAt' => 'updated_at', 'bio' => 'bio'],
     ],
     joinTables: [
-
+        'clog_inventory_site' => new TableSchema(
+            'clog_inventory_site',
+            [
+                'inventory_id' => new Column('inventory_id', 'BIGINT UNSIGNED', false, false, null),
+                'site_id' => new Column('site_id', 'BIGINT UNSIGNED', false, false, null),
+            ],
+            [
+                'clog_inventory_site_pair_uniq' => new Index('clog_inventory_site_pair_uniq', ['inventory_id', 'site_id'], true),
+                'clog_inventory_site_site_id_idx' => new Index('clog_inventory_site_site_id_idx', ['site_id'], false),
+            ],
+            '',
+        ),
+        'clog_location_sites' => new TableSchema(
+            'clog_location_sites',
+            [
+                'location_id' => new Column('location_id', 'BIGINT UNSIGNED', false, false, null),
+                'site_id' => new Column('site_id', 'BIGINT UNSIGNED', false, false, null),
+            ],
+            [
+                'clog_location_sites_pair_uniq' => new Index('clog_location_sites_pair_uniq', ['location_id', 'site_id'], true),
+                'clog_location_sites_site_id_idx' => new Index('clog_location_sites_site_id_idx', ['site_id'], false),
+            ],
+            '',
+        ),
     ],
     taxonomies: [
         'Site' => 'clog_site',
     ],
     taxonomyPlacements: [
-        'Inventory.site' => new TaxonomyPlacement(
-            'Inventory',
-            'site',
-            'Site',
-            'clog_site',
-        ),
-        'Location.sites' => new TaxonomyPlacement(
-            'Location',
-            'sites',
-            'Site',
-            'clog_site',
-        ),
+
     ],
     accounts: [
         'User' => new AccountFields(

@@ -9,7 +9,7 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   graphql-manifest.php
- * digest: sha256:37cda883c32ba92a8f58f8c0a2e6a2e5bc405ebcc05c45f4ffcc635c1c6e4ae3
+ * digest: sha256:5e1c596297ecd7278e2629792f76622f2994d5e94e17efc3399df17992b43e9e
  */
 
 namespace Eleph\WPGraphQL\Manifest;
@@ -37,7 +37,7 @@ return new Manifest(
                 'location' => new FieldEntry('location', new GraphQLType('ClogLocation', false, false), 'getLocation', 'Where it is kept.', FieldEncoding::Value, null),
             ],
             [
-                'site' => new ConnectionEntry('site', 'ClogInventory', 'ClogSite', 'site', 'site', 'Which building this instance is physically in. Many-to-many because that is the only relation Elephentity\'s WordPress driver stores as a taxonomy term rather than a column; an entry moving between buildings relinks this edge instead of becoming a different row.
+                'site' => new ConnectionEntry('site', 'ClogInventory', 'ClogSite', 'site', 'site', 'Which building this instance is physically in. Many-to-many allows more than one building to be recorded; an entry moving between buildings relinks this edge instead of becoming a different row.
 '),
             ],
             'One stocked instance of an item, in a location, with its own expiry.',
