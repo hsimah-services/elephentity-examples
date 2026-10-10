@@ -70,3 +70,7 @@ jobs:
       - name: check
         working-directory: clog
         run: vendor/bin/eleph check
+
+      - name: Behavioral contract tests
+        working-directory: clog
+        run: composer test

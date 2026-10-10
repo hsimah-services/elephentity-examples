@@ -5,14 +5,17 @@ declare(strict_types=1);
 namespace Clog\Contract;
 
 use Clog\Entity\Inventory\Contract\InventorySiteAvailabilitySideEffect;
+use Clog\Entity\Inventory\Inventory;
 use Clog\Entity\Inventory\InventoryPreCommitContext;
 use Clog\Entity\Site\Site;
 use Clog\Entity\Site\SiteHydrator;
 use DomainException;
 use Eleph\Runtime\Identity\Identifier;
+use Eleph\Runtime\Mutation\PendingEdge;
 use Eleph\Runtime\Query\Queries;
 use Eleph\Runtime\Storage\Criteria;
 use Eleph\Runtime\Storage\EdgeFilter;
+use RuntimeException;
 
 /**
  * PreCommit check that Inventory.site belongs to Inventory.location's allowed sites.
@@ -27,8 +30,21 @@ final readonly class SiteAvailableAtLocation implements InventorySiteAvailabilit
 
     public function handle(InventoryPreCommitContext $context): void
     {
-        $location = $context->pendingLocation();
-        $sites = $context->pendingSite();
+        $original = $context->originalEntity();
+        if (!$context->isCreate() && !$original instanceof Inventory) {
+            throw new RuntimeException('Inventory validation needs the original entity.');
+        }
+        $locationEdge = $context->location();
+        $siteEdge = $context->site();
+        if (!$locationEdge instanceof PendingEdge || !$siteEdge instanceof PendingEdge) {
+            throw new RuntimeException('Inventory validation needs readable pending edge changes.');
+        }
+        $originalLocation = $original instanceof Inventory ? $original->getLocation()?->getId() : null;
+        $locations = $this->finalIds($locationEdge, null === $originalLocation ? [] : [$originalLocation]);
+        $location = [] === $locations ? null : $locations[array_key_last($locations)];
+        $sites = $this->finalIds($siteEdge, $original instanceof Inventory
+            ? array_map(static fn (Site $site): Identifier => $site->getId(), $original->site()->all())
+            : []);
 
         if (null === $location || [] === $sites) {
             // Optional location or absent site leaves no pair to validate.
@@ -48,6 +64,29 @@ final readonly class SiteAvailableAtLocation implements InventorySiteAvailabilit
                 ));
             }
         }
+    }
+
+    /**
+     * @param list<Identifier> $original
+     *
+     * @return list<Identifier>
+     */
+    private function finalIds(PendingEdge $edge, array $original): array
+    {
+        if ($edge->isReplacement()) {
+            return $edge->added();
+        }
+        $ids = array_filter($original, static function (Identifier $id) use ($edge): bool {
+            foreach ($edge->removed() as $removed) {
+                if ($removed->equals($id)) {
+                    return false;
+                }
+            }
+
+            return true;
+        });
+
+        return [...$ids, ...$edge->added()];
     }
 
     /**

@@ -49,9 +49,8 @@ edges:
     to: Site
     cardinality: many
     description: >
-      Which building this instance is physically in. Many-to-many because that is
-      the only relation Elephentity's WordPress driver stores as a taxonomy term
-      rather than a column; an entry moving between buildings relinks this edge
+      Which building this instance is physically in. Many-to-many allows more than one
+      building to be recorded; an entry moving between buildings relinks this edge
       instead of becoming a different row.
 sideEffects:
   siteAvailability:
