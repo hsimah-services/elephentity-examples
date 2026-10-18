@@ -1,0 +1,65 @@
+entity: Book
+description: A book on the shelf.
+use:
+  - HasSlug
+  - HasTimestamps
+  - SignedInWrites
+integrations:
+  graphql:
+    singular: Book
+    plural: Books
+storage:
+  table: book
+policies:
+  terminalRule:
+    read: allow
+    write: deny
+fields:
+  title:
+    type: string
+    required: true
+    indexed: true
+    maxLength: 200
+  author:
+    type: string
+    required: true
+    maxLength: 120
+  pages:
+    type: int
+    nullable: true
+  status:
+    type: enum
+    required: true
+    indexed: true
+    values: ReadingStatus
+edges:
+  notes:
+    to: Note
+    cardinality: many
+    inverse: true
+  tags:
+    to: Tag
+    cardinality: many
+    inverse:
+      name: books
+      unique: false
+queries:
+  reading:
+    description: The books being read now.
+    returns:
+      type: Book
+      cardinality: many
+    integrations:
+      graphql:
+        field: readingBooks
+    handler: true
+actions:
+  finish:
+    description: Mark a book as finished.
+    writes:
+      fields: [status]
+    handler: true
+readPolicies:
+  hideWishlist:
+    description: A wishlist is private to signed-in viewers.
+    handler: true

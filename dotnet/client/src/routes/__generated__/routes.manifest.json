@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "routes": [
+    {
+      "name": "Shelf",
+      "path": "/",
+      "ssr": true,
+      "fields": {},
+      "query": {
+        "operation": "ShelfQuery",
+        "id": "shelf-query-1",
+        "text": "query ShelfQuery($first: Int = 10, $after: String) {\n  readingBooks(first: $first, after: $after) {\n    nodes {\n      id\n      title\n      author\n      status\n    }\n    pageInfo {\n      hasNextPage\n      endCursor\n    }\n  }\n}\n",
+        "variables": {
+          "after": {},
+          "first": { "default": 10 }
+        }
+      }
+    },
+    {
+      "name": "NewBook",
+      "path": "/books/new",
+      "ssr": false,
+      "fields": {}
+    }
+  ]
+}

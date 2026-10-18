@@ -1,0 +1,7 @@
+pattern: SignedInWrites
+description: Only a signed-in viewer may write.
+writePolicies:
+  signedIn:
+    description: Anonymous viewers read; writing needs a signed-in one.
+    handler: true
+interface: true

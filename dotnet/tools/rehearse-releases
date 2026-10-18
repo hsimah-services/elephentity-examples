@@ -1,0 +1,49 @@
+#!/usr/bin/env bash
+#
+# Builds the programs in tools/sources.txt from source and lays them out as GitHub releases would be, so that `eleph install` runs for real
+# (it downloads, checks SHA256SUMS, unpacks, records) with no network beyond the clones and no release to depend on.
+#
+#   tools/rehearse-releases <workdir>
+#   export PATH="<workdir>/bin:$PATH" ELEPH_RELEASES_URL="file://<workdir>/releases"
+#   eleph install && eleph install --check
+#
+# The layout is elephentity-codegen's release contract (docs/RELEASING.md there): <base>/<owner>/<repo>/releases/download/v<version>/
+# holding <binary>-<version>-<rid>.tar.gz and SHA256SUMS. SOURCES_BASE (default https://github.com/hsimah-services) says where to clone from.
+
+set -euo pipefail
+
+work="${1:?usage: tools/rehearse-releases <workdir>}"
+here="$(cd "$(dirname "$0")" && pwd)"
+base="${SOURCES_BASE:-https://github.com/hsimah-services}"
+rid="${RID:-linux-x64}"
+
+mkdir -p "$work/bin" "$work/src" "$work/releases"
+
+grep -v '^\s*#' "$here/sources.txt" | grep -v '^\s*$' | while read -r name repo commit version crate; do
+    source="$work/src/$repo"
+
+    if [ ! -d "$source/.git" ]; then
+        git clone --quiet "$base/$repo.git" "$source"
+    fi
+
+    git -C "$source" fetch --quiet origin
+    git -C "$source" checkout --quiet "$commit"
+    cargo build --release --locked --manifest-path "$source/$crate/Cargo.toml"
+
+    binary="$source/$crate/target/release/$name"
+
+    if [ "$version" = "-" ]; then
+        # eleph itself: on the PATH, as install.sh would leave it.
+        cp "$binary" "$work/bin/$name"
+
+        continue
+    fi
+
+    release="$work/releases/hsimah-services/$repo/releases/download/v$version"
+    archive="$name-$version-$rid.tar.gz"
+
+    mkdir -p "$release"
+    tar -czf "$release/$archive" -C "$(dirname "$binary")" "$name"
+    (cd "$release" && sha256sum "$archive" > SHA256SUMS)
+    echo "rehearsed $name $version"
+done

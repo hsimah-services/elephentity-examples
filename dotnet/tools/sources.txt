@@ -1,0 +1,9 @@
+# The programs this example runs, built from source until the first release exists (step 22): name, repository, commit, the version eleph.json
+# pins it as, and the directory of its Cargo.toml. `eleph` itself is not pinned in eleph.json (install.sh puts it on the PATH).
+# Replace this file, and tools/rehearse-releases, with install.sh and the real releases once they are tagged.
+eleph                     elephentity                         81afd519ff42cd84ce2c50759d4d396316506711  -            compiler
+eleph-codegen             elephentity-codegen                 09c760cbb060d8c0dd0c3e863323e6dd17208851  0.7.0        .
+eleph-gen-csharp          elephentity-codegen-csharp          7c232c27e3302ef5a01e3841bf271e7cf3b47597  0.1.0-alpha.1 .
+eleph-gen-cosmos          elephentity-codegen-cosmos          89ffe53ac43cf25819a6e43d3b76a36618d75b02  0.1.0-alpha.1 .
+eleph-gen-graphql-csharp  elephentity-codegen-graphql-csharp  5fbfbbd99d36f6188a2057f19131c3ad3c1296c5  0.1.0-alpha.1 .
+eleph-gen-tsquid          elephentity-codegen-tsquid          c62cab8c8c84ce2354e4d9aee215217e8ba0a86c  0.2.0        .
