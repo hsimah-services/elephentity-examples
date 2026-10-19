@@ -5,17 +5,17 @@
     "license": "MIT",
     "require": {
         "php": ">=8.3",
-        "elephentity/runtime": "^0.13.1",
-        "elephentity/wordpress": "^0.4",
-        "elephentity/wpgraphql": "^0.3"
+        "elephentity/runtime": "^0.14.1",
+        "elephentity/wordpress": "^0.4.1",
+        "elephentity/wpgraphql": "^0.3.1"
     },
     "require-dev": {
         "axepress/wp-graphql-stubs": "^2.22",
-        "elephentity/cli": "^0.13.1",
-        "elephentity/codegen": "^0.6",
-        "elephentity/codegen-php": "^0.7",
-        "elephentity/codegen-wordpress": "^0.5",
-        "elephentity/codegen-wpgraphql": "^0.3",
+        "elephentity/cli": "^0.14.2",
+        "elephentity/codegen": "^0.7",
+        "elephentity/codegen-php": "^0.8.1",
+        "elephentity/codegen-wordpress": "^0.5.1",
+        "elephentity/codegen-wpgraphql": "^0.3.2",
         "friendsofphp/php-cs-fixer": "^3.64",
         "php-stubs/wordpress-stubs": "^6.7 || ^7.0",
         "phpstan/phpstan": "^2.0"
