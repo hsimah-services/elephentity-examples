@@ -36,6 +36,14 @@ jobs:
         working-directory: dotnet
 
     steps:
+      # GitHub's runner image ships PHP. Take it out, so that the check below proves nothing in this job needs it.
+      - name: Remove the runner's PHP
+        working-directory: .
+        run: |
+          sudo apt-get purge -y 'php*' >/dev/null 2>&1 || true
+          sudo rm -f /usr/bin/php /usr/local/bin/php /usr/bin/php[0-9]* /usr/bin/composer /usr/local/bin/composer
+          hash -r
+
       - name: There is no PHP on this runner
         working-directory: .
         run: |
