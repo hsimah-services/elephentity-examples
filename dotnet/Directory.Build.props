@@ -6,10 +6,6 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <!-- Where elephentity-dotnet is checked out: the commit in elephentity-dotnet.sha, until the packages are on nuget.org (step 22), when
-         the project references below become PackageReferences to Elephentity.* and this goes away. -->
-    <ElephentityDotnet Condition="'$(ElephentityDotnet)' == ''">$(ELEPH_DOTNET_DIR)</ElephentityDotnet>
-    <ElephentityDotnet Condition="'$(ElephentityDotnet)' == ''">$(MSBuildThisFileDirectory).deps/elephentity-dotnet</ElephentityDotnet>
   </PropertyGroup>
 
 </Project>

@@ -9,7 +9,7 @@
 
   <ItemGroup>
     <ProjectReference Include="../../src/App/Shelf.App.csproj" />
-    <ProjectReference Include="$(ElephentityDotnet)/src/Elephentity.Runtime.Memory/Elephentity.Runtime.Memory.csproj" />
+    <PackageReference Include="Elephentity.Runtime.Memory" Version="0.1.0-alpha.1" />
     <PackageReference Include="Microsoft.AspNetCore.TestHost" Version="10.0.12" />
     <PackageReference Include="xunit.v3" Version="4.0.2" />
     <Using Include="Xunit" />
