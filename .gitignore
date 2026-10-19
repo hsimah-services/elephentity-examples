@@ -6,3 +6,9 @@
 /*/.phpstan.cache/
 /.php-cs-fixer.cache
 /*/.php-cs-fixer.cache
+
+# The .NET example
+/dotnet/tools/builders/
+/dotnet/.deps/
+/dotnet/**/bin/
+/dotnet/**/obj/

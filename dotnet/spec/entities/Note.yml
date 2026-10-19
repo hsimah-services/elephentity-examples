@@ -1,0 +1,18 @@
+entity: Note
+description: A note on a book.
+use:
+  - HasTimestamps
+  - SignedInWrites
+integrations:
+  graphql:
+    singular: Note
+    plural: Notes
+storage:
+  table: note
+policies:
+  terminalRule:
+    write: deny
+fields:
+  body:
+    type: text
+    required: true

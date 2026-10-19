@@ -1,0 +1,12 @@
+pattern: HasTimestamps
+description: Creation and modification timestamps, filled by the framework.
+fields:
+  createdAt:
+    type: datetime
+    description: When the entity was created. Filled by the framework.
+    managed: created
+  updatedAt:
+    type: datetime
+    description: When the entity was last modified. Filled by the framework.
+    managed: modified
+interface: true

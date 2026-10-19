@@ -1,0 +1,111 @@
+name: dotnet
+
+# The .NET path end to end, on a runner with no PHP: install the programs eleph.json pins, run the four gates, then the application's tests
+# against the Cosmos emulator. Until the first release exists (step 22), "install" means building the pinned commits from tools/sources.txt
+# and laying them out as releases (tools/rehearse-releases), so `eleph install` still downloads, checks and records for real.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  dotnet:
+    name: dotnet / no PHP
+    runs-on: ubuntu-latest
+
+    services:
+      cosmos:
+        image: mcr.microsoft.com/cosmosdb/linux/azure-cosmos-emulator:latest
+        ports:
+          - 8081:8081
+          - 10250-10255:10250-10255
+        env:
+          AZURE_COSMOS_EMULATOR_PARTITION_COUNT: 3
+          AZURE_COSMOS_EMULATOR_ENABLE_DATA_PERSISTENCE: false
+
+    defaults:
+      run:
+        working-directory: dotnet
+
+    steps:
+      # GitHub's runner image ships PHP. Take it out, so that the check below proves nothing in this job needs it.
+      - name: Remove the runner's PHP
+        working-directory: .
+        run: |
+          sudo apt-get purge -y 'php*' >/dev/null 2>&1 || true
+          sudo rm -f /usr/bin/php /usr/local/bin/php /usr/bin/php[0-9]* /usr/bin/composer /usr/local/bin/composer
+          hash -r
+
+      - name: There is no PHP on this runner
+        working-directory: .
+        run: |
+          if command -v php >/dev/null 2>&1; then
+            echo "php is installed here: $(command -v php)" >&2
+            exit 1
+          fi
+          echo "php: not found, as required"
+
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          global-json-file: dotnet/global.json
+
+      - name: Set up Rust
+        run: rustup toolchain install stable --profile minimal
+
+      - name: The runtime
+        run: |
+          git clone https://github.com/hsimah-services/elephentity-dotnet.git .deps/elephentity-dotnet
+          git -C .deps/elephentity-dotnet checkout "$(cat elephentity-dotnet.sha)"
+
+      - name: Build the pinned programs and lay them out as releases
+        run: tools/rehearse-releases "$RUNNER_TEMP/rehearsal"
+
+      - name: eleph install
+        run: |
+          echo "$RUNNER_TEMP/rehearsal/bin" >> "$GITHUB_PATH"
+          export PATH="$RUNNER_TEMP/rehearsal/bin:$PATH" ELEPH_RELEASES_URL="file://$RUNNER_TEMP/rehearsal/releases"
+          eleph install
+          eleph install --check
+
+      - name: fmt
+        run: eleph fmt
+
+      - name: validate
+        run: eleph validate
+
+      - name: generate --check
+        run: eleph generate --check
+
+      - name: check
+        run: eleph check
+
+      - name: Wait for the emulator
+        run: |
+          for attempt in $(seq 1 60); do
+            if curl -ksf https://localhost:8081/_explorer/emulator.pem -o /dev/null; then
+              echo "Emulator ready after $attempt attempt(s)."
+              exit 0
+            fi
+            sleep 5
+          done
+          echo "The Cosmos emulator did not become ready." >&2
+          docker ps -a
+          exit 1
+
+      - name: Build
+        run: dotnet build tests/App.Tests -c Release
+
+      - name: Tests
+        env:
+          ELEPH_COSMOS_ENDPOINT: https://localhost:8081
+        run: dotnet test --project tests/App.Tests -c Release

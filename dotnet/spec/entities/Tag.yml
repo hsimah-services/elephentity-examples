@@ -1,0 +1,19 @@
+entity: Tag
+description: A label for finding books.
+use:
+  - HasSlug
+  - SignedInWrites
+integrations:
+  graphql:
+    singular: Tag
+    plural: Tags
+storage:
+  table: tag
+policies:
+  terminalRule:
+    write: deny
+fields:
+  name:
+    type: string
+    required: true
+    maxLength: 60

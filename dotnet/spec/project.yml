@@ -1,0 +1,7 @@
+project: Shelf
+description: A reading shelf, to prove the .NET path end to end.
+storage:
+  driver: cosmos
+integrations:
+  graphql: {}
+  tsquid: {}
