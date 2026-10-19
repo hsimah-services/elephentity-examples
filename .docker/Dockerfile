@@ -4,6 +4,8 @@ FROM docker.io/library/php:8.3-cli-bookworm
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
         build-essential \
+        ca-certificates \
+        curl \
         git \
         unzip \
         libonig-dev \
@@ -13,6 +15,11 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/*
 
 COPY --from=docker.io/library/composer:2 /usr/bin/composer /usr/bin/composer
+
+# The spec compiler. tools/php names the image after this version, so changing it rebuilds.
+ARG ELEPH_VERSION=0.14.2
+RUN curl -fsSL "https://github.com/hsimah-services/elephentity/releases/download/v${ELEPH_VERSION}/install.sh" \
+    | ELEPH_INSTALL_DIR=/usr/local/bin sh -s -- "${ELEPH_VERSION}"
 COPY --from=rust /usr/local/cargo /usr/local/cargo
 COPY --from=rust /usr/local/rustup /usr/local/rustup
 

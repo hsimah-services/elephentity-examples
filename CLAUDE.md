@@ -14,10 +14,12 @@ cd clog
 
 Composer installs the tagged Rust generator sources. Run `composer build-generators`
 after installation or generator updates, in the same environment used for `eleph`.
-`tools/php` provides both PHP and Rust; CI uses the same build script natively.
+`tools/php` provides PHP, Rust and the `eleph` compiler (a release binary, pinned by
+`ELEPH_VERSION` in `tools/php`); CI installs the same version and uses the same build
+script natively.
 
 `clog/generated/` is signed. Never edit it by hand. Regenerate with
-`../tools/php vendor/bin/eleph generate` and review the diff. Investigate unexplained
+`../tools/php eleph generate` and review the diff. Investigate unexplained
 `generate --check` drift before replacing output.
 
 Run `composer ci` before committing. It includes style, PHPStan, and the four gates.

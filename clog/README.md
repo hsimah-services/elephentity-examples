@@ -21,7 +21,7 @@ conformance. The orchestrator and PHP builder use 0.6; the WordPress builder use
 the WPGraphQL builder uses 0.3. Compiler/runtime 0.10, WordPress integration 0.2.2,
 and WPGraphQL integration 0.2 complete the IR 1.2 mutation lifecycle stack. Composer locks their versions and Cargo locks their Rust
 dependencies. Rebuild after generator updates, then regenerate with
-`../tools/php vendor/bin/eleph generate` and commit the signed output.
+`../tools/php eleph generate` and commit the signed output.
 
 ## Reading it
 
@@ -142,4 +142,4 @@ named, testable class the application cannot boot without.
 entities in custom tables it needs rewriting against those, which is a straightforward
 change but not one the spec describes.
 
-Build tools come from `elephentity/cli` ^0.11 and its schema dependency. Clog no longer installs the monorepo bundle. Runtime, WordPress and WPGraphQL remain explicit production dependencies.
+The compiler, `eleph`, is a release binary installed with `install.sh` (pinned by `ELEPH_VERSION` in `tools/php` and CI); the builders come from Composer. Clog no longer installs the monorepo bundle or the retired PHP compiler (`elephentity/cli`). Runtime, WordPress and WPGraphQL remain explicit production dependencies.
