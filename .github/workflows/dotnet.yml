@@ -1,8 +1,7 @@
 name: dotnet
 
 # The .NET path end to end, on a runner with no PHP: install the programs eleph.json pins, run the four gates, then the application's tests
-# against the Cosmos emulator. Until the first release exists (step 22), "install" means building the pinned commits from tools/sources.txt
-# and laying them out as releases (tools/rehearse-releases), so `eleph install` still downloads, checks and records for real.
+# against the Cosmos emulator. `eleph` comes from install.sh, the builders from `eleph install`, and Elephentity.* from nuget.org.
 
 on:
   push:
@@ -59,21 +58,16 @@ jobs:
         with:
           global-json-file: dotnet/global.json
 
-      - name: Set up Rust
-        run: rustup toolchain install stable --profile minimal
-
-      - name: The runtime
+      - name: Install eleph
+        env:
+          ELEPH_VERSION: 0.14.0
+          ELEPH_INSTALL_DIR: ${{ runner.temp }}/bin
         run: |
-          git clone https://github.com/hsimah-services/elephentity-dotnet.git .deps/elephentity-dotnet
-          git -C .deps/elephentity-dotnet checkout "$(cat elephentity-dotnet.sha)"
-
-      - name: Build the pinned programs and lay them out as releases
-        run: tools/rehearse-releases "$RUNNER_TEMP/rehearsal"
+          curl -fsSL "https://github.com/hsimah-services/elephentity/releases/download/v$ELEPH_VERSION/install.sh" | sh
+          echo "$ELEPH_INSTALL_DIR" >> "$GITHUB_PATH"
 
       - name: eleph install
         run: |
-          echo "$RUNNER_TEMP/rehearsal/bin" >> "$GITHUB_PATH"
-          export PATH="$RUNNER_TEMP/rehearsal/bin:$PATH" ELEPH_RELEASES_URL="file://$RUNNER_TEMP/rehearsal/releases"
           eleph install
           eleph install --check
 

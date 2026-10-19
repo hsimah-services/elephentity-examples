@@ -9,9 +9,9 @@
 
   <ItemGroup>
     <Compile Include="../../Generated/**/*.cs" />
-    <ProjectReference Include="$(ElephentityDotnet)/src/Elephentity.Cosmos/Elephentity.Cosmos.csproj" />
-    <ProjectReference Include="$(ElephentityDotnet)/src/Elephentity.GraphQL/Elephentity.GraphQL.csproj" />
-    <ProjectReference Include="$(ElephentityDotnet)/src/Elephentity.Tsquid/Elephentity.Tsquid.csproj" />
+    <PackageReference Include="Elephentity.Cosmos" Version="0.1.0-alpha.1" />
+    <PackageReference Include="Elephentity.GraphQL" Version="0.1.0-alpha.1" />
+    <PackageReference Include="Elephentity.Tsquid" Version="0.1.0-alpha.1" />
     <Content Update="wwwroot/**" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 

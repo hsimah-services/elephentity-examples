@@ -20,25 +20,32 @@ parity breaking).
 Everything runs in containers; there is no host dotnet or PHP.
 
 ```bash
+curl -fsSL https://github.com/hsimah-services/elephentity/releases/latest/download/install.sh | sh   # eleph, into ~/.local/bin
+
 cd dotnet
-eleph install && eleph install --check      # fetch what eleph.json pins
+eleph install && eleph install --check      # fetch the builders eleph.json pins into tools/builders/
 eleph fmt && eleph validate && eleph generate --check && eleph check
 
-ELEPH_DOTNET_SOURCE=../../elephentity-dotnet ./tools/dotnet dotnet test --project tests/App.Tests
+./tools/dotnet dotnet test --project tests/App.Tests
 ```
+
+On Windows, `install.ps1` from the same release does what `install.sh` does. The runtime is the `Elephentity.*` packages on nuget.org
+(`0.1.0-alpha.1`, prerelease, `net10.0`).
 
 `tests/App.Tests` runs on the Cosmos emulator when `ELEPH_COSMOS_ENDPOINT` is set (CI always sets it) and on the memory driver otherwise.
 Against a real account, set `Cosmos:Endpoint`, `Cosmos:Key` and `Cosmos:Database`, run `dotnet run --project src/App -- install` once, then the app.
 
-## Until the first release (step 22)
+## Versions
 
-- **The programs.** `eleph.json` pins the versions the releases will have. There are no releases yet, so `tools/rehearse-releases` builds the
-  commits in `tools/sources.txt` and lays them out exactly as GitHub releases would be, and `eleph install` runs against that (it downloads,
-  checks `SHA256SUMS`, unpacks and records for real). When the releases exist, bootstrap `eleph` with `install.sh` instead, delete both files, and
-  put the tags in `eleph.json`.
-- **The runtime.** `src/App` references `Elephentity.*` by project from a checkout of elephentity-dotnet at the commit in
-  `elephentity-dotnet.sha`; they become package references once the packages are on nuget.org.
-- **`routes.manifest.json`** is written by hand here (a real app has tsquid generate it).
+| | Version | From |
+|---|---|---|
+| `eleph` | 0.14.0 | `install.sh` / `install.ps1` on the [elephentity release](https://github.com/hsimah-services/elephentity/releases/tag/v0.14.0) |
+| `eleph-codegen` | 0.7.0 | `eleph install`, pinned in `eleph.json` |
+| `eleph-gen-csharp`, `eleph-gen-cosmos`, `eleph-gen-graphql-csharp` | 0.1.0-alpha.1 | `eleph install`, pinned in `eleph.json` |
+| `eleph-gen-tsquid` | 0.2.0 | `eleph install`, pinned in `eleph.json` |
+| `Elephentity.*` | 0.1.0-alpha.1 | nuget.org, `PackageReference` in the `.csproj` files |
+
+`routes.manifest.json` is written by hand here (a real app has tsquid generate it).
 
 ## Notes from building it
 

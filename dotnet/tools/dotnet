@@ -7,8 +7,6 @@
 #   ./tools/dotnet dotnet format --verify-no-changes
 #   ./tools/dotnet dotnet --version
 #   ./tools/dotnet bash                 # interactive shell
-#
-# Also mounts a checkout of elephentity-dotnet (ELEPH_DOTNET_SOURCE, default ../elephentity-dotnet) at /deps/elephentity-dotnet, which
 
 # Mirrors elephentity/tools/php: the host has no dotnet, the container is removed on exit,
 # and podman is preferred with docker as a fallback.
@@ -48,12 +46,6 @@ if [ -t 0 ] && [ -t 1 ]; then
     TTY_ARGS=(-it)
 fi
 
-DEPS_ARGS=()
-SOURCE="${ELEPH_DOTNET_SOURCE:-$PWD/.deps/elephentity-dotnet}"
-if [ -d "$SOURCE" ]; then
-    DEPS_ARGS=(-v "$(cd "$SOURCE" && pwd):/deps/elephentity-dotnet:z" -e ELEPH_DOTNET_DIR=/deps/elephentity-dotnet)
-fi
-
 # The Cosmos tests run against the emulator when told where it is (ELEPH_COSMOS_ENDPOINT, ELEPH_COSMOS_KEY) and
 # skip otherwise. ELEPH_DOTNET_NETWORK=host lets the container reach an emulator published on the host's loopback.
 ENV_ARGS=()
@@ -74,7 +66,6 @@ exec "$ENGINE" run --rm \
     `# :z relabels the mount for SELinux, which Fedora enforces by default.` \
     "${NETWORK_ARGS[@]}" \
     "${ENV_ARGS[@]}" \
-    "${DEPS_ARGS[@]}" \
     -v "$PWD:/app:z" \
     -v "$CACHE_DIR:/nuget:z" \
     -e NUGET_PACKAGES=/nuget \

@@ -7,8 +7,8 @@
 
   <ItemGroup>
     <ProjectReference Include="../../src/App/Shelf.App.csproj" />
-    <ProjectReference Include="$(ElephentityDotnet)/src/Elephentity.Runtime.Memory/Elephentity.Runtime.Memory.csproj" />
-    <ProjectReference Include="$(ElephentityDotnet)/src/Elephentity.Runtime.Testing/Elephentity.Runtime.Testing.csproj" />
+    <PackageReference Include="Elephentity.Runtime.Memory" Version="0.1.0-alpha.1" />
+    <PackageReference Include="Elephentity.Runtime.Testing" Version="0.1.0-alpha.1" />
   </ItemGroup>
 
 </Project>
