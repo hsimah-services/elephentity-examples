@@ -10,7 +10,7 @@ parity breaking).
 | `spec/` | `Book`, `Note` and `Tag`: the `HasSlug`, `HasTimestamps` and `SignedInWrites` patterns (copied into the project, as patterns are), a read policy, a write policy, one action (`finish`), one to-many edge (`notes`), one many-to-many edge (`tags`), an enum (`ReadingStatus`) and one published query (`readingBooks`). |
 | `eleph.json` | Four targets with **pinned** builders: `csharp`, `cosmos`, `graphql-csharp`, and `tsquid` with `"language": "csharp"`. |
 | `Generated/` | The signed output, committed. Never edit it; `eleph generate`. |
-| `src/App` | The ASP.NET Core host: `AddShelfEntities()` (generated), `Elephentity.Cosmos`, `AddElephentityGraphQL`, `UseElephentityTsquid`, a viewer read from an `X-Viewer` header (so a test can be anyone), and the handlers for the contracts the spec generated. |
+| `src/App` | The ASP.NET Core host: `AddShelfEntities()` (generated), `Elephentity.Cosmos`, `AddElephentityGraphQL`, `UseElephentityTsquid`, a viewer provider you supply (`AddHeaderViewers()` reads an `X-Viewer` header and is registered only by the tests and by `dotnet run` in development; with none, every request is anonymous), and the handlers for the contracts the spec generated. |
 | `tests/Contracts` | The `ContractCheck` entry point that `eleph check` runs. |
 | `tests/App.Tests` | GraphQL create, read, page and delete; policy denial; timestamps; uniqueness; edges and the action; tsquid inlining; and the `client/schema.graphql` drift check. |
 | `client/` | What a tsquid client would hold: `schema.graphql` (printed by `shelf schema`) and the route manifest. |

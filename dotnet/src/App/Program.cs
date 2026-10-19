@@ -11,6 +11,13 @@ using Shelf.App;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// A viewer taken from a header is for development: in production, register an IViewerProvider that reads a session or a token. Without one every
+// request is anonymous and nothing can be written.
+if (builder.Environment.IsDevelopment())
+{
+    builder.Services.AddHeaderViewers();
+}
+
 builder.Services.AddShelf();
 
 // The schema does not touch storage, so `schema` needs no account.

@@ -93,6 +93,19 @@ public sealed partial class ShelfTests
     }
 
     [Fact]
+    public async Task AHostThatDoesNotTrustTheViewerHeaderTreatsEveryoneAsAnonymous()
+    {
+        await using var app = await ShelfApp.StartAsync(trustViewerHeader: false);
+
+        // The header names a viewer, and is ignored: a write is refused exactly as for an anonymous one.
+        var result = await app.Graph(
+            "mutation { createBook(input: { slug: \"forged\", title: \"Forged\", author: \"A\", status: READING }) { book { id } } }",
+            viewer: "ada");
+
+        Assert.Equal("FORBIDDEN", result.GetProperty("errors")[0].GetProperty("extensions").GetProperty("code").GetString());
+    }
+
+    [Fact]
     public async Task AWishlistIsPrivateToSignedInViewers()
     {
         await using var app = await ShelfApp.StartAsync();

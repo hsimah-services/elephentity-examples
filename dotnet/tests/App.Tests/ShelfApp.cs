@@ -110,12 +110,18 @@ public sealed class ShelfApp : IAsyncDisposable
 
     public IServiceProvider Services => app.Services;
 
-    public static async Task<ShelfApp> StartAsync()
+    /// <param name="trustViewerHeader">Whether the host believes <c>X-Viewer</c>, as a test host and a development one do and a production one must not.</param>
+    public static async Task<ShelfApp> StartAsync(bool trustViewerHeader = true)
     {
         var builder = WebApplication.CreateBuilder();
         var storage = Backend.Adaptor();
 
         builder.WebHost.UseTestServer();
+        if (trustViewerHeader)
+        {
+            builder.Services.AddHeaderViewers();
+        }
+
         builder.Services.AddShelf();
         builder.Services.AddSingleton(storage);
 

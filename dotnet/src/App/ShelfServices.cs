@@ -14,19 +14,29 @@ public static class ShelfServices
     /// <summary>The emulator's well-known key. It protects nothing, and is the default only when the endpoint is the emulator's.</summary>
     public const string EmulatorKey = "C2y6yDjf5/R+ob0N8A7Cgv30VRDJIWEHLM+4QDU5DE2nQ9nDuVTqobD4b8mGGyPMbIZnqyMsEcaGQy67XIw/Jw==";
 
+    /// <summary>Lets a request say who it is with an <c>X-Viewer</c> header. Believing a header is only honest where nobody hostile can send one:
+    /// a test host, or <c>dotnet run</c> in development. Register it <em>before</em> <see cref="AddShelf" />, which leaves a registered provider alone;
+    /// without it the app sees every viewer as anonymous.</summary>
+    public static IServiceCollection AddHeaderViewers(this IServiceCollection services)
+    {
+        services.AddHttpContextAccessor();
+        services.AddSingleton<IViewerProvider, HeaderViewerProvider>();
+
+        return services;
+    }
+
     /// <summary>Everything the generated code needs from the application, and the schema and executor built on it. Storage is separate:
     /// <see cref="AddCosmos" /> for the real thing, any <see cref="IStorageAdaptor" /> for a check or a test.</summary>
     public static IServiceCollection AddShelf(this IServiceCollection services)
     {
         services.AddHttpContextAccessor();
-        services.AddSingleton<IViewerProvider, HeaderViewerProvider>();
 
         services.AddSingleton<IBookHideWishlistReadPolicy, HideWishlist>();
         services.AddSingleton<Shelf.Entity.Pattern.Contract.ISignedInWritesSignedInWritePolicy, SignedInWrites>();
         services.AddSingleton<IBookFinishAction, Finish>();
         services.AddSingleton<IBookReadingQuery, Reading>();
 
-        // The generated wiring leaves a viewer provider and the rest alone when they are already registered.
+        // The viewer is the application's to supply (a cookie, a token); the generated wiring registers the anonymous one only when nothing else is.
         services.AddShelfEntities();
         services.AddElephentityGraphQL(Shelf.GraphQL.GraphQLManifestFactory.Create(), options => options.DefaultPageSize = 20);
 
