@@ -1,0 +1,65 @@
+name: hblake
+
+# The Elephentity .NET path on a content site: install the programs eleph.json pins, run the four gates, then the application's tests on the
+# memory driver. `eleph` comes from install.sh, the builders from `eleph install`, and Elephentity.* from nuget.org.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  hblake:
+    name: hblake / .NET
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: hblake
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          global-json-file: hblake/global.json
+
+      - name: Install eleph
+        env:
+          ELEPH_VERSION: 0.16.1
+          ELEPH_INSTALL_DIR: ${{ runner.temp }}/bin
+        run: |
+          curl -fsSL "https://github.com/hsimah-services/elephentity/releases/download/v$ELEPH_VERSION/install.sh" | sh
+          echo "$ELEPH_INSTALL_DIR" >> "$GITHUB_PATH"
+
+      - name: eleph install
+        run: |
+          eleph install
+          eleph install --check
+
+      - name: fmt
+        run: eleph fmt
+
+      - name: validate
+        run: eleph validate
+
+      - name: generate --check
+        run: eleph generate --check
+
+      - name: Build
+        run: |
+          dotnet build tests/Contracts
+          dotnet build tests/App.Tests
+
+      - name: check
+        run: eleph check
+
+      - name: Tests
+        run: dotnet test --project tests/App.Tests

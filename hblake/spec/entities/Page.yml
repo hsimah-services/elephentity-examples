@@ -1,0 +1,71 @@
+entity: Page
+description: Durable consulting page.
+use: [Content, Publishable, Timestamps]
+integrations:
+  graphql:
+    singular: Page
+    plural: Pages
+storage:
+  table: page
+policies:
+  terminalRule:
+    read: deny
+    write: deny
+fields:
+  defaultItemKind:
+    type: string
+    nullable: true
+    maxLength: 80
+    verify: true
+  showInNavigation:
+    type: bool
+    default: true
+  navigationOrder:
+    type: int
+    default: 100
+    verify: true
+  featureOnHome:
+    type: bool
+    default: false
+  homeOrder:
+    type: int
+    default: 100
+    verify: true
+  accent:
+    type: PageAccent
+    default: ink
+    verify: true
+queries:
+  bySlug:
+    description: Look up one content record by exact canonical slug under read policies.
+    args:
+      slug: { type: string }
+    returns:
+      type: Page
+      cardinality: one
+    integrations:
+      graphql:
+        field: pageBySlug
+    handler: true
+  placed:
+    description: Published pages placed on the home page (home true, by home order) or in the navigation (home false, by navigation order), then by title.
+    args:
+      home: { type: bool }
+    returns:
+      type: Page
+      cardinality: many
+    integrations:
+      graphql:
+        field: placedPages
+    handler: true
+  recent:
+    description: Records newest-edited first, optionally of one publication status, under read policies.
+    args:
+      status: { type: PublicationStatus, nullable: true }
+    returns:
+      type: Page
+      cardinality: many
+    integrations:
+      graphql:
+        field: recentPages
+    handler: true

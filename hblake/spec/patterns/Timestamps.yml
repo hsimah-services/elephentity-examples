@@ -1,0 +1,9 @@
+pattern: Timestamps
+description: Runtime managed creation and modification times.
+fields:
+  createdAt:
+    type: datetime
+    managed: created
+  updatedAt:
+    type: datetime
+    managed: modified

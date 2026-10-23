@@ -1,0 +1,4 @@
+type: PublicationStatus
+description: Visibility of a content record.
+primitive: string
+values: [draft, published]

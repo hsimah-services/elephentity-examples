@@ -1,0 +1,6 @@
+project: Hsimah
+description: Software engineering consulting website and content administration.
+storage:
+  driver: cosmos
+integrations:
+  graphql: {}

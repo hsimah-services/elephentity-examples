@@ -1,0 +1,35 @@
+entity: User
+description: Private staff account profile and authorization role.
+use: [Timestamps]
+storage:
+  table: user
+policies:
+  terminalRule:
+    read: deny
+    write: deny
+fields:
+  username:
+    type: string
+    required: true
+    unique: true
+    maxLength: 32
+    verify: true
+  displayName:
+    type: string
+    required: true
+    maxLength: 100
+    verify: true
+  role:
+    type: UserRole
+    default: editor
+  active:
+    type: bool
+    default: true
+readPolicies:
+  staffProfile:
+    description: Active admin can read staff accounts; an active user can read their own profile.
+    handler: true
+writePolicies:
+  adminAccounts:
+    description: Active admins may update account profiles.
+    handler: true

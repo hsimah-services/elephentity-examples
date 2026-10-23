@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <RootNamespace>Hsimah</RootNamespace>
+    <AssemblyName>Hsimah.App</AssemblyName>
+    <InvariantGlobalization>true</InvariantGlobalization>
+    <!-- The generated trees are signed and committed; they are compiled in, never edited. -->
+    <NoWarn>$(NoWarn);CS1591</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="../../Generated/**/*.cs" />
+    <PackageReference Include="Elephentity.Cosmos" Version="0.1.0-alpha.2" />
+    <PackageReference Include="Elephentity.GraphQL" Version="0.1.0-alpha.2" />
+  </ItemGroup>
+
+</Project>

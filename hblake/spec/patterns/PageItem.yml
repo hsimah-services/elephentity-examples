@@ -1,0 +1,24 @@
+pattern: PageItem
+description: Content item attached to a Page, grouped under a named kind such as News, Product or a framework type.
+config:
+  name:
+    type: string
+    description: Default item kind this entity contributes to its page.
+    default: Item
+use: [Content, Publishable, Timestamps]
+fields:
+  kind:
+    type: string
+    indexed: true
+    maxLength: 80
+    verify: true
+edges:
+  page:
+    to: Page
+    cardinality: one
+    description: The page this item belongs to.
+    inverse:
+      name: items
+      unique: false
+    onDelete: cascade
+    required: true

@@ -1,0 +1,67 @@
+entity: PageItem
+description: Item attached to a page, such as a news article, product or framework entry, grouped by kind.
+use: [PageItem]
+configure:
+  PageItem:
+    name: Item
+integrations:
+  graphql:
+    singular: PageItem
+    plural: PageItems
+storage:
+  table: page_item
+policies:
+  terminalRule:
+    read: deny
+    write: deny
+fields:
+  enquiryUrl:
+    type: string
+    nullable: true
+    maxLength: 2048
+    verify: true
+  imageUrl:
+    type: string
+    nullable: true
+    maxLength: 100
+    verify: true
+  imageAlt:
+    type: string
+    nullable: true
+    maxLength: 300
+    verify: true
+queries:
+  bySlug:
+    description: Look up one item by exact canonical slug under read policies.
+    args:
+      slug: { type: string }
+    returns:
+      type: PageItem
+      cardinality: one
+    integrations:
+      graphql:
+        field: pageItemBySlug
+    handler: true
+  ofPage:
+    description: Published items of one page by its slug, newest published first, under read policies.
+    args:
+      page: { type: string }
+    returns:
+      type: PageItem
+      cardinality: many
+    integrations:
+      graphql:
+        field: pageItemsOfPage
+    handler: true
+  recent:
+    description: Items newest-edited first, optionally of one kind or publication status, under read policies.
+    args:
+      kind: { type: string, nullable: true }
+      status: { type: PublicationStatus, nullable: true }
+    returns:
+      type: PageItem
+      cardinality: many
+    integrations:
+      graphql:
+        field: recentPageItems
+    handler: true

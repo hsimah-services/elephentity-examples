@@ -1,0 +1,24 @@
+{
+    "spec": "spec",
+    "codegen": "eleph-codegen@0.7.0",
+    "targets": {
+        "csharp": {
+            "builder": "eleph-gen-csharp@0.1.0-alpha.1",
+            "output": "Generated/Entities",
+            "namespace": "Hsimah.Entity",
+            "typeNamespace": "Hsimah.Type",
+            "check": ["dotnet", "run", "--no-build", "--project", "tests/Contracts", "--", "eleph-check"]
+        },
+        "cosmos": {
+            "builder": "eleph-gen-cosmos@0.1.0-alpha.1",
+            "output": "Generated/Cosmos",
+            "namespace": "Hsimah.Storage"
+        },
+        "graphql-csharp": {
+            "builder": "eleph-gen-graphql-csharp@0.1.0-alpha.1",
+            "output": "Generated/GraphQL",
+            "namespace": "Hsimah.GraphQL",
+            "entityNamespace": "Hsimah.Entity"
+        }
+    }
+}

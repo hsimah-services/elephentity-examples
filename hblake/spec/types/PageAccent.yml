@@ -1,0 +1,4 @@
+type: PageAccent
+description: A page's colour for its home tile and navigation hover; ink is the neutral text colour.
+primitive: string
+values: [ink, green, orange, blue, berry]
