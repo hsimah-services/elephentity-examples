@@ -1,0 +1,32 @@
+pattern: Publishable
+description: Shared publication lifecycle and content access policies.
+fields:
+  status:
+    type: PublicationStatus
+    default: draft
+    indexed: true
+    verify: true
+  publishedAt:
+    type: datetime
+    nullable: true
+    verify: true
+actions:
+  publish:
+    description: Publish valid content and retain its first publication time.
+    writes:
+      fields: [status, publishedAt]
+    handler: true
+  unpublish:
+    description: Return content to draft without discarding its first publication time.
+    writes:
+      fields: [status]
+    handler: true
+readPolicies:
+  contentVisibility:
+    description: Staff can read all content; anonymous readers can read published content.
+    handler: true
+writePolicies:
+  contentStaff:
+    description: Active editors and admins can create and update; only admins can delete.
+    handler: true
+interface: true

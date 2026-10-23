@@ -12,3 +12,8 @@
 /dotnet/tools/builders/
 /dotnet/**/bin/
 /dotnet/**/obj/
+
+# The hblake example
+/hblake/tools/builders/
+/hblake/**/bin/
+/hblake/**/obj/

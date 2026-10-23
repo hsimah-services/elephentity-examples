@@ -1,0 +1,4 @@
+type: UserRole
+description: Content editor or account administrator.
+primitive: string
+values: [editor, admin]

@@ -1,0 +1,28 @@
+pattern: Content
+description: Shared title, URL identity, Markdown body and summary.
+fields:
+  title:
+    type: string
+    required: true
+    maxLength: 200
+    verify: true
+  slug:
+    type: string
+    required: true
+    unique: true
+    maxLength: 160
+    verify: true
+  content:
+    type: text
+    default: ''
+    verify: true
+  excerpt:
+    type: string
+    default: ''
+    maxLength: 300
+edges:
+  author:
+    to: User
+    cardinality: one
+    description: The staff member who wrote the content.
+    onDelete: restrict

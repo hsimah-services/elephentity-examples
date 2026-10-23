@@ -7,6 +7,7 @@ specs, generated tree, wiring, and CI checks.
 |---|---|
 | [Clog](clog/) | SQLite storage with a generated GraphQL schema, policies, verifiers and an action. |
 | [Shelf](dotnet/) | The .NET path with no PHP: C# entities, Cosmos DB storage, a GraphQL.NET schema and tsquid initial data, on ASP.NET Core. |
+| [hblake](hblake/) | A small-business CMS in C#: pages and items with a draft/publish lifecycle, staff roles, cross-field verifiers and published queries, on Cosmos DB and GraphQL.NET. Specs only; no UI. |
 
 ## Development
 
