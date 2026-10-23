@@ -3,7 +3,7 @@
 The inventory model from [clog](https://github.com/hsimah/clog) — Item, Location, Site
 and Inventory — written as Elephentity specs, with the generated output committed so
 the two can be compared. Storage is SQLite and the API is GraphQL; there is no
-WordPress. Runtime, SQLite and GraphQL packages are 0.17; `eleph` is 0.16.1.
+WordPress. Runtime, SQLite and GraphQL packages are 0.17; `eleph` is 0.16.1, a release binary pinned by `ELEPH_VERSION` in `tools/php` and CI.
 
 From this directory:
 

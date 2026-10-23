@@ -1,0 +1,339 @@
+schema {
+  query: RootQuery
+  mutation: RootMutation
+}
+
+"""A book on the shelf."""
+type Book implements Node {
+  """"""
+  author: String!
+
+  """When the entity was created. Filled by the framework."""
+  createdAt: String!
+
+  """
+  The row as storage knows it, unique within its table rather than the schema.
+  """
+  databaseId: ID!
+
+  """The globally unique identifier, opaque and safe to use as a cache key."""
+  id: ID!
+  notes(after: String, before: String, first: Int, last: Int): BookToNoteConnection
+
+  """"""
+  pages: Int
+
+  """An application-supplied slug, fixed after creation."""
+  slug: String!
+
+  """"""
+  status: ReadingStatus!
+  tags(after: String, before: String, first: Int, last: Int): BookToTagConnection
+
+  """"""
+  title: String!
+
+  """When the entity was last modified. Filled by the framework."""
+  updatedAt: String!
+}
+
+type BookToNoteConnection {
+  edges: [BookToNoteConnectionEdge]
+  nodes: [Note]
+  pageInfo: PageInfo!
+
+  """How many match, ignoring pagination."""
+  totalCount: Int
+}
+
+type BookToNoteConnectionEdge {
+  cursor: String
+  node: Note
+}
+
+type BookToTagConnection {
+  edges: [BookToTagConnectionEdge]
+  nodes: [Tag]
+  pageInfo: PageInfo!
+
+  """How many match, ignoring pagination."""
+  totalCount: Int
+}
+
+type BookToTagConnectionEdge {
+  cursor: String
+  node: Tag
+}
+
+input CreateBookInput {
+  author: String!
+  clientMutationId: String
+  notes: [ID]
+  pages: Int
+  slug: String!
+  status: ReadingStatus!
+  tags: [ID]
+  title: String!
+}
+
+type CreateBookPayload {
+  book: Book
+  clientMutationId: String
+}
+
+input CreateNoteInput {
+  body: String!
+  clientMutationId: String
+}
+
+type CreateNotePayload {
+  clientMutationId: String
+  note: Note
+}
+
+input CreateTagInput {
+  clientMutationId: String
+  name: String!
+  slug: String!
+}
+
+type CreateTagPayload {
+  clientMutationId: String
+  tag: Tag
+}
+
+input DeleteBookInput {
+  clientMutationId: String
+  id: ID!
+}
+
+type DeleteBookPayload {
+  clientMutationId: String
+  deletedId: ID
+}
+
+input DeleteNoteInput {
+  clientMutationId: String
+  id: ID!
+}
+
+type DeleteNotePayload {
+  clientMutationId: String
+  deletedId: ID
+}
+
+input DeleteTagInput {
+  clientMutationId: String
+  id: ID!
+}
+
+type DeleteTagPayload {
+  clientMutationId: String
+  deletedId: ID
+}
+
+input FinishBookInput {
+  clientMutationId: String
+  id: ID!
+}
+
+type FinishBookPayload {
+  book: Book
+  clientMutationId: String
+}
+
+interface Node {
+  id: ID!
+}
+
+"""A note on a book."""
+type Note implements Node {
+  """"""
+  body: String!
+
+  """The Book pointing here through "notes"."""
+  book: Book
+
+  """When the entity was created. Filled by the framework."""
+  createdAt: String!
+
+  """
+  The row as storage knows it, unique within its table rather than the schema.
+  """
+  databaseId: ID!
+
+  """The globally unique identifier, opaque and safe to use as a cache key."""
+  id: ID!
+
+  """When the entity was last modified. Filled by the framework."""
+  updatedAt: String!
+}
+
+type PageInfo {
+  endCursor: String
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String
+}
+
+enum ReadingStatus {
+  FINISHED
+  READING
+  WISHLIST
+}
+
+type RootMutation {
+  createBook(input: CreateBookInput!): CreateBookPayload
+  createNote(input: CreateNoteInput!): CreateNotePayload
+  createTag(input: CreateTagInput!): CreateTagPayload
+  deleteBook(input: DeleteBookInput!): DeleteBookPayload
+  deleteNote(input: DeleteNoteInput!): DeleteNotePayload
+  deleteTag(input: DeleteTagInput!): DeleteTagPayload
+  finishBook(input: FinishBookInput!): FinishBookPayload
+  updateBook(input: UpdateBookInput!): UpdateBookPayload
+  updateNote(input: UpdateNoteInput!): UpdateNotePayload
+  updateTag(input: UpdateTagInput!): UpdateTagPayload
+}
+
+type RootQuery {
+  """One Book by id."""
+  book(id: ID!): Book
+  books(after: String, before: String, first: Int, last: Int): RootQueryToBookConnection
+  node(id: ID!): Node
+
+  """One Note by id."""
+  note(id: ID!): Note
+  notes(after: String, before: String, first: Int, last: Int): RootQueryToNoteConnection
+  readingBooks(after: String, before: String, first: Int, last: Int): RootQueryToReadingBooksConnection
+
+  """One Tag by id."""
+  tag(id: ID!): Tag
+  tags(after: String, before: String, first: Int, last: Int): RootQueryToTagConnection
+}
+
+type RootQueryToBookConnection {
+  edges: [RootQueryToBookConnectionEdge]
+  nodes: [Book]
+  pageInfo: PageInfo!
+
+  """How many match, ignoring pagination."""
+  totalCount: Int
+}
+
+type RootQueryToBookConnectionEdge {
+  cursor: String
+  node: Book
+}
+
+type RootQueryToNoteConnection {
+  edges: [RootQueryToNoteConnectionEdge]
+  nodes: [Note]
+  pageInfo: PageInfo!
+
+  """How many match, ignoring pagination."""
+  totalCount: Int
+}
+
+type RootQueryToNoteConnectionEdge {
+  cursor: String
+  node: Note
+}
+
+type RootQueryToReadingBooksConnection {
+  edges: [RootQueryToReadingBooksConnectionEdge]
+  nodes: [Book]
+  pageInfo: PageInfo!
+
+  """How many match, ignoring pagination."""
+  totalCount: Int
+}
+
+type RootQueryToReadingBooksConnectionEdge {
+  cursor: String
+  node: Book
+}
+
+type RootQueryToTagConnection {
+  edges: [RootQueryToTagConnectionEdge]
+  nodes: [Tag]
+  pageInfo: PageInfo!
+
+  """How many match, ignoring pagination."""
+  totalCount: Int
+}
+
+type RootQueryToTagConnectionEdge {
+  cursor: String
+  node: Tag
+}
+
+"""A label for finding books."""
+type Tag implements Node {
+  books(after: String, before: String, first: Int, last: Int): TagToBookConnection
+
+  """
+  The row as storage knows it, unique within its table rather than the schema.
+  """
+  databaseId: ID!
+
+  """The globally unique identifier, opaque and safe to use as a cache key."""
+  id: ID!
+
+  """"""
+  name: String!
+
+  """An application-supplied slug, fixed after creation."""
+  slug: String!
+}
+
+type TagToBookConnection {
+  edges: [TagToBookConnectionEdge]
+  nodes: [Book]
+  pageInfo: PageInfo!
+
+  """How many match, ignoring pagination."""
+  totalCount: Int
+}
+
+type TagToBookConnectionEdge {
+  cursor: String
+  node: Book
+}
+
+input UpdateBookInput {
+  author: String
+  clientMutationId: String
+  id: ID!
+  notes: [ID]
+  pages: Int
+  status: ReadingStatus
+  tags: [ID]
+  title: String
+}
+
+type UpdateBookPayload {
+  book: Book
+  clientMutationId: String
+}
+
+input UpdateNoteInput {
+  body: String
+  clientMutationId: String
+  id: ID!
+}
+
+type UpdateNotePayload {
+  clientMutationId: String
+  note: Note
+}
+
+input UpdateTagInput {
+  clientMutationId: String
+  id: ID!
+  name: String
+}
+
+type UpdateTagPayload {
+  clientMutationId: String
+  tag: Tag
+}

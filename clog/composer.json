@@ -2,7 +2,7 @@
     "name": "elephentity/example-clog",
     "description": "The Elephentity worked example: a household inventory on SQLite and GraphQL.",
     "type": "project",
-    "license": "Apache-2.0",
+    "license": "MIT",
     "require": {
         "php": ">=8.3",
         "ext-mbstring": "*",

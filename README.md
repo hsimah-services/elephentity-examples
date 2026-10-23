@@ -6,6 +6,7 @@ specs, generated tree, wiring, and CI checks.
 | Example | Coverage |
 |---|---|
 | [Clog](clog/) | SQLite storage with a generated GraphQL schema, policies, verifiers and an action. |
+| [Shelf](dotnet/) | The .NET path with no PHP: C# entities, Cosmos DB storage, a GraphQL.NET schema and tsquid initial data, on ASP.NET Core. |
 
 ## Development
 

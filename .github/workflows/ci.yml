@@ -37,18 +37,20 @@ jobs:
           extensions: pdo_sqlite, mbstring
           tools: composer:v2
 
-      - name: Install eleph
-        env:
-          ELEPH_VERSION: 0.16.1
-          ELEPH_INSTALL_DIR: ${{ runner.temp }}/eleph
-        run: |
-          curl -fsSL "https://github.com/hsimah-services/elephentity/releases/download/v${ELEPH_VERSION}/install.sh" | sh
-          echo "$ELEPH_INSTALL_DIR" >> "$GITHUB_PATH"
-
       - name: Install dependencies
         uses: ramsey/composer-install@v3
         with:
           working-directory: clog
+
+      # The spec compiler is one binary, not a Composer package. Keep the version in step with
+      # ELEPH_VERSION in tools/php.
+      - name: Install eleph
+        env:
+          ELEPH_VERSION: 0.16.1
+          ELEPH_INSTALL_DIR: ${{ runner.temp }}/bin
+        run: |
+          curl -fsSL "https://github.com/hsimah-services/elephentity/releases/download/v$ELEPH_VERSION/install.sh" | sh
+          echo "$ELEPH_INSTALL_DIR" >> "$GITHUB_PATH"
 
       - name: Build generators
         working-directory: clog

@@ -1,0 +1,31 @@
+{
+    "spec": "spec",
+    "codegen": "eleph-codegen@0.7.0",
+    "targets": {
+        "csharp": {
+            "builder": "eleph-gen-csharp@0.1.0-alpha.1",
+            "output": "Generated/Entities",
+            "namespace": "Shelf.Entity",
+            "typeNamespace": "Shelf.Type",
+            "check": ["dotnet", "run", "--project", "tests/Contracts", "--", "eleph-check"]
+        },
+        "cosmos": {
+            "builder": "eleph-gen-cosmos@0.1.0-alpha.1",
+            "output": "Generated/Cosmos",
+            "namespace": "Shelf.Storage"
+        },
+        "graphql-csharp": {
+            "builder": "eleph-gen-graphql-csharp@0.1.0-alpha.1",
+            "output": "Generated/GraphQL",
+            "namespace": "Shelf.GraphQL",
+            "entityNamespace": "Shelf.Entity"
+        },
+        "tsquid": {
+            "builder": "eleph-gen-tsquid@0.2.0",
+            "output": "Generated/Tsquid",
+            "namespace": "Shelf.Tsquid",
+            "language": "csharp",
+            "manifest": "../../client/src/routes/__generated__/routes.manifest.json"
+        }
+    }
+}

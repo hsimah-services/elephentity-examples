@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <IsPackable>false</IsPackable>
+    <IsTestProject>true</IsTestProject>
+    <RootNamespace>Shelf.App.Tests</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../../src/App/Shelf.App.csproj" />
+    <PackageReference Include="Elephentity.Runtime.Memory" Version="0.1.0-alpha.1" />
+    <PackageReference Include="Microsoft.AspNetCore.TestHost" Version="10.0.12" />
+    <PackageReference Include="xunit.v3" Version="4.0.2" />
+    <Using Include="Xunit" />
+    <!-- The schema a client was built against, and the shell: both are files the app ships or is checked against. -->
+    <Content Include="../../client/schema.graphql" Link="client/schema.graphql" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+</Project>
