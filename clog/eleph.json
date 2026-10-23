@@ -9,7 +9,8 @@
         },
         "sqlite": {
             "builder": "vendor/bin/eleph-gen-sqlite",
-            "output": "generated/sqlite"
+            "output": "generated/sqlite",
+            "language": "php"
         },
         "graphql-php": {
             "builder": "vendor/bin/eleph-gen-graphql-php",
