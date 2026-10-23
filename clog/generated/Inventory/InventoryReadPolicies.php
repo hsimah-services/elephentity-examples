@@ -9,12 +9,12 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   Inventory/InventoryReadPolicies.php
- * digest: sha256:a2b37eda85daf4239d8f80de2a33b2ffc186c470705ce7680289252523a28650
+ * digest: sha256:3160dd649bea0e49f949082a54c00e6e750b45e092a6cf4f8895ce83fdf727ff
  */
 
 namespace Clog\Entity\Inventory;
 
-use Clog\Entity\Pattern\ClogPost\Contract\ClogPostSignedInReadPolicy;
+use Clog\Entity\Pattern\Record\Contract\RecordSignedInReadPolicy;
 use Eleph\Runtime\Policy\EntityReadPolicies;
 use Eleph\Runtime\Policy\PolicyDecision;
 use Eleph\Runtime\Policy\PolicyOutcome;
@@ -23,7 +23,7 @@ use Eleph\Runtime\Policy\Viewer;
 final readonly class InventoryReadPolicies implements EntityReadPolicies
 {
     public function __construct(
-        private ClogPostSignedInReadPolicy $signedInPolicy,
+        private RecordSignedInReadPolicy $signedInPolicy,
     ) {
 
     }

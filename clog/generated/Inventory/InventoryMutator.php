@@ -9,12 +9,12 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   Inventory/InventoryMutator.php
- * digest: sha256:7153d7333f7cd305b1dc928f5398cf4a4ffb3b053478a9d5149d58aba21862f1
+ * digest: sha256:da3b21ea8804a121995f694a729e138c3e89b6477e3cb45681e7685e1683ed87
  */
 
 namespace Clog\Entity\Inventory;
 
-use Clog\Entity\Pattern\ClogPost\ClogPostMutatorTrait;
+use Clog\Entity\Pattern\Record\RecordMutatorTrait;
 use DateTimeImmutable;
 use Eleph\Runtime\Identity\Identifier;
 use Eleph\Runtime\Mutation\EdgeMutation;
@@ -25,7 +25,7 @@ use Eleph\Runtime\Mutation\MutationBuffer;
  */
 final class InventoryMutator
 {
-    use ClogPostMutatorTrait;
+    use RecordMutatorTrait;
 
     public function __construct(
         private readonly MutationBuffer $buffer,

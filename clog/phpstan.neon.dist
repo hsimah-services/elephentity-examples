@@ -4,10 +4,6 @@ parameters:
     paths:
         - src
         - generated
+        - standalone
     tmpDir: .phpstan.cache
-    # WordPress and WPGraphQL ship no autoloadable class map, so their symbols come
-    # from stubs.
-    scanFiles:
-        - vendor/php-stubs/wordpress-stubs/wordpress-stubs.php
-        - vendor/axepress/wp-graphql-stubs/wp-graphql-stubs.php
     treatPhpDocTypesAsCertain: false

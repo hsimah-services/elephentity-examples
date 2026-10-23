@@ -1,0 +1,11 @@
+pattern: Record
+description: Timestamps and access policies shared by every Clog entity.
+use:
+  - Timestamps
+readPolicies:
+  signedIn:
+    handler: true
+writePolicies:
+  staff:
+    handler: true
+interface: true

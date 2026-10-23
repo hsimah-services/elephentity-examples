@@ -4,20 +4,61 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a3320d3481b1eb764d1460a8ccf36a11",
+    "content-hash": "ba7683a6917be0499bd222476426ed0e",
     "packages": [
         {
-            "name": "elephentity/runtime",
-            "version": "v0.13.1",
+            "name": "elephentity/graphql",
+            "version": "v0.17.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/hsimah-services/elephentity-runtime.git",
-                "reference": "a2c260d5e47efbab3933fd7a85b39dd07a6afeb1"
+                "url": "https://github.com/hsimah-services/elephentity-graphql-php.git",
+                "reference": "75406fee6742c013122104e9b10f0e089d6618e1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hsimah-services/elephentity-runtime/zipball/a2c260d5e47efbab3933fd7a85b39dd07a6afeb1",
-                "reference": "a2c260d5e47efbab3933fd7a85b39dd07a6afeb1",
+                "url": "https://api.github.com/repos/hsimah-services/elephentity-graphql-php/zipball/75406fee6742c013122104e9b10f0e089d6618e1",
+                "reference": "75406fee6742c013122104e9b10f0e089d6618e1",
+                "shasum": ""
+            },
+            "require": {
+                "elephentity/runtime": "^0.17",
+                "php": ">=8.3",
+                "webonyx/graphql-php": "^15.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-main": "0.17.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Eleph\\GraphQL\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Experimental Framework-independent GraphQL integration for the Elephentity PHP runtime.",
+            "support": {
+                "issues": "https://github.com/hsimah-services/elephentity-graphql-php/issues",
+                "source": "https://github.com/hsimah-services/elephentity-graphql-php/tree/v0.17.0"
+            },
+            "time": "2026-10-21T23:48:15+00:00"
+        },
+        {
+            "name": "elephentity/runtime",
+            "version": "v0.17.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/hsimah-services/elephentity-runtime.git",
+                "reference": "399619b88c28590b4ac1bec6bef6e5ac4592c2b4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/hsimah-services/elephentity-runtime/zipball/399619b88c28590b4ac1bec6bef6e5ac4592c2b4",
+                "reference": "399619b88c28590b4ac1bec6bef6e5ac4592c2b4",
                 "shasum": ""
             },
             "require": {
@@ -38,97 +79,57 @@
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "Apache-2.0"
+                "MIT"
             ],
             "description": "Elephentity runtime contracts: storage port, unit of work, verification, loaders.",
             "support": {
                 "issues": "https://github.com/hsimah-services/elephentity-runtime/issues",
-                "source": "https://github.com/hsimah-services/elephentity-runtime/tree/v0.13.1"
+                "source": "https://github.com/hsimah-services/elephentity-runtime/tree/v0.17.0"
             },
-            "time": "2026-10-10T22:13:33+00:00"
+            "time": "2026-10-18T22:32:08+00:00"
         },
         {
-            "name": "elephentity/wordpress",
-            "version": "v0.4.0",
+            "name": "elephentity/sqlite",
+            "version": "v0.17.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/hsimah-services/elephentity-wordpress.git",
-                "reference": "c422f0cd042f23af91505f4220ef2d99163f0240"
+                "url": "https://github.com/hsimah-services/elephentity-sqlite.git",
+                "reference": "412155d26106a0f4d55ea83e3909e3e28b351370"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hsimah-services/elephentity-wordpress/zipball/c422f0cd042f23af91505f4220ef2d99163f0240",
-                "reference": "c422f0cd042f23af91505f4220ef2d99163f0240",
+                "url": "https://api.github.com/repos/hsimah-services/elephentity-sqlite/zipball/412155d26106a0f4d55ea83e3909e3e28b351370",
+                "reference": "412155d26106a0f4d55ea83e3909e3e28b351370",
                 "shasum": ""
             },
             "require": {
-                "elephentity/runtime": "^0.13.1",
+                "elephentity/runtime": "^0.17",
+                "ext-mbstring": "*",
+                "ext-pdo": "*",
+                "ext-pdo_sqlite": "*",
                 "php": ">=8.3"
             },
-            "require-dev": {
-                "friendsofphp/php-cs-fixer": "^3.64",
-                "php-stubs/wordpress-stubs": "^6.7 || ^7.0",
-                "phpstan/phpstan": "^2.0",
-                "phpunit/phpunit": "^11.0 || ^12.0"
-            },
             "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-main": "0.17.x-dev"
+                }
+            },
             "autoload": {
                 "psr-4": {
-                    "Eleph\\WordPress\\": "src/"
+                    "Eleph\\SQLite\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "Apache-2.0"
+                "MIT"
             ],
-            "description": "WordPress storage adaptor for Elephentity. The only package permitted to reference WP symbols.",
+            "description": "Experimental SQLite storage adaptor for the Elephentity PHP runtime.",
             "support": {
-                "issues": "https://github.com/hsimah-services/elephentity-wordpress/issues",
-                "source": "https://github.com/hsimah-services/elephentity-wordpress/tree/v0.4.0"
+                "issues": "https://github.com/hsimah-services/elephentity-sqlite/issues",
+                "source": "https://github.com/hsimah-services/elephentity-sqlite/tree/v0.17.0"
             },
-            "time": "2026-10-10T22:23:46+00:00"
-        },
-        {
-            "name": "elephentity/wpgraphql",
-            "version": "v0.3.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/hsimah-services/elephentity-wpgraphql.git",
-                "reference": "8f26cba9d41943d5eb8fd9a1a3e7f58dcbb7f81b"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/hsimah-services/elephentity-wpgraphql/zipball/8f26cba9d41943d5eb8fd9a1a3e7f58dcbb7f81b",
-                "reference": "8f26cba9d41943d5eb8fd9a1a3e7f58dcbb7f81b",
-                "shasum": ""
-            },
-            "require": {
-                "elephentity/runtime": "^0.13",
-                "php": ">=8.3"
-            },
-            "require-dev": {
-                "axepress/wp-graphql-stubs": "^2.22",
-                "friendsofphp/php-cs-fixer": "^3.64",
-                "php-stubs/wordpress-stubs": "^6.7 || ^7.0",
-                "phpstan/phpstan": "^2.0",
-                "phpunit/phpunit": "^11.0 || ^12.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Eleph\\WPGraphQL\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "Apache-2.0"
-            ],
-            "description": "Exposes Elephentity entities and mutators to WPGraphQL from a compiled manifest.",
-            "support": {
-                "issues": "https://github.com/hsimah-services/elephentity-wpgraphql/issues",
-                "source": "https://github.com/hsimah-services/elephentity-wpgraphql/tree/v0.3.0"
-            },
-            "time": "2026-10-10T20:29:27+00:00"
+            "time": "2026-10-21T23:48:01+00:00"
         },
         {
             "name": "psr/container",
@@ -232,62 +233,89 @@
                 "source": "https://github.com/php-fig/log/tree/3.0.2"
             },
             "time": "2024-09-11T13:17:53+00:00"
-        }
-    ],
-    "packages-dev": [
+        },
         {
-            "name": "axepress/wp-graphql-stubs",
-            "version": "v2.23.1",
+            "name": "webonyx/graphql-php",
+            "version": "v15.38.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/AxeWP/wp-graphql-stubs.git",
-                "reference": "af779998bfa1f30dee1e128591ad78da1aa86115"
+                "url": "https://github.com/webonyx/graphql-php.git",
+                "reference": "32edc67af119b709d020f93447729afd503fe56a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/AxeWP/wp-graphql-stubs/zipball/af779998bfa1f30dee1e128591ad78da1aa86115",
-                "reference": "af779998bfa1f30dee1e128591ad78da1aa86115",
+                "url": "https://api.github.com/repos/webonyx/graphql-php/zipball/32edc67af119b709d020f93447729afd503fe56a",
+                "reference": "32edc67af119b709d020f93447729afd503fe56a",
                 "shasum": ""
             },
             "require": {
-                "php-stubs/wordpress-stubs": ">=5.4"
+                "ext-json": "*",
+                "ext-mbstring": "*",
+                "php": "^7.4 || ^8"
             },
             "require-dev": {
-                "php": ">=7.4",
-                "php-stubs/generator": "^0.9.0",
-                "phpstan/phpstan": "^2.1.5"
+                "amphp/amp": "^2.6 || ^3",
+                "amphp/http-server": "^2.1 || ^3",
+                "dms/phpunit-arraysubset-asserts": "dev-master",
+                "ergebnis/composer-normalize": "^2.28",
+                "friendsofphp/php-cs-fixer": "3.95.27",
+                "mll-lab/php-cs-fixer-config": "5.13.0",
+                "nyholm/psr7": "^1.5",
+                "phpbench/phpbench": "^1.2",
+                "phpstan/extension-installer": "^1.1",
+                "phpstan/phpstan": "2.2.17",
+                "phpstan/phpstan-phpunit": "2.0.21",
+                "phpstan/phpstan-strict-rules": "2.0.12",
+                "phpunit/phpunit": "^9.5 || ^10.5.21 || ^11",
+                "psr/http-message": "^1 || ^2",
+                "react/http": "^1.6",
+                "react/promise": "^2.0 || ^3.0",
+                "rector/rector": "^2.0",
+                "symfony/polyfill-php81": "^1.23",
+                "symfony/var-exporter": "^5 || ^6 || ^7 || ^8",
+                "thecodingmachine/safe": "^1.3 || ^2 || ^3",
+                "ticketswap/phpstan-error-formatter": "1.3.0"
             },
             "suggest": {
-                "axepress/wp-graphql-cs": "Coding standards for WPGraphQL projects",
-                "szepeviktor/phpstan-wordpress": "WordPress extensions for PHPStan"
+                "amphp/amp": "To leverage async resolving on AMPHP platform (v3 with AmpFutureAdapter, v2 with AmpPromiseAdapter)",
+                "amphp/http-server": "To leverage async resolving with webserver on AMPHP platform",
+                "psr/http-message": "To use standard GraphQL server",
+                "react/promise": "To leverage async resolving on React PHP platform"
             },
             "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "GraphQL\\": "src/"
+                }
+            },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
-            "description": "WPGraphQL function and class declaration stubs for static analysis.",
-            "homepage": "https://github.com/axewp/wp-graphql-stubs",
+            "description": "A PHP port of GraphQL reference implementation",
+            "homepage": "https://github.com/webonyx/graphql-php",
             "keywords": [
-                "PHPStan",
-                "graphql",
-                "static analysis",
-                "wordpress",
-                "wp-graphql",
-                "wpgraphql"
+                "api",
+                "graphql"
             ],
             "support": {
-                "issues": "https://github.com/AxeWP/wp-graphql-stubs/issues",
-                "source": "https://github.com/AxeWP/wp-graphql-stubs/tree/v2.23.1"
+                "issues": "https://github.com/webonyx/graphql-php/issues",
+                "source": "https://github.com/webonyx/graphql-php/tree/v15.38.1"
             },
             "funding": [
                 {
-                    "url": "https://github.com/AxeWp",
+                    "url": "https://github.com/spawnia",
                     "type": "github"
+                },
+                {
+                    "url": "https://opencollective.com/webonyx-graphql-php",
+                    "type": "open_collective"
                 }
             ],
-            "time": "2026-09-23T04:33:22+00:00"
-        },
+            "time": "2026-10-12T14:31:33+00:00"
+        }
+    ],
+    "packages-dev": [
         {
             "name": "clue/ndjson-react",
             "version": "v1.3.0",
@@ -430,16 +458,16 @@
         },
         {
             "name": "composer/semver",
-            "version": "3.5.1",
+            "version": "3.5.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/semver.git",
-                "reference": "528948210cc46f967a4b98e83b19e76f2b504993"
+                "reference": "9dfce66f1e97360ea5e6d3e38ab14277e4cc591e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/semver/zipball/528948210cc46f967a4b98e83b19e76f2b504993",
-                "reference": "528948210cc46f967a4b98e83b19e76f2b504993",
+                "url": "https://api.github.com/repos/composer/semver/zipball/9dfce66f1e97360ea5e6d3e38ab14277e4cc591e",
+                "reference": "9dfce66f1e97360ea5e6d3e38ab14277e4cc591e",
                 "shasum": ""
             },
             "require": {
@@ -491,7 +519,7 @@
             "support": {
                 "irc": "ircs://irc.libera.chat:6697/composer",
                 "issues": "https://github.com/composer/semver/issues",
-                "source": "https://github.com/composer/semver/tree/3.5.1"
+                "source": "https://github.com/composer/semver/tree/3.5.2"
             },
             "funding": [
                 {
@@ -503,7 +531,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-10-05T13:12:12+00:00"
+            "time": "2026-10-22T15:37:26+00:00"
         },
         {
             "name": "composer/xdebug-handler",
@@ -572,63 +600,17 @@
             "time": "2024-05-06T16:37:16+00:00"
         },
         {
-            "name": "elephentity/cli",
-            "version": "v0.13.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/hsimah-services/elephentity-cli.git",
-                "reference": "d372692cf23d1959850e8886dfd07a8bef782c54"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/hsimah-services/elephentity-cli/zipball/d372692cf23d1959850e8886dfd07a8bef782c54",
-                "reference": "d372692cf23d1959850e8886dfd07a8bef782c54",
-                "shasum": ""
-            },
-            "require": {
-                "elephentity/codegen": "^0.6",
-                "elephentity/runtime": "^0.10 || ^0.11 || ^0.12 || ^0.13",
-                "elephentity/schema": "^0.11",
-                "php": ">=8.3",
-                "symfony/console": "^7.0 || ^8.0"
-            },
-            "require-dev": {
-                "elephentity/codegen-php": "^0.6",
-                "phpunit/phpunit": "^11.0 || ^12.0"
-            },
-            "bin": [
-                "bin/eleph",
-                "bin/eleph-gen-memory"
-            ],
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Eleph\\Cli\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "Apache-2.0"
-            ],
-            "description": "The eleph command: validate, generate, check, fmt. Build-time only.",
-            "support": {
-                "issues": "https://github.com/hsimah-services/elephentity-cli/issues",
-                "source": "https://github.com/hsimah-services/elephentity-cli/tree/v0.13.1"
-            },
-            "time": "2026-10-10T20:24:07+00:00"
-        },
-        {
             "name": "elephentity/codegen",
-            "version": "v0.6.1",
+            "version": "v0.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hsimah-services/elephentity-codegen.git",
-                "reference": "97f753c68385cca8d7cb66ecad9ece0df26bbba8"
+                "reference": "09c760cbb060d8c0dd0c3e863323e6dd17208851"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hsimah-services/elephentity-codegen/zipball/97f753c68385cca8d7cb66ecad9ece0df26bbba8",
-                "reference": "97f753c68385cca8d7cb66ecad9ece0df26bbba8",
+                "url": "https://api.github.com/repos/hsimah-services/elephentity-codegen/zipball/09c760cbb060d8c0dd0c3e863323e6dd17208851",
+                "reference": "09c760cbb060d8c0dd0c3e863323e6dd17208851",
                 "shasum": ""
             },
             "require": {
@@ -651,45 +633,78 @@
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "Apache-2.0"
+                "MIT"
             ],
             "description": "The Elephentity code generator: runs a project's language builders, then signs and writes what they return.",
             "support": {
                 "issues": "https://github.com/hsimah-services/elephentity-codegen/issues",
-                "source": "https://github.com/hsimah-services/elephentity-codegen/tree/v0.6.1"
+                "source": "https://github.com/hsimah-services/elephentity-codegen/tree/v0.7.0"
             },
-            "time": "2026-10-10T18:03:46+00:00"
+            "time": "2026-10-18T20:05:19+00:00"
         },
         {
-            "name": "elephentity/codegen-php",
-            "version": "v0.7.0",
+            "name": "elephentity/codegen-graphql-php",
+            "version": "v0.1.0-alpha.4",
             "source": {
                 "type": "git",
-                "url": "https://github.com/hsimah-services/elephentity-codegen-php.git",
-                "reference": "092751008929366d14caf060b6221f5e854da5f5"
+                "url": "https://github.com/hsimah-services/elephentity-codegen-graphql-php.git",
+                "reference": "9f6de91ae532f6e4b984348f190376309d49fdca"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hsimah-services/elephentity-codegen-php/zipball/092751008929366d14caf060b6221f5e854da5f5",
-                "reference": "092751008929366d14caf060b6221f5e854da5f5",
+                "url": "https://api.github.com/repos/hsimah-services/elephentity-codegen-graphql-php/zipball/9f6de91ae532f6e4b984348f190376309d49fdca",
+                "reference": "9f6de91ae532f6e4b984348f190376309d49fdca",
                 "shasum": ""
             },
             "require": {
-                "elephentity/runtime": "^0.13.1",
+                "php": ">=8.3"
+            },
+            "bin": [
+                "bin/eleph-gen-graphql-php"
+            ],
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Standalone GraphQL PHP manifest generator for Elephentity. Build-time only.",
+            "support": {
+                "issues": "https://github.com/hsimah-services/elephentity-codegen-graphql-php/issues",
+                "source": "https://github.com/hsimah-services/elephentity-codegen-graphql-php/tree/v0.1.0-alpha.4"
+            },
+            "time": "2026-10-12T02:08:48+00:00"
+        },
+        {
+            "name": "elephentity/codegen-php",
+            "version": "v0.9.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/hsimah-services/elephentity-codegen-php.git",
+                "reference": "50bc0373954079da402f21ba7e5912acf04796af"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/hsimah-services/elephentity-codegen-php/zipball/50bc0373954079da402f21ba7e5912acf04796af",
+                "reference": "50bc0373954079da402f21ba7e5912acf04796af",
+                "shasum": ""
+            },
+            "require": {
+                "elephentity/runtime": "^0.17",
                 "nette/php-generator": "^4.1",
                 "php": ">=8.3",
                 "psr/container": "^2.0"
             },
             "require-dev": {
-                "elephentity/graphql": "^0.2@alpha",
-                "elephentity/memory": "^0.13.1",
-                "elephentity/sqlite": "^0.1.0-alpha.5",
+                "elephentity/graphql": "^0.17",
+                "elephentity/memory": "^0.17",
+                "elephentity/sqlite": "^0.17",
                 "friendsofphp/php-cs-fixer": "^3.64",
                 "phpstan/phpstan": "^2.0",
                 "phpunit/phpunit": "^11.0 || ^12.0"
             },
             "bin": [
-                "bin/eleph-gen-php"
+                "bin/eleph-gen-php",
+                "bin/eleph-check-php"
             ],
             "type": "library",
             "autoload": {
@@ -699,177 +714,85 @@
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "Apache-2.0"
+                "MIT"
             ],
             "description": "The PHP builder for Elephentity: compiles the IR into locked PHP. Build-time only.",
             "support": {
                 "issues": "https://github.com/hsimah-services/elephentity-codegen-php/issues",
-                "source": "https://github.com/hsimah-services/elephentity-codegen-php/tree/v0.7.0"
+                "source": "https://github.com/hsimah-services/elephentity-codegen-php/tree/v0.9.0"
             },
-            "time": "2026-10-10T22:32:48+00:00"
+            "time": "2026-10-22T00:12:52+00:00"
         },
         {
-            "name": "elephentity/codegen-wordpress",
-            "version": "v0.5.0",
+            "name": "elephentity/codegen-sqlite",
+            "version": "v0.1.0-alpha.5",
             "source": {
                 "type": "git",
-                "url": "https://github.com/hsimah-services/elephentity-codegen-wordpress.git",
-                "reference": "49e715713c27e8deab4b6e66c3f753cf21034a9f"
+                "url": "https://github.com/hsimah-services/elephentity-codegen-sqlite.git",
+                "reference": "919e1cf6ee6c3445a6967a470926269784788c4c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hsimah-services/elephentity-codegen-wordpress/zipball/49e715713c27e8deab4b6e66c3f753cf21034a9f",
-                "reference": "49e715713c27e8deab4b6e66c3f753cf21034a9f",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=8.3",
-                "symfony/yaml": "^7.0 || ^8.0"
-            },
-            "require-dev": {
-                "friendsofphp/php-cs-fixer": "^3.64",
-                "phpstan/phpstan": "^2.0",
-                "phpunit/phpunit": "^11.0 || ^12.0"
-            },
-            "bin": [
-                "bin/eleph-gen-wordpress"
-            ],
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Eleph\\Gen\\WordPress\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "Apache-2.0"
-            ],
-            "description": "The WordPress builder for Elephentity: compiles the IR into the physical schema WordPress needs. Build-time only.",
-            "support": {
-                "issues": "https://github.com/hsimah-services/elephentity-codegen-wordpress/issues",
-                "source": "https://github.com/hsimah-services/elephentity-codegen-wordpress/tree/v0.5.0"
-            },
-            "time": "2026-10-10T20:00:35+00:00"
-        },
-        {
-            "name": "elephentity/codegen-wpgraphql",
-            "version": "v0.3.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/hsimah-services/elephentity-codegen-wpgraphql.git",
-                "reference": "16e7ead664534809a9534a15f999e1689ab86fc8"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/hsimah-services/elephentity-codegen-wpgraphql/zipball/16e7ead664534809a9534a15f999e1689ab86fc8",
-                "reference": "16e7ead664534809a9534a15f999e1689ab86fc8",
+                "url": "https://api.github.com/repos/hsimah-services/elephentity-codegen-sqlite/zipball/919e1cf6ee6c3445a6967a470926269784788c4c",
+                "reference": "919e1cf6ee6c3445a6967a470926269784788c4c",
                 "shasum": ""
             },
             "require": {
                 "php": ">=8.3"
             },
-            "require-dev": {
-                "friendsofphp/php-cs-fixer": "^3.64",
-                "phpstan/phpstan": "^2.0",
-                "phpunit/phpunit": "^11.0 || ^12.0"
-            },
             "bin": [
-                "bin/eleph-gen-wpgraphql"
+                "bin/eleph-gen-sqlite"
             ],
             "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Eleph\\Gen\\WPGraphQL\\": "src/"
-                }
-            },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "Apache-2.0"
+                "MIT"
             ],
-            "description": "The WPGraphQL builder for Elephentity: compiles the IR into a GraphQL manifest and a conformance verifier. Build-time only.",
+            "description": "SQLite storage manifest and schema generator for Elephentity. Build-time only.",
             "support": {
-                "issues": "https://github.com/hsimah-services/elephentity-codegen-wpgraphql/issues",
-                "source": "https://github.com/hsimah-services/elephentity-codegen-wpgraphql/tree/v0.3.1"
+                "issues": "https://github.com/hsimah-services/elephentity-codegen-sqlite/issues",
+                "source": "https://github.com/hsimah-services/elephentity-codegen-sqlite/tree/v0.1.0-alpha.5"
             },
-            "time": "2026-10-10T19:21:26+00:00"
-        },
-        {
-            "name": "elephentity/schema",
-            "version": "v0.11.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/hsimah-services/elephentity-schema.git",
-                "reference": "429a73e2d03994914bd410e6efb055b0eaf7f908"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/hsimah-services/elephentity-schema/zipball/429a73e2d03994914bd410e6efb055b0eaf7f908",
-                "reference": "429a73e2d03994914bd410e6efb055b0eaf7f908",
-                "shasum": ""
-            },
-            "require": {
-                "opis/json-schema": "^2.3",
-                "php": ">=8.3",
-                "symfony/yaml": "^7.0 || ^8.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^11.0 || ^12.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Eleph\\Schema\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "Apache-2.0"
-            ],
-            "description": "Spec parser, JSON Schema, pattern resolution and IR for Elephentity. Build-time only.",
-            "support": {
-                "issues": "https://github.com/hsimah-services/elephentity-schema/issues",
-                "source": "https://github.com/hsimah-services/elephentity-schema/tree/v0.11.1"
-            },
-            "time": "2026-09-22T01:29:07+00:00"
+            "time": "2026-10-21T16:41:28+00:00"
         },
         {
             "name": "ergebnis/agent-detector",
-            "version": "1.2.0",
+            "version": "1.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ergebnis/agent-detector.git",
-                "reference": "e211f17928c8b95a51e06040792d57f5462fb271"
+                "reference": "0cd815cec1207873c37624d33f0f2853523152f3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ergebnis/agent-detector/zipball/e211f17928c8b95a51e06040792d57f5462fb271",
-                "reference": "e211f17928c8b95a51e06040792d57f5462fb271",
+                "url": "https://api.github.com/repos/ergebnis/agent-detector/zipball/0cd815cec1207873c37624d33f0f2853523152f3",
+                "reference": "0cd815cec1207873c37624d33f0f2853523152f3",
                 "shasum": ""
             },
             "require": {
                 "php": "~7.4.0 || ~8.0.0 || ~8.1.0 || ~8.2.0 || ~8.3.0 || ~8.4.0 || ~8.5.0 || ~8.6.0"
             },
             "require-dev": {
-                "ergebnis/composer-normalize": "^2.51.0",
-                "ergebnis/license": "^2.7.0",
+                "ergebnis/composer-normalize": "^2.54.0",
+                "ergebnis/license": "^2.8.0",
                 "ergebnis/php-cs-fixer-config": "^6.60.2",
-                "ergebnis/phpstan-rules": "^2.13.1",
-                "ergebnis/phpunit-slow-test-detector": "^2.24.0",
-                "ergebnis/rector-rules": "^1.18.1",
+                "ergebnis/phpstan-rules": "^2.14.0",
+                "ergebnis/phpunit-slow-test-detector": "^2.26.0",
+                "ergebnis/rector-rules": "^1.18.5",
                 "fakerphp/faker": "^1.24.1",
                 "infection/infection": "^0.26.6",
                 "phpstan/extension-installer": "^1.4.3",
-                "phpstan/phpstan": "^2.1.54",
-                "phpstan/phpstan-deprecation-rules": "^2.0.4",
-                "phpstan/phpstan-phpunit": "^2.0.16",
-                "phpstan/phpstan-strict-rules": "^2.0.10",
+                "phpstan/phpstan": "^2.2.14",
+                "phpstan/phpstan-deprecation-rules": "^2.0.5",
+                "phpstan/phpstan-phpunit": "^2.1.1",
+                "phpstan/phpstan-strict-rules": "^2.1.0",
                 "phpunit/phpunit": "^9.6.34",
-                "rector/rector": "^2.4.2"
+                "rector/rector": "^2.7.0"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "1.2-dev"
+                    "dev-main": "1.3-dev"
                 },
                 "composer-normalize": {
                     "indent-size": 2,
@@ -899,7 +822,7 @@
                 "security": "https://github.com/ergebnis/agent-detector/blob/main/.github/SECURITY.md",
                 "source": "https://github.com/ergebnis/agent-detector"
             },
-            "time": "2026-05-07T08:19:07+00:00"
+            "time": "2026-10-15T11:13:32+00:00"
         },
         {
             "name": "evenement/evenement",
@@ -1116,21 +1039,21 @@
         },
         {
             "name": "nette/php-generator",
-            "version": "v4.2.2",
+            "version": "v4.2.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/php-generator.git",
-                "reference": "0d7060926f5c3e8c488b9b9ced42d857f12a34b5"
+                "reference": "abdfd4c22f9077af10daa7391d14e83fc36ba809"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/php-generator/zipball/0d7060926f5c3e8c488b9b9ced42d857f12a34b5",
-                "reference": "0d7060926f5c3e8c488b9b9ced42d857f12a34b5",
+                "url": "https://api.github.com/repos/nette/php-generator/zipball/abdfd4c22f9077af10daa7391d14e83fc36ba809",
+                "reference": "abdfd4c22f9077af10daa7391d14e83fc36ba809",
                 "shasum": ""
             },
             "require": {
                 "nette/utils": "^4.0.6",
-                "php": "8.1 - 8.5"
+                "php": "8.1 - 8.6"
             },
             "require-dev": {
                 "jetbrains/phpstorm-attributes": "^1.2",
@@ -1168,42 +1091,39 @@
                 {
                     "name": "David Grudl",
                     "homepage": "https://davidgrudl.com"
-                },
-                {
-                    "name": "Nette Community",
-                    "homepage": "https://nette.org/contributors"
                 }
             ],
-            "description": "🐘 Nette PHP Generator: generates neat PHP code for you. Supports new PHP 8.5 features.",
-            "homepage": "https://nette.org",
+            "description": "🐘 Nette PHP Generator: generates PHP code from objects. Classes, enums, functions and whole files, with namespaces resolved for you, and always up to date with the latest PHP.",
+            "homepage": "https://doc.nette.org/php-generator",
             "keywords": [
-                "code",
+                "code generation",
+                "code generator",
+                "codegen",
                 "nette",
-                "php",
                 "scaffolding"
             ],
             "support": {
                 "issues": "https://github.com/nette/php-generator/issues",
-                "source": "https://github.com/nette/php-generator/tree/v4.2.2"
+                "source": "https://github.com/nette/php-generator/tree/v4.2.3"
             },
-            "time": "2026-02-26T00:58:33+00:00"
+            "time": "2026-10-22T01:12:52+00:00"
         },
         {
             "name": "nette/utils",
-            "version": "v4.1.5",
+            "version": "v4.1.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/utils.git",
-                "reference": "b043439dbdf954e6c28b5ea7e34b0100f83165e0"
+                "reference": "6bf24518accf32cf845bca305e0b92078700fd01"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/utils/zipball/b043439dbdf954e6c28b5ea7e34b0100f83165e0",
-                "reference": "b043439dbdf954e6c28b5ea7e34b0100f83165e0",
+                "url": "https://api.github.com/repos/nette/utils/zipball/6bf24518accf32cf845bca305e0b92078700fd01",
+                "reference": "6bf24518accf32cf845bca305e0b92078700fd01",
                 "shasum": ""
             },
             "require": {
-                "php": "8.2 - 8.5"
+                "php": "8.2 - 8.6"
             },
             "conflict": {
                 "nette/finder": "<3",
@@ -1275,251 +1195,9 @@
             ],
             "support": {
                 "issues": "https://github.com/nette/utils/issues",
-                "source": "https://github.com/nette/utils/tree/v4.1.5"
+                "source": "https://github.com/nette/utils/tree/v4.1.6"
             },
-            "time": "2026-07-17T23:02:45+00:00"
-        },
-        {
-            "name": "opis/json-schema",
-            "version": "2.6.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/opis/json-schema.git",
-                "reference": "8458763e0dd0b6baa310e04f1829fc73da4e8c8a"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/opis/json-schema/zipball/8458763e0dd0b6baa310e04f1829fc73da4e8c8a",
-                "reference": "8458763e0dd0b6baa310e04f1829fc73da4e8c8a",
-                "shasum": ""
-            },
-            "require": {
-                "ext-json": "*",
-                "opis/string": "^2.1",
-                "opis/uri": "^1.0",
-                "php": "^7.4 || ^8.0"
-            },
-            "require-dev": {
-                "ext-bcmath": "*",
-                "ext-intl": "*",
-                "phpunit/phpunit": "^9.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Opis\\JsonSchema\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "Apache-2.0"
-            ],
-            "authors": [
-                {
-                    "name": "Sorin Sarca",
-                    "email": "sarca_sorin@hotmail.com"
-                },
-                {
-                    "name": "Marius Sarca",
-                    "email": "marius.sarca@gmail.com"
-                }
-            ],
-            "description": "Json Schema Validator for PHP",
-            "homepage": "https://opis.io/json-schema",
-            "keywords": [
-                "json",
-                "json-schema",
-                "schema",
-                "validation",
-                "validator"
-            ],
-            "support": {
-                "issues": "https://github.com/opis/json-schema/issues",
-                "source": "https://github.com/opis/json-schema/tree/2.6.0"
-            },
-            "time": "2025-10-17T12:46:48+00:00"
-        },
-        {
-            "name": "opis/string",
-            "version": "2.1.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/opis/string.git",
-                "reference": "3e4d2aaff518ac518530b89bb26ed40f4503635e"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/opis/string/zipball/3e4d2aaff518ac518530b89bb26ed40f4503635e",
-                "reference": "3e4d2aaff518ac518530b89bb26ed40f4503635e",
-                "shasum": ""
-            },
-            "require": {
-                "ext-iconv": "*",
-                "ext-json": "*",
-                "php": "^7.4 || ^8.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^9.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Opis\\String\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "Apache-2.0"
-            ],
-            "authors": [
-                {
-                    "name": "Marius Sarca",
-                    "email": "marius.sarca@gmail.com"
-                },
-                {
-                    "name": "Sorin Sarca",
-                    "email": "sarca_sorin@hotmail.com"
-                }
-            ],
-            "description": "Multibyte strings as objects",
-            "homepage": "https://opis.io/string",
-            "keywords": [
-                "multi-byte",
-                "opis",
-                "string",
-                "string manipulation",
-                "utf-8"
-            ],
-            "support": {
-                "issues": "https://github.com/opis/string/issues",
-                "source": "https://github.com/opis/string/tree/2.1.0"
-            },
-            "time": "2025-10-17T12:38:41+00:00"
-        },
-        {
-            "name": "opis/uri",
-            "version": "1.1.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/opis/uri.git",
-                "reference": "0f3ca49ab1a5e4a6681c286e0b2cc081b93a7d5a"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/opis/uri/zipball/0f3ca49ab1a5e4a6681c286e0b2cc081b93a7d5a",
-                "reference": "0f3ca49ab1a5e4a6681c286e0b2cc081b93a7d5a",
-                "shasum": ""
-            },
-            "require": {
-                "opis/string": "^2.0",
-                "php": "^7.4 || ^8.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^9"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Opis\\Uri\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "Apache-2.0"
-            ],
-            "authors": [
-                {
-                    "name": "Marius Sarca",
-                    "email": "marius.sarca@gmail.com"
-                },
-                {
-                    "name": "Sorin Sarca",
-                    "email": "sarca_sorin@hotmail.com"
-                }
-            ],
-            "description": "Build, parse and validate URIs and URI-templates",
-            "homepage": "https://opis.io",
-            "keywords": [
-                "URI Template",
-                "parse url",
-                "punycode",
-                "uri",
-                "uri components",
-                "url",
-                "validate uri"
-            ],
-            "support": {
-                "issues": "https://github.com/opis/uri/issues",
-                "source": "https://github.com/opis/uri/tree/1.1.0"
-            },
-            "time": "2021-05-22T15:57:08+00:00"
-        },
-        {
-            "name": "php-stubs/wordpress-stubs",
-            "version": "v7.1.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/php-stubs/wordpress-stubs.git",
-                "reference": "6926c5156431a3ff909d43faa16a92a0bc0c2428"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/php-stubs/wordpress-stubs/zipball/6926c5156431a3ff909d43faa16a92a0bc0c2428",
-                "reference": "6926c5156431a3ff909d43faa16a92a0bc0c2428",
-                "shasum": ""
-            },
-            "conflict": {
-                "phpdocumentor/reflection-docblock": "5.6.1"
-            },
-            "require-dev": {
-                "dealerdirect/phpcodesniffer-composer-installer": "^1.0",
-                "nikic/php-parser": "^5.5",
-                "php": "^7.4 || ^8.0",
-                "php-stubs/generator": "^0.9",
-                "phpdocumentor/reflection-docblock": "^6.0",
-                "phpstan/phpstan": "^2.2",
-                "phpunit/phpunit": "^9.5",
-                "symfony/polyfill-php80": "*",
-                "szepeviktor/phpcs-psr-12-neutron-hybrid-ruleset": "^1.2",
-                "wp-coding-standards/wpcs": "3.4.1 as 2.3.0"
-            },
-            "suggest": {
-                "paragonie/sodium_compat": "Pure PHP implementation of libsodium",
-                "symfony/polyfill-php80": "Symfony polyfill backporting some PHP 8.0+ features to lower PHP versions",
-                "szepeviktor/phpstan-wordpress": "WordPress extensions for PHPStan"
-            },
-            "type": "library",
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "WordPress function and class declaration stubs for static analysis.",
-            "homepage": "https://github.com/php-stubs/wordpress-stubs",
-            "keywords": [
-                "PHPStan",
-                "static analysis",
-                "wordpress"
-            ],
-            "support": {
-                "issues": "https://github.com/php-stubs/wordpress-stubs/issues",
-                "source": "https://github.com/php-stubs/wordpress-stubs/tree/v7.1.2"
-            },
-            "time": "2026-10-06T06:59:21+00:00"
+            "time": "2026-10-20T17:07:56+00:00"
         },
         {
             "name": "phpstan/phpstan",
@@ -2242,16 +1920,16 @@
         },
         {
             "name": "symfony/console",
-            "version": "v7.4.20",
+            "version": "v7.4.21",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "d7bca2fe05241dc7732d0c8b6d551b879f5d0a7d"
+                "reference": "21f1bc2296f7ff6043241a8dcbc09559b3732820"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/d7bca2fe05241dc7732d0c8b6d551b879f5d0a7d",
-                "reference": "d7bca2fe05241dc7732d0c8b6d551b879f5d0a7d",
+                "url": "https://api.github.com/repos/symfony/console/zipball/21f1bc2296f7ff6043241a8dcbc09559b3732820",
+                "reference": "21f1bc2296f7ff6043241a8dcbc09559b3732820",
                 "shasum": ""
             },
             "require": {
@@ -2316,7 +1994,7 @@
                 "terminal"
             ],
             "support": {
-                "source": "https://github.com/symfony/console/tree/v7.4.20"
+                "source": "https://github.com/symfony/console/tree/v7.4.21"
             },
             "funding": [
                 {
@@ -2336,7 +2014,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-09-18T15:55:00+00:00"
+            "time": "2026-10-12T18:45:38+00:00"
         },
         {
             "name": "symfony/deprecation-contracts",
@@ -2576,16 +2254,16 @@
         },
         {
             "name": "symfony/filesystem",
-            "version": "v7.4.18",
+            "version": "v7.4.21",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/filesystem.git",
-                "reference": "90d412aa5277c6819db39e7605aa46b1019e3232"
+                "reference": "fd0e3462be6d32a0d130e8423e4940a7688162d8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/filesystem/zipball/90d412aa5277c6819db39e7605aa46b1019e3232",
-                "reference": "90d412aa5277c6819db39e7605aa46b1019e3232",
+                "url": "https://api.github.com/repos/symfony/filesystem/zipball/fd0e3462be6d32a0d130e8423e4940a7688162d8",
+                "reference": "fd0e3462be6d32a0d130e8423e4940a7688162d8",
                 "shasum": ""
             },
             "require": {
@@ -2622,7 +2300,7 @@
             "description": "Provides basic utilities for the filesystem",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/filesystem/tree/v7.4.18"
+                "source": "https://github.com/symfony/filesystem/tree/v7.4.21"
             },
             "funding": [
                 {
@@ -2642,7 +2320,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-08-23T10:03:40+00:00"
+            "time": "2026-10-06T20:05:19+00:00"
         },
         {
             "name": "symfony/finder",
@@ -3364,16 +3042,16 @@
         },
         {
             "name": "symfony/process",
-            "version": "v7.4.19",
+            "version": "v7.4.21",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/process.git",
-                "reference": "ed0ae095b86994d370d5791612e55984f15aa30e"
+                "reference": "e5247f4a5e0797d232ad8e8e6803aeb341843c83"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/process/zipball/ed0ae095b86994d370d5791612e55984f15aa30e",
-                "reference": "ed0ae095b86994d370d5791612e55984f15aa30e",
+                "url": "https://api.github.com/repos/symfony/process/zipball/e5247f4a5e0797d232ad8e8e6803aeb341843c83",
+                "reference": "e5247f4a5e0797d232ad8e8e6803aeb341843c83",
                 "shasum": ""
             },
             "require": {
@@ -3405,7 +3083,7 @@
             "description": "Executes commands in sub-processes",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/process/tree/v7.4.19"
+                "source": "https://github.com/symfony/process/tree/v7.4.21"
             },
             "funding": [
                 {
@@ -3425,7 +3103,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-09-02T12:38:34+00:00"
+            "time": "2026-10-08T16:56:12+00:00"
         },
         {
             "name": "symfony/service-contracts",
@@ -3582,16 +3260,16 @@
         },
         {
             "name": "symfony/string",
-            "version": "v7.4.19",
+            "version": "v7.4.21",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/string.git",
-                "reference": "02731ce2bd26514bec9efc0baef2cd0b0cf67f46"
+                "reference": "9bc35d074ad16a58c21cd52b18c5cacc4f4c3981"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/string/zipball/02731ce2bd26514bec9efc0baef2cd0b0cf67f46",
-                "reference": "02731ce2bd26514bec9efc0baef2cd0b0cf67f46",
+                "url": "https://api.github.com/repos/symfony/string/zipball/9bc35d074ad16a58c21cd52b18c5cacc4f4c3981",
+                "reference": "9bc35d074ad16a58c21cd52b18c5cacc4f4c3981",
                 "shasum": ""
             },
             "require": {
@@ -3649,7 +3327,7 @@
                 "utf8"
             ],
             "support": {
-                "source": "https://github.com/symfony/string/tree/v7.4.19"
+                "source": "https://github.com/symfony/string/tree/v7.4.21"
             },
             "funding": [
                 {
@@ -3669,93 +3347,26 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-09-11T14:46:58+00:00"
-        },
-        {
-            "name": "symfony/yaml",
-            "version": "v7.4.20",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/yaml.git",
-                "reference": "0222bf4dfaa1e3ceb8fff579635d655f2950d5a7"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/yaml/zipball/0222bf4dfaa1e3ceb8fff579635d655f2950d5a7",
-                "reference": "0222bf4dfaa1e3ceb8fff579635d655f2950d5a7",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=8.2",
-                "symfony/deprecation-contracts": "^2.5|^3",
-                "symfony/polyfill-ctype": "^1.8"
-            },
-            "conflict": {
-                "symfony/console": "<6.4"
-            },
-            "require-dev": {
-                "symfony/console": "^6.4|^7.0|^8.0"
-            },
-            "bin": [
-                "Resources/bin/yaml-lint"
-            ],
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Symfony\\Component\\Yaml\\": ""
-                },
-                "exclude-from-classmap": [
-                    "/Tests/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com"
-                },
-                {
-                    "name": "Symfony Community",
-                    "homepage": "https://symfony.com/contributors"
-                }
-            ],
-            "description": "Loads and dumps YAML files",
-            "homepage": "https://symfony.com",
-            "support": {
-                "source": "https://github.com/symfony/yaml/tree/v7.4.20"
-            },
-            "funding": [
-                {
-                    "url": "https://symfony.com/sponsor",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/fabpot",
-                    "type": "github"
-                },
-                {
-                    "url": "https://github.com/nicolas-grekas",
-                    "type": "github"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
-                    "type": "tidelift"
-                }
-            ],
-            "time": "2026-09-26T06:31:10+00:00"
+            "time": "2026-10-03T15:15:30+00:00"
         }
     ],
     "aliases": [],
-    "minimum-stability": "dev",
-    "stability-flags": {},
+    "minimum-stability": "stable",
+    "stability-flags": {
+        "elephentity/codegen-graphql-php": 15,
+        "elephentity/codegen-sqlite": 15
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=8.3"
+        "php": ">=8.3",
+        "ext-mbstring": "*",
+        "ext-pdo": "*",
+        "ext-pdo_sqlite": "*"
     },
     "platform-dev": {},
+    "platform-overrides": {
+        "php": "8.3.31"
+    },
     "plugin-api-version": "2.9.0"
 }

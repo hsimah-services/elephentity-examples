@@ -34,7 +34,16 @@ jobs:
         with:
           php-version: ${{ matrix.php }}
           coverage: none
+          extensions: pdo_sqlite, mbstring
           tools: composer:v2
+
+      - name: Install eleph
+        env:
+          ELEPH_VERSION: 0.16.1
+          ELEPH_INSTALL_DIR: ${{ runner.temp }}/eleph
+        run: |
+          curl -fsSL "https://github.com/hsimah-services/elephentity/releases/download/v${ELEPH_VERSION}/install.sh" | sh
+          echo "$ELEPH_INSTALL_DIR" >> "$GITHUB_PATH"
 
       - name: Install dependencies
         uses: ramsey/composer-install@v3
@@ -57,19 +66,19 @@ jobs:
 
       - name: fmt
         working-directory: clog
-        run: vendor/bin/eleph fmt
+        run: eleph fmt
 
       - name: validate
         working-directory: clog
-        run: vendor/bin/eleph validate
+        run: eleph validate
 
       - name: generate --check
         working-directory: clog
-        run: vendor/bin/eleph generate --check
+        run: eleph generate --check
 
       - name: check
         working-directory: clog
-        run: vendor/bin/eleph check
+        run: eleph check
 
       - name: Behavioral contract tests
         working-directory: clog

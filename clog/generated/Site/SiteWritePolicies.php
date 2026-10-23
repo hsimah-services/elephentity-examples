@@ -9,11 +9,12 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   Site/SiteWritePolicies.php
- * digest: sha256:7472bf8c8f142312ceafff3e6d9ed57fbae18729d9c95e7cf2bd807ebefaf0b8
+ * digest: sha256:6feaffe8f259a35c5337f6af45ff6a5460d0149363aee04b4fde554bb2cce4b2
  */
 
 namespace Clog\Entity\Site;
 
+use Clog\Entity\Pattern\Record\Contract\RecordStaffWritePolicy;
 use Eleph\Runtime\Policy\EntityWritePolicies;
 use Eleph\Runtime\Policy\PolicyDecision;
 use Eleph\Runtime\Policy\PolicyOutcome;
@@ -22,12 +23,14 @@ use Eleph\Runtime\Policy\WriteContext;
 
 final readonly class SiteWritePolicies implements EntityWritePolicies
 {
-    public function __construct() {
+    public function __construct(
+        private RecordStaffWritePolicy $staffPolicy,
+    ) {
 
     }
 
     public function isEmpty(): bool {
-        return true;
+        return false;
     }
 
     public function decide(
@@ -35,6 +38,12 @@ final readonly class SiteWritePolicies implements EntityWritePolicies
         WriteContext $context,
         Viewer $viewer,
     ): PolicyDecision {
-        return PolicyDecision::allow();
+        assert(null === $entity || $entity instanceof Site);
+        $decision = $this->staffPolicy->decide($entity, $context, $viewer);
+        if (PolicyOutcome::Skip !== $decision->outcome) {
+            return $decision->withPolicy('staff');
+        }
+
+        return PolicyDecision::deny('No policy allowed this write.')->withPolicy('terminal');
     }
 }

@@ -1,15 +1,9 @@
 entity: Inventory
 description: One stocked instance of an item, in a location, with its own expiry.
 use:
-  - ClogPost
-configure:
-  ClogPost:
-    visibility: private
-    adminMenu: clog
-    label: Inventory Entry
-    pluralLabel: Inventory
+  - Record
 integrations:
-  wpgraphql:
+  graphql:
     singular: ClogInventory
     plural: ClogInventoryEntries
 storage:
@@ -18,7 +12,7 @@ storage:
 fields:
   name:
     type: string
-    description: Projected to post_title, so the admin list has something to show.
+    description: Display label derived from the item and location before writing.
     required: true
     maxLength: 200
   dateAdded:
@@ -52,11 +46,3 @@ edges:
       Which building this instance is physically in. Many-to-many allows more than one
       building to be recorded; an entry moving between buildings relinks this edge
       instead of becoming a different row.
-sideEffects:
-  siteAvailability:
-    description: >
-      Rejects a write whose site is not one of its location's available sites — Deep
-      Freezer lists only Cave, so an entry there can never claim the Loft.
-    on: [create, update]
-    phase: preCommit
-    handler: true

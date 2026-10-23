@@ -9,12 +9,11 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   Location/LocationInput.php
- * digest: sha256:6dc605d2299568217f6acb5fabf936eadfb3c35bc64441141c251ba76adaad51
+ * digest: sha256:2c7ffec37ee3ff1e6d773d1c40e2f405351b58be1869a27f70e49aaae0db3099
  */
 
 namespace Clog\Entity\Location;
 
-use Eleph\Runtime\Identity\Identifier;
 use Eleph\Runtime\Mutation\MutationBuffer;
 use Eleph\Runtime\Query\ValueDecoder;
 use InvalidArgumentException;
@@ -41,29 +40,6 @@ final readonly class LocationInput
     }
 
     /**
-     * @return list<Identifier>
-     */
-    private function sites(
-        mixed $value,
-    ): array {
-        if (null === $value) {
-            return [];
-        }
-
-        if (!is_array($value)) {
-            throw new InvalidArgumentException(sprintf('%s takes a list of ids.', 'Location.sites'));
-        }
-
-        $ids = [];
-
-        foreach ($value as $id) {
-            $ids[] = $this->decode->id($id, 'Location.sites');
-        }
-
-        return $ids;
-    }
-
-    /**
      * Seeds declared defaults on create and applies explicit input.
      * Absent update keys and existing pending values are not reset by defaults.
      *
@@ -75,10 +51,6 @@ final readonly class LocationInput
     ): void {
         if (array_key_exists('name', $input)) {
             $buffer->set('name', $this->name($input['name']));
-        }
-
-        if (array_key_exists('sites', $input)) {
-            $buffer->edge('sites')->set($this->sites($input['sites']));
         }
     }
 

@@ -9,7 +9,7 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   Location/LocationPreCommitContext.php
- * digest: sha256:7ad53a4f59554a98d3f05a797622ad07be00d141c279a85cfb59efa1df1f81b0
+ * digest: sha256:608cb85a2407ba9b9be53921543da3c9548c3131b76d15c3f2e58d79b9b67512
  */
 
 namespace Clog\Entity\Location;
@@ -75,10 +75,6 @@ final readonly class LocationPreCommitContext implements MutableMutationContext
         string $value,
     ): void {
         $this->context->set('name', $value);
-    }
-
-    public function sites(): EdgeMutation {
-        return $this->context->edge('sites');
     }
 
     public function id(): Identifier {
@@ -173,17 +169,6 @@ final readonly class LocationPreCommitContext implements MutableMutationContext
         assert(null === $value || is_string($value));
 
         return $value;
-    }
-
-    /**
-     * @return list<Identifier>
-     */
-    public function pendingSites(): array {
-        return $this->context->pendingEdge('sites');
-    }
-
-    public function isSitesChanged(): bool {
-        return $this->context->isEdgeChanged('sites');
     }
 
     public static function of(

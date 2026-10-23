@@ -9,7 +9,7 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   Site/SiteDeleter.php
- * digest: sha256:ef9776f978d371c283171bd57df3e5fad8f5c2fab70915f30d3f5286864b5522
+ * digest: sha256:fa8dee11d30340a680fd4096eaf253f335c7f954fa902c4faf9425a62f2d10bc
  */
 
 namespace Clog\Entity\Site;
@@ -46,7 +46,6 @@ final class SiteDeleter
     public static function rules(): array {
         return [
             new DeletionRule('Inventory', 'site', 'Inventory', DeletionPolicy::Restrict, true),
-            new DeletionRule('Location', 'sites', 'Location', DeletionPolicy::Restrict, true),
         ];
     }
 }

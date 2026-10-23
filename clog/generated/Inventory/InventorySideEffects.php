@@ -9,12 +9,11 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   Inventory/InventorySideEffects.php
- * digest: sha256:e7b5fda1fc36fa36e34128cc2a1c0e252e29fd0f04d9691eb9bd683282e64c5f
+ * digest: sha256:ce793731aaf6cbe312bccd200875b438622de96c16609da190dfe3fbc9afef6e
  */
 
 namespace Clog\Entity\Inventory;
 
-use Clog\Entity\Inventory\Contract\InventorySiteAvailabilitySideEffect;
 use Eleph\Runtime\Mutation\EntitySideEffects;
 use Eleph\Runtime\Mutation\MutableMutationContext;
 use Eleph\Runtime\SideEffect\SideEffectEvent;
@@ -25,9 +24,7 @@ use Eleph\Runtime\SideEffect\SideEffectPhase;
  */
 final readonly class InventorySideEffects implements EntitySideEffects
 {
-    public function __construct(
-        private InventorySiteAvailabilitySideEffect $siteAvailabilitySideEffect,
-    ) {
+    public function __construct() {
 
     }
 
@@ -40,10 +37,6 @@ final readonly class InventorySideEffects implements EntitySideEffects
         MutableMutationContext $context,
     ): iterable {
         $handlers = [];
-        if (SideEffectPhase::PreCommit === $phase && in_array($event, [SideEffectEvent::Create, SideEffectEvent::Update], true)) {
-            $handlers[] = fn () => $this->siteAvailabilitySideEffect->handle(InventoryPreCommitContext::of($context));
-        }
-
         return $handlers;
     }
 }

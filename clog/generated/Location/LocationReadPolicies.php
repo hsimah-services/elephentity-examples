@@ -9,12 +9,12 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   Location/LocationReadPolicies.php
- * digest: sha256:dbaf4ffcf144be8d6f33a302910b71a5069f26afb78007f22484153e4fbcaeb0
+ * digest: sha256:9713fd4315769cc1075c17f9399daf36776d4f0a4401e32ef22a8a131d73a95d
  */
 
 namespace Clog\Entity\Location;
 
-use Clog\Entity\Pattern\ClogPost\Contract\ClogPostSignedInReadPolicy;
+use Clog\Entity\Pattern\Record\Contract\RecordSignedInReadPolicy;
 use Eleph\Runtime\Policy\EntityReadPolicies;
 use Eleph\Runtime\Policy\PolicyDecision;
 use Eleph\Runtime\Policy\PolicyOutcome;
@@ -23,7 +23,7 @@ use Eleph\Runtime\Policy\Viewer;
 final readonly class LocationReadPolicies implements EntityReadPolicies
 {
     public function __construct(
-        private ClogPostSignedInReadPolicy $signedInPolicy,
+        private RecordSignedInReadPolicy $signedInPolicy,
     ) {
 
     }

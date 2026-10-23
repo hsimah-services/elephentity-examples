@@ -9,11 +9,12 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   Site/SiteWriteContext.php
- * digest: sha256:dffd74dd98b8a103f80c2dffbc0926a68d3a3f009e0a115fd6611f5d54b67708
+ * digest: sha256:4353ac9763ad058ef02b91dc9952647b73a6c05d29281fb933f2d6b91df4bd2f
  */
 
 namespace Clog\Entity\Site;
 
+use DateTimeImmutable;
 use Eleph\Runtime\Mutation\ActionCall;
 use Eleph\Runtime\Mutation\MutationContext;
 use Eleph\Runtime\Policy\WriteContext;
@@ -58,6 +59,34 @@ final readonly class SiteWriteContext implements WriteContext
 
     public function mutation(): ?MutationContext {
         return $this->context->mutation();
+    }
+
+    public function originalCreatedAt(): ?DateTimeImmutable {
+        $value = $this->context->mutation()?->original('createdAt');
+        assert(null === $value || $value instanceof DateTimeImmutable);
+
+        return $value;
+    }
+
+    public function pendingCreatedAt(): ?DateTimeImmutable {
+        $value = $this->context->mutation()?->pending('createdAt');
+        assert(null === $value || $value instanceof DateTimeImmutable);
+
+        return $value;
+    }
+
+    public function originalUpdatedAt(): ?DateTimeImmutable {
+        $value = $this->context->mutation()?->original('updatedAt');
+        assert(null === $value || $value instanceof DateTimeImmutable);
+
+        return $value;
+    }
+
+    public function pendingUpdatedAt(): ?DateTimeImmutable {
+        $value = $this->context->mutation()?->pending('updatedAt');
+        assert(null === $value || $value instanceof DateTimeImmutable);
+
+        return $value;
     }
 
     public function originalName(): ?string {

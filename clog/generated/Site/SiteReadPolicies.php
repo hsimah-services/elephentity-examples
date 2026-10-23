@@ -9,11 +9,12 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   Site/SiteReadPolicies.php
- * digest: sha256:e9c625f8e057f37cca1c6a383eb02dd5274b219ac9cfc13ddfe123e21ddb455a
+ * digest: sha256:f5bbe1b4d8917a0dca3b5242415a38105145b95b90d432c4f80f58e526b50b15
  */
 
 namespace Clog\Entity\Site;
 
+use Clog\Entity\Pattern\Record\Contract\RecordSignedInReadPolicy;
 use Eleph\Runtime\Policy\EntityReadPolicies;
 use Eleph\Runtime\Policy\PolicyDecision;
 use Eleph\Runtime\Policy\PolicyOutcome;
@@ -21,18 +22,26 @@ use Eleph\Runtime\Policy\Viewer;
 
 final readonly class SiteReadPolicies implements EntityReadPolicies
 {
-    public function __construct() {
+    public function __construct(
+        private RecordSignedInReadPolicy $signedInPolicy,
+    ) {
 
     }
 
     public function isEmpty(): bool {
-        return true;
+        return false;
     }
 
     public function decide(
         object $entity,
         Viewer $viewer,
     ): PolicyDecision {
-        return PolicyDecision::allow();
+        assert($entity instanceof Site);
+        $decision = $this->signedInPolicy->decide($entity, $viewer);
+        if (PolicyOutcome::Skip !== $decision->outcome) {
+            return $decision->withPolicy('signedIn');
+        }
+
+        return PolicyDecision::deny('No policy allowed this read.')->withPolicy('terminal');
     }
 }

@@ -9,11 +9,12 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   Site/SitePreCommitContext.php
- * digest: sha256:43fceb7191221c5a6182c9a85605a2a7220e5df9823220f4e99754a15fc3e927
+ * digest: sha256:60b0e587fa0959ba9b53541fc20f373a8db6aceb44f29854badc0ba6096553eb
  */
 
 namespace Clog\Entity\Site;
 
+use DateTimeImmutable;
 use Eleph\Runtime\Identity\Identifier;
 use Eleph\Runtime\Mutation\ActionCall;
 use Eleph\Runtime\Mutation\EdgeMutation;
@@ -56,6 +57,18 @@ final readonly class SitePreCommitContext implements MutableMutationContext
         string $edge,
     ): EdgeMutation {
         return $this->context->edge($edge);
+    }
+
+    public function setCreatedAt(
+        DateTimeImmutable $value,
+    ): void {
+        $this->context->set('createdAt', $value);
+    }
+
+    public function setUpdatedAt(
+        DateTimeImmutable $value,
+    ): void {
+        $this->context->set('updatedAt', $value);
     }
 
     public function setName(
@@ -114,6 +127,34 @@ final readonly class SitePreCommitContext implements MutableMutationContext
         string $edge,
     ): bool {
         return $this->context->isEdgeChanged($edge);
+    }
+
+    public function originalCreatedAt(): ?DateTimeImmutable {
+        $value = $this->context->original('createdAt');
+        assert(null === $value || $value instanceof DateTimeImmutable);
+
+        return $value;
+    }
+
+    public function pendingCreatedAt(): ?DateTimeImmutable {
+        $value = $this->context->pending('createdAt');
+        assert(null === $value || $value instanceof DateTimeImmutable);
+
+        return $value;
+    }
+
+    public function originalUpdatedAt(): ?DateTimeImmutable {
+        $value = $this->context->original('updatedAt');
+        assert(null === $value || $value instanceof DateTimeImmutable);
+
+        return $value;
+    }
+
+    public function pendingUpdatedAt(): ?DateTimeImmutable {
+        $value = $this->context->pending('updatedAt');
+        assert(null === $value || $value instanceof DateTimeImmutable);
+
+        return $value;
     }
 
     public function originalName(): ?string {

@@ -9,11 +9,12 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   Inventory/InventoryWritePolicies.php
- * digest: sha256:fff9f288df6d85a860a25a3f0533fc09795c18dd259d0f5435ead289bba4a32a
+ * digest: sha256:31151733adc6f8e2b4d353a5ab79c4bc8a44939953bd44ba41e4937b0bb18157
  */
 
 namespace Clog\Entity\Inventory;
 
+use Clog\Entity\Pattern\Record\Contract\RecordStaffWritePolicy;
 use Eleph\Runtime\Policy\EntityWritePolicies;
 use Eleph\Runtime\Policy\PolicyDecision;
 use Eleph\Runtime\Policy\PolicyOutcome;
@@ -22,12 +23,14 @@ use Eleph\Runtime\Policy\WriteContext;
 
 final readonly class InventoryWritePolicies implements EntityWritePolicies
 {
-    public function __construct() {
+    public function __construct(
+        private RecordStaffWritePolicy $staffPolicy,
+    ) {
 
     }
 
     public function isEmpty(): bool {
-        return true;
+        return false;
     }
 
     public function decide(
@@ -35,6 +38,12 @@ final readonly class InventoryWritePolicies implements EntityWritePolicies
         WriteContext $context,
         Viewer $viewer,
     ): PolicyDecision {
-        return PolicyDecision::allow();
+        assert(null === $entity || $entity instanceof Inventory);
+        $decision = $this->staffPolicy->decide($entity, $context, $viewer);
+        if (PolicyOutcome::Skip !== $decision->outcome) {
+            return $decision->withPolicy('staff');
+        }
+
+        return PolicyDecision::deny('No policy allowed this write.')->withPolicy('terminal');
     }
 }

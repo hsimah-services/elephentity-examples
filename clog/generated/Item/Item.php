@@ -9,14 +9,14 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   Item/Item.php
- * digest: sha256:b5c3694b288739eeaad37770077e7272f91086f006e7b8c01c9ce1eb7eeed980
+ * digest: sha256:f88cbf88b05afeedfff04d79a6b5d35cdd99a54ec3f671ec0cca5474dae3a908
  */
 
 namespace Clog\Entity\Item;
 
 use Clog\Entity\Enum\ExpiryUnit;
 use Clog\Entity\Inventory\Inventory;
-use Clog\Entity\Pattern\ClogPost\ClogPost;
+use Clog\Entity\Pattern\Record\Record;
 use DateTimeImmutable;
 use Eleph\Runtime\Identity\EntityId;
 use Eleph\Runtime\Query\EdgeLoader;
@@ -25,7 +25,7 @@ use Eleph\Runtime\Query\EntityQuery;
 /**
  * A thing that can be stocked, identified by its barcode.
  */
-final class Item implements ClogPost
+final class Item implements Record
 {
     private function __construct(
         private readonly EntityId $id,
@@ -59,7 +59,7 @@ final class Item implements ClogPost
     }
 
     /**
-     * What the item is called. Projected to post_title.
+     * What the item is called.
      */
     public function getName(): string {
         return $this->name;
