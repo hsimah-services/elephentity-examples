@@ -6,6 +6,7 @@
 /*/.phpstan.cache/
 /.php-cs-fixer.cache
 /*/.php-cs-fixer.cache
+*.sqlite
 
 # The .NET example
 /dotnet/tools/builders/

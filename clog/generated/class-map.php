@@ -9,7 +9,7 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   class-map.php
- * digest: sha256:f2182bdb830d5ceeab60ebdc15829993f55861c26817bf561d7ad55ac2cb2068
+ * digest: sha256:b60bc6d2b3403639679928cafa5cc1b733287aaa98c16b1d528fdc44df6ef09f
  */
 
 return [
@@ -18,12 +18,10 @@ return [
         'Item' => 'Clog\\Entity\\Item\\Item',
         'Location' => 'Clog\\Entity\\Location\\Location',
         'Site' => 'Clog\\Entity\\Site\\Site',
-        'User' => 'Clog\\Entity\\User\\User',
     ],
     'classes' => [
         'Clog\\Entity\\Catalogue' => 'Catalogue.php',
         'Clog\\Entity\\Enum\\ExpiryUnit' => 'Enum/ExpiryUnit.php',
-        'Clog\\Entity\\Inventory\\Contract\\InventorySiteAvailabilitySideEffect' => 'Inventory/Contract/InventorySiteAvailabilitySideEffect.php',
         'Clog\\Entity\\Inventory\\Inventory' => 'Inventory/Inventory.php',
         'Clog\\Entity\\Inventory\\InventoryDeleter' => 'Inventory/InventoryDeleter.php',
         'Clog\\Entity\\Inventory\\InventoryHydrator' => 'Inventory/InventoryHydrator.php',
@@ -40,7 +38,6 @@ return [
         'Clog\\Entity\\Item\\Contract\\ItemDefaultExpiryValueVerifier' => 'Item/Contract/ItemDefaultExpiryValueVerifier.php',
         'Clog\\Entity\\Item\\Contract\\ItemDiscontinueAction' => 'Item/Contract/ItemDiscontinueAction.php',
         'Clog\\Entity\\Item\\Contract\\ItemSearchQuery' => 'Item/Contract/ItemSearchQuery.php',
-        'Clog\\Entity\\Item\\Contract\\ItemStaffWritePolicy' => 'Item/Contract/ItemStaffWritePolicy.php',
         'Clog\\Entity\\Item\\Item' => 'Item/Item.php',
         'Clog\\Entity\\Item\\ItemDeleter' => 'Item/ItemDeleter.php',
         'Clog\\Entity\\Item\\ItemDiscontinueArguments' => 'Item/ItemDiscontinueArguments.php',
@@ -68,9 +65,10 @@ return [
         'Clog\\Entity\\Location\\LocationVerifiers' => 'Location/LocationVerifiers.php',
         'Clog\\Entity\\Location\\LocationWriteContext' => 'Location/LocationWriteContext.php',
         'Clog\\Entity\\Location\\LocationWritePolicies' => 'Location/LocationWritePolicies.php',
-        'Clog\\Entity\\Pattern\\ClogPost\\ClogPost' => 'Pattern/ClogPost/ClogPost.php',
-        'Clog\\Entity\\Pattern\\ClogPost\\ClogPostMutatorTrait' => 'Pattern/ClogPost/ClogPostMutatorTrait.php',
-        'Clog\\Entity\\Pattern\\ClogPost\\Contract\\ClogPostSignedInReadPolicy' => 'Pattern/ClogPost/Contract/ClogPostSignedInReadPolicy.php',
+        'Clog\\Entity\\Pattern\\Record\\Contract\\RecordSignedInReadPolicy' => 'Pattern/Record/Contract/RecordSignedInReadPolicy.php',
+        'Clog\\Entity\\Pattern\\Record\\Contract\\RecordStaffWritePolicy' => 'Pattern/Record/Contract/RecordStaffWritePolicy.php',
+        'Clog\\Entity\\Pattern\\Record\\Record' => 'Pattern/Record/Record.php',
+        'Clog\\Entity\\Pattern\\Record\\RecordMutatorTrait' => 'Pattern/Record/RecordMutatorTrait.php',
         'Clog\\Entity\\Site\\Site' => 'Site/Site.php',
         'Clog\\Entity\\Site\\SiteDeleter' => 'Site/SiteDeleter.php',
         'Clog\\Entity\\Site\\SiteHydrator' => 'Site/SiteHydrator.php',
@@ -83,18 +81,6 @@ return [
         'Clog\\Entity\\Site\\SiteVerifiers' => 'Site/SiteVerifiers.php',
         'Clog\\Entity\\Site\\SiteWriteContext' => 'Site/SiteWriteContext.php',
         'Clog\\Entity\\Site\\SiteWritePolicies' => 'Site/SiteWritePolicies.php',
-        'Clog\\Entity\\User\\User' => 'User/User.php',
-        'Clog\\Entity\\User\\UserDeleter' => 'User/UserDeleter.php',
-        'Clog\\Entity\\User\\UserHydrator' => 'User/UserHydrator.php',
-        'Clog\\Entity\\User\\UserInput' => 'User/UserInput.php',
-        'Clog\\Entity\\User\\UserMutationContext' => 'User/UserMutationContext.php',
-        'Clog\\Entity\\User\\UserMutator' => 'User/UserMutator.php',
-        'Clog\\Entity\\User\\UserPreCommitContext' => 'User/UserPreCommitContext.php',
-        'Clog\\Entity\\User\\UserReadPolicies' => 'User/UserReadPolicies.php',
-        'Clog\\Entity\\User\\UserSideEffects' => 'User/UserSideEffects.php',
-        'Clog\\Entity\\User\\UserVerifiers' => 'User/UserVerifiers.php',
-        'Clog\\Entity\\User\\UserWriteContext' => 'User/UserWriteContext.php',
-        'Clog\\Entity\\User\\UserWritePolicies' => 'User/UserWritePolicies.php',
         'Clog\\Entity\\Wiring' => 'Wiring.php',
     ],
 ];

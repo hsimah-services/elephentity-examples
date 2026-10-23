@@ -1,27 +1,32 @@
 {
     "name": "elephentity/example-clog",
-    "description": "The Elephentity worked example, as a real WordPress plugin: a lending library for equipment.",
-    "type": "wordpress-plugin",
+    "description": "The Elephentity worked example: a household inventory on SQLite and GraphQL.",
+    "type": "project",
     "license": "MIT",
     "require": {
         "php": ">=8.3",
-        "elephentity/runtime": "^0.14.1",
-        "elephentity/wordpress": "^0.4.1",
-        "elephentity/wpgraphql": "^0.3.1"
+        "ext-mbstring": "*",
+        "ext-pdo": "*",
+        "ext-pdo_sqlite": "*",
+        "elephentity/graphql": "^0.17.0",
+        "elephentity/runtime": "^0.17.0",
+        "elephentity/sqlite": "^0.17.0",
+        "psr/container": "^2.0",
+        "psr/log": "^3.0",
+        "webonyx/graphql-php": "^15.37"
     },
     "require-dev": {
-        "axepress/wp-graphql-stubs": "^2.22",
-        "elephentity/codegen": "^0.7",
-        "elephentity/codegen-php": "^0.8.1",
-        "elephentity/codegen-wordpress": "^0.5.1",
-        "elephentity/codegen-wpgraphql": "^0.3.2",
+        "elephentity/codegen": "^0.7.0",
+        "elephentity/codegen-graphql-php": "^0.1@alpha",
+        "elephentity/codegen-php": "^0.9.0",
+        "elephentity/codegen-sqlite": "^0.1@alpha",
         "friendsofphp/php-cs-fixer": "^3.64",
-        "php-stubs/wordpress-stubs": "^6.7 || ^7.0",
         "phpstan/phpstan": "^2.0"
     },
     "autoload": {
         "psr-4": {
             "Clog\\Entity\\": "generated/",
+            "Clog\\Standalone\\": "standalone/src/",
             "Clog\\": "src/"
         }
     },
@@ -43,14 +48,14 @@
             "@eleph-check",
             "@test"
         ],
-        "test": [
-            "@php tests/site-availability.php",
-            "@php tests/expiry-pairing.php"
-        ]
+        "test": "@php tests/smoke.php"
     },
     "config": {
+        "platform": {
+            "php": "8.3.31"
+        },
         "sort-packages": true
     },
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "prefer-stable": true
 }

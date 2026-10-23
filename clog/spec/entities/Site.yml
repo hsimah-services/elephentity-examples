@@ -1,11 +1,18 @@
 entity: Site
 description: A building an inventory entry is physically kept in — Loft or Cave.
 use:
-  - Taxonomy
+  - Record
 integrations:
-  wpgraphql:
+  graphql:
     singular: ClogSite
     plural: ClogSites
 storage:
   table: site
   handle: clog_site
+fields:
+  name:
+    type: string
+    description: What the site is called.
+    required: true
+    unique: true
+    maxLength: 200

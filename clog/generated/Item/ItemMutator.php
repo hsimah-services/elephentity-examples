@@ -9,14 +9,14 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   Item/ItemMutator.php
- * digest: sha256:a7393ea626d97716c1028ff01f24f65d8de3214230a8063b5c65082e0e879e04
+ * digest: sha256:070d687d45463cea415e7b0701a8be4d4eb271d69ed2ca13c0c50db466e1ec8c
  */
 
 namespace Clog\Entity\Item;
 
 use Clog\Entity\Enum\ExpiryUnit;
 use Clog\Entity\Item\Contract\ItemDiscontinueAction;
-use Clog\Entity\Pattern\ClogPost\ClogPostMutatorTrait;
+use Clog\Entity\Pattern\Record\RecordMutatorTrait;
 use Eleph\Runtime\Mutation\MutationBuffer;
 
 /**
@@ -24,7 +24,7 @@ use Eleph\Runtime\Mutation\MutationBuffer;
  */
 final class ItemMutator
 {
-    use ClogPostMutatorTrait;
+    use RecordMutatorTrait;
 
     public function __construct(
         private readonly MutationBuffer $buffer,

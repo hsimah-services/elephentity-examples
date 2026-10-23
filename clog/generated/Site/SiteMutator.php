@@ -9,11 +9,12 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   Site/SiteMutator.php
- * digest: sha256:8b4fed04056aa5aa55383d4990534b8d15363c88b91ac6f00c6316390e82be9e
+ * digest: sha256:eca1049b2ca159618ed3f7a2ff8b1fc81b28d6de81ad6d5e65031a6bd27e5e8e
  */
 
 namespace Clog\Entity\Site;
 
+use Clog\Entity\Pattern\Record\RecordMutatorTrait;
 use Eleph\Runtime\Mutation\MutationBuffer;
 
 /**
@@ -21,6 +22,8 @@ use Eleph\Runtime\Mutation\MutationBuffer;
  */
 final class SiteMutator
 {
+    use RecordMutatorTrait;
+
     public function __construct(
         private readonly MutationBuffer $buffer,
     ) {

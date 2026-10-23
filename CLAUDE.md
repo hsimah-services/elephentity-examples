@@ -12,7 +12,7 @@ cd clog
 ../tools/php composer ci
 ```
 
-Composer installs the tagged Rust generator sources. Run `composer build-generators`
+Composer installs the tagged Rust generator sources; `eleph` is a pinned binary in the container. Run `composer build-generators`
 after installation or generator updates, in the same environment used for `eleph`.
 `tools/php` provides PHP, Rust and the `eleph` compiler (a release binary, pinned by
 `ELEPH_VERSION` in `tools/php`); CI installs the same version and uses the same build

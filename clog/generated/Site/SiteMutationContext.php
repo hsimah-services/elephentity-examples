@@ -9,11 +9,12 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   Site/SiteMutationContext.php
- * digest: sha256:5b8723c5a870af25bf7fd85023925c8ce2f58961c6103b2e4df0b3e5d0780546
+ * digest: sha256:ec684cfcc47740408a9abaa5d160b88602f1b21d26ebe54f5df759c155d0ce65
  */
 
 namespace Clog\Entity\Site;
 
+use DateTimeImmutable;
 use Eleph\Runtime\Identity\Identifier;
 use Eleph\Runtime\Mutation\ActionCall;
 use Eleph\Runtime\Mutation\MutationContext;
@@ -90,6 +91,34 @@ final readonly class SiteMutationContext implements MutationContext
         string $edge,
     ): bool {
         return $this->context->isEdgeChanged($edge);
+    }
+
+    public function originalCreatedAt(): ?DateTimeImmutable {
+        $value = $this->context->original('createdAt');
+        assert(null === $value || $value instanceof DateTimeImmutable);
+
+        return $value;
+    }
+
+    public function pendingCreatedAt(): ?DateTimeImmutable {
+        $value = $this->context->pending('createdAt');
+        assert(null === $value || $value instanceof DateTimeImmutable);
+
+        return $value;
+    }
+
+    public function originalUpdatedAt(): ?DateTimeImmutable {
+        $value = $this->context->original('updatedAt');
+        assert(null === $value || $value instanceof DateTimeImmutable);
+
+        return $value;
+    }
+
+    public function pendingUpdatedAt(): ?DateTimeImmutable {
+        $value = $this->context->pending('updatedAt');
+        assert(null === $value || $value instanceof DateTimeImmutable);
+
+        return $value;
     }
 
     public function originalName(): ?string {

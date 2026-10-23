@@ -9,14 +9,14 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   Inventory/Inventory.php
- * digest: sha256:319dc4b393d1cad6e00bb26cd976f3960807ae43cbc4475853d1cd94039bb4ba
+ * digest: sha256:e86a386d83834837d1c40c84c9fbb98009e9e9234dfaa5dbbce62083d75d2492
  */
 
 namespace Clog\Entity\Inventory;
 
 use Clog\Entity\Item\Item;
 use Clog\Entity\Location\Location;
-use Clog\Entity\Pattern\ClogPost\ClogPost;
+use Clog\Entity\Pattern\Record\Record;
 use Clog\Entity\Site\Site;
 use DateTimeImmutable;
 use Eleph\Runtime\Identity\EntityId;
@@ -26,7 +26,7 @@ use Eleph\Runtime\Query\EntityQuery;
 /**
  * One stocked instance of an item, in a location, with its own expiry.
  */
-final class Inventory implements ClogPost
+final class Inventory implements Record
 {
     private function __construct(
         private readonly EntityId $id,
@@ -59,7 +59,7 @@ final class Inventory implements ClogPost
     }
 
     /**
-     * Projected to post_title, so the admin list has something to show.
+     * Display label derived from the item and location before writing.
      */
     public function getName(): string {
         return $this->name;

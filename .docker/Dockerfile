@@ -17,7 +17,7 @@ RUN apt-get update \
 COPY --from=docker.io/library/composer:2 /usr/bin/composer /usr/bin/composer
 
 # The spec compiler. tools/php names the image after this version, so changing it rebuilds.
-ARG ELEPH_VERSION=0.14.2
+ARG ELEPH_VERSION=0.16.1
 RUN curl -fsSL "https://github.com/hsimah-services/elephentity/releases/download/v${ELEPH_VERSION}/install.sh" \
     | ELEPH_INSTALL_DIR=/usr/local/bin sh -s -- "${ELEPH_VERSION}"
 COPY --from=rust /usr/local/cargo /usr/local/cargo

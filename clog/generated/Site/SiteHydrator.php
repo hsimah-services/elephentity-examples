@@ -9,11 +9,12 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   Site/SiteHydrator.php
- * digest: sha256:3daf8f4d1e5ffd60f2f5f5a512e13bb7a4539008ce55456e1ee4ccb3b1429f96
+ * digest: sha256:7bfce410721e8f511679a5658b808c025edd89b6bfbcd668703fe87b91072953
  */
 
 namespace Clog\Entity\Site;
 
+use DateTimeImmutable;
 use Eleph\Runtime\Query\EdgeLoader;
 use Eleph\Runtime\Query\Hydrator;
 use Eleph\Runtime\Query\ValueDecoder;
@@ -38,8 +39,26 @@ final readonly class SiteHydrator implements Hydrator
     ): Site {
         return Site::of(
             $record->id,
+            $this->createdAt($record),
+            $this->updatedAt($record),
             $this->name($record),
         );
+    }
+
+    private function createdAt(
+        Record $record,
+    ): DateTimeImmutable {
+        $value = $record->value('createdAt');
+
+        return $this->decode->datetime($value, 'Site.createdAt');
+    }
+
+    private function updatedAt(
+        Record $record,
+    ): DateTimeImmutable {
+        $value = $record->value('updatedAt');
+
+        return $this->decode->datetime($value, 'Site.updatedAt');
     }
 
     private function name(

@@ -22,7 +22,7 @@ set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 REL="$(realpath --relative-to="$ROOT" "$PWD")"
 
-ELEPH_VERSION=0.14.2
+ELEPH_VERSION=0.16.1
 IMAGE="eleph-examples-dev:8.3-rust-eleph${ELEPH_VERSION}"
 CACHE_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/eleph/composer"
 RUST_CACHE_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/eleph/cargo"

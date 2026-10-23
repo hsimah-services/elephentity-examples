@@ -1,17 +1,9 @@
 entity: Item
 description: A thing that can be stocked, identified by its barcode.
 use:
-  - ClogPost
-configure:
-  ClogPost:
-    visibility: private
-    adminMenu: clog
-    label: Item
-    pluralLabel: Items
+  - Record
 integrations:
-  wordpress:
-    linkPosts: true
-  wpgraphql:
+  graphql:
     singular: ClogItem
     plural: ClogItems
 storage:
@@ -20,7 +12,7 @@ storage:
 fields:
   name:
     type: string
-    description: What the item is called. Projected to post_title.
+    description: What the item is called.
     required: true
     indexed: true
     maxLength: 200
@@ -52,9 +44,6 @@ queries:
     returns:
       type: Item
       cardinality: many
-    integrations:
-      wpgraphql:
-        field: clogItemSearch
     handler: true
 actions:
   discontinue:
@@ -66,7 +55,4 @@ actions:
       reason: { type: string }
     writes:
       fields: [barcode]
-    handler: true
-writePolicies:
-  staff:
     handler: true

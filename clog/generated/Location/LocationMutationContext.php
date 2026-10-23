@@ -9,7 +9,7 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   Location/LocationMutationContext.php
- * digest: sha256:e646d6526d974700cacc7aac5924f2dad3a651d50f43c9e235a67608adf0c01d
+ * digest: sha256:7386814e952bbf731e564e0931c78108f75d28f96161ac365e1802ffdb44f5c1
  */
 
 namespace Clog\Entity\Location;
@@ -133,17 +133,6 @@ final readonly class LocationMutationContext implements MutationContext
         assert(null === $value || is_string($value));
 
         return $value;
-    }
-
-    /**
-     * @return list<Identifier>
-     */
-    public function pendingSites(): array {
-        return $this->context->pendingEdge('sites');
-    }
-
-    public function isSitesChanged(): bool {
-        return $this->context->isEdgeChanged('sites');
     }
 
     public static function of(

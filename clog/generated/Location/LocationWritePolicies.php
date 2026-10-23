@@ -9,11 +9,12 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   Location/LocationWritePolicies.php
- * digest: sha256:b6b92893cd8215cbb80e2aacce2491f6f5d9d87985a7617f41798f7b1765e405
+ * digest: sha256:6c33e67563ae2cb25662b63244bab5454abe4a5c75b866657908848f8f641121
  */
 
 namespace Clog\Entity\Location;
 
+use Clog\Entity\Pattern\Record\Contract\RecordStaffWritePolicy;
 use Eleph\Runtime\Policy\EntityWritePolicies;
 use Eleph\Runtime\Policy\PolicyDecision;
 use Eleph\Runtime\Policy\PolicyOutcome;
@@ -22,12 +23,14 @@ use Eleph\Runtime\Policy\WriteContext;
 
 final readonly class LocationWritePolicies implements EntityWritePolicies
 {
-    public function __construct() {
+    public function __construct(
+        private RecordStaffWritePolicy $staffPolicy,
+    ) {
 
     }
 
     public function isEmpty(): bool {
-        return true;
+        return false;
     }
 
     public function decide(
@@ -35,6 +38,12 @@ final readonly class LocationWritePolicies implements EntityWritePolicies
         WriteContext $context,
         Viewer $viewer,
     ): PolicyDecision {
-        return PolicyDecision::allow();
+        assert(null === $entity || $entity instanceof Location);
+        $decision = $this->staffPolicy->decide($entity, $context, $viewer);
+        if (PolicyOutcome::Skip !== $decision->outcome) {
+            return $decision->withPolicy('staff');
+        }
+
+        return PolicyDecision::deny('No policy allowed this write.')->withPolicy('terminal');
     }
 }

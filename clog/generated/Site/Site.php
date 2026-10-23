@@ -9,20 +9,24 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   Site/Site.php
- * digest: sha256:18e149e3d9ab27da94e8a71c40fb4c4abb66da47aab6d69900699f15243a5581
+ * digest: sha256:f59334448310e57a6c7be42869d6db1f7f8a79e3adea93a64e9a962f8608a08e
  */
 
 namespace Clog\Entity\Site;
 
+use Clog\Entity\Pattern\Record\Record;
+use DateTimeImmutable;
 use Eleph\Runtime\Identity\EntityId;
 
 /**
  * A building an inventory entry is physically kept in — Loft or Cave.
  */
-final class Site
+final class Site implements Record
 {
     private function __construct(
         private readonly EntityId $id,
+        private readonly DateTimeImmutable $createdAt,
+        private readonly DateTimeImmutable $updatedAt,
         private readonly string $name,
     ) {
 
@@ -33,7 +37,21 @@ final class Site
     }
 
     /**
-     * The term's label. A taxonomy-backed entity has exactly this field — anything else declared here has nowhere to live in wp_term_taxonomy and is silently dropped at runtime.
+     * When the row was first written. Filled by the framework.
+     */
+    public function getCreatedAt(): DateTimeImmutable {
+        return $this->createdAt;
+    }
+
+    /**
+     * When the row was last written. Filled by the framework.
+     */
+    public function getUpdatedAt(): DateTimeImmutable {
+        return $this->updatedAt;
+    }
+
+    /**
+     * What the site is called.
      */
     public function getName(): string {
         return $this->name;
@@ -41,8 +59,10 @@ final class Site
 
     public static function of(
         EntityId $id,
+        DateTimeImmutable $createdAt,
+        DateTimeImmutable $updatedAt,
         string $name,
     ): self {
-        return new self($id, $name);
+        return new self($id, $createdAt, $updatedAt, $name);
     }
 }

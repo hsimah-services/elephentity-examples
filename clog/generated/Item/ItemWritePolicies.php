@@ -9,12 +9,12 @@ declare(strict_types=1);
  * detected by the build and rejected.
  *
  * path:   Item/ItemWritePolicies.php
- * digest: sha256:382d318ce64c92e791df1367421ba9e647240f345d4238e0532a0e07c860c9cd
+ * digest: sha256:a357350922ce525dd58bd930a0dff865fe59f1d0214184bc9103872c0077bbe2
  */
 
 namespace Clog\Entity\Item;
 
-use Clog\Entity\Item\Contract\ItemStaffWritePolicy;
+use Clog\Entity\Pattern\Record\Contract\RecordStaffWritePolicy;
 use Eleph\Runtime\Policy\EntityWritePolicies;
 use Eleph\Runtime\Policy\PolicyDecision;
 use Eleph\Runtime\Policy\PolicyOutcome;
@@ -24,7 +24,7 @@ use Eleph\Runtime\Policy\WriteContext;
 final readonly class ItemWritePolicies implements EntityWritePolicies
 {
     public function __construct(
-        private ItemStaffWritePolicy $staffPolicy,
+        private RecordStaffWritePolicy $staffPolicy,
     ) {
 
     }
@@ -39,7 +39,7 @@ final readonly class ItemWritePolicies implements EntityWritePolicies
         Viewer $viewer,
     ): PolicyDecision {
         assert(null === $entity || $entity instanceof Item);
-        $decision = $this->staffPolicy->decide($entity, ItemWriteContext::of($context), $viewer);
+        $decision = $this->staffPolicy->decide($entity, $context, $viewer);
         if (PolicyOutcome::Skip !== $decision->outcome) {
             return $decision->withPolicy('staff');
         }
